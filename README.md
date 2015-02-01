@@ -2,6 +2,8 @@
 
 [![Gittip](http://img.shields.io/gittip/OpenCV.png)](https://www.gittip.com/OpenCV/)
 
+### Compile
+
 #### Resources
 
 * Homepage: <http://opencv.org>
