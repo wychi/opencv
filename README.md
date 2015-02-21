@@ -11,7 +11,7 @@ Version 1.29 and above is recommended for better performance.
 ```
 git clone https://github.com/kakukogou/opencv.git
 cd opencv
-git branch opencvjs
+git checkout -b opencvjs
 ```
 #### [optional] Modify the CMakelists.txt
 If you decide not to compile from the opencvjs branch, please do the following modification to avoid running test_big_endian module. The test_big_endian uses try_compile which is not supported in the Emscripten tool-chain now. We temporarily hard-code it to let the build system knows that the Emscripten is little endian.
