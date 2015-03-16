@@ -1,0 +1,1312 @@
+## ../../core/include/opencv2/core/mat.hpp
+const cv.ACCESS_READ 1<<24 
+const cv.ACCESS_WRITE 1<<25 
+const cv.ACCESS_RW 3<<24 
+const cv.ACCESS_MASK ACCESS_RW 
+const cv.ACCESS_FAST 1<<26 
+class cv._InputArray  
+const cv._InputArray.KIND_SHIFT 16 
+const cv._InputArray.FIXED_TYPE 0x8000 << KIND_SHIFT 
+const cv._InputArray.FIXED_SIZE 0x4000 << KIND_SHIFT 
+const cv._InputArray.KIND_MASK 31 << KIND_SHIFT 
+const cv._InputArray.NONE 0 << KIND_SHIFT 
+const cv._InputArray.MAT 1 << KIND_SHIFT 
+const cv._InputArray.MATX 2 << KIND_SHIFT 
+const cv._InputArray.STD_VECTOR 3 << KIND_SHIFT 
+const cv._InputArray.STD_VECTOR_VECTOR 4 << KIND_SHIFT 
+const cv._InputArray.STD_VECTOR_MAT 5 << KIND_SHIFT 
+const cv._InputArray.EXPR 6 << KIND_SHIFT 
+const cv._InputArray.OPENGL_BUFFER 7 << KIND_SHIFT 
+const cv._InputArray.CUDA_HOST_MEM 8 << KIND_SHIFT 
+const cv._InputArray.CUDA_GPU_MAT 9 << KIND_SHIFT 
+const cv._InputArray.UMAT 10 << KIND_SHIFT 
+const cv._InputArray.STD_VECTOR_UMAT 11 << KIND_SHIFT 
+cv._InputArray._InputArray  
+cv._InputArray._InputArray  
+    int _flags 
+    void* _obj 
+cv._InputArray._InputArray  
+    const Mat& m 
+cv._InputArray._InputArray  
+    const MatExpr& expr 
+cv._InputArray._InputArray  
+    const std::vector<Mat>& vec 
+cv._InputArray._InputArray  
+    const double& val 
+cv._InputArray._InputArray  
+    const cuda::GpuMat& d_mat 
+cv._InputArray._InputArray  
+    const ogl::Buffer& buf 
+cv._InputArray._InputArray  
+    const cuda::HostMem& cuda_mem 
+cv._InputArray._InputArray  
+    const UMat& um 
+cv._InputArray._InputArray  
+    const std::vector<UMat>& umv 
+cv._InputArray.getMat Mat /C
+    int idx -1
+cv._InputArray.getUMat UMat /C
+    int idx -1
+cv._InputArray.getMatVector void /C
+    std::vector<Mat>& mv 
+cv._InputArray.getUMatVector void /C
+    std::vector<UMat>& umv 
+cv._InputArray.getGpuMat cuda::GpuMat /C
+cv._InputArray.getOGlBuffer ogl::Buffer /C
+cv._InputArray.getObj void* /C
+cv._InputArray.kind int /C
+cv._InputArray.dims int /C
+    int i -1
+cv._InputArray.cols int /C
+    int i -1
+cv._InputArray.rows int /C
+    int i -1
+cv._InputArray.size Size /C
+    int i -1
+cv._InputArray.sizend int /C
+    int* sz 
+    int i -1
+cv._InputArray.sameSize bool /C
+    const _InputArray& arr 
+cv._InputArray.total size_t /C
+    int i -1
+cv._InputArray.type int /C
+    int i -1
+cv._InputArray.depth int /C
+    int i -1
+cv._InputArray.channels int /C
+    int i -1
+cv._InputArray.isContinuous bool /C
+    int i -1
+cv._InputArray.isSubmatrix bool /C
+    int i -1
+cv._InputArray.empty bool /C
+cv._InputArray.copyTo void /C
+    const _OutputArray& arr 
+cv._InputArray.copyTo void /C
+    const _OutputArray& arr 
+    const _InputArray & mask 
+cv._InputArray.offset size_t /C
+    int i -1
+cv._InputArray.step size_t /C
+    int i -1
+cv._InputArray.isMat bool /C
+cv._InputArray.isUMat bool /C
+cv._InputArray.isMatVector bool /C
+cv._InputArray.isUMatVector bool /C
+cv._InputArray.isMatx bool /C
+cv._InputArray.~_InputArray  
+cv._InputArray.init void 
+    int _flags 
+    const void* _obj 
+cv._InputArray.init void 
+    int _flags 
+    const void* _obj 
+    Size _sz 
+class cv._OutputArray : cv::_InputArray 
+const cv._OutputArray.DEPTH_MASK_8U 1 << CV_8U 
+const cv._OutputArray.DEPTH_MASK_8S 1 << CV_8S 
+const cv._OutputArray.DEPTH_MASK_16U 1 << CV_16U 
+const cv._OutputArray.DEPTH_MASK_16S 1 << CV_16S 
+const cv._OutputArray.DEPTH_MASK_32S 1 << CV_32S 
+const cv._OutputArray.DEPTH_MASK_32F 1 << CV_32F 
+const cv._OutputArray.DEPTH_MASK_64F 1 << CV_64F 
+const cv._OutputArray.DEPTH_MASK_ALL (DEPTH_MASK_64F<<1)-1 
+const cv._OutputArray.DEPTH_MASK_ALL_BUT_8S DEPTH_MASK_ALL & ~DEPTH_MASK_8S 
+const cv._OutputArray.DEPTH_MASK_FLT DEPTH_MASK_32F + DEPTH_MASK_64F 
+cv._OutputArray._OutputArray  
+cv._OutputArray._OutputArray  
+    int _flags 
+    void* _obj 
+cv._OutputArray._OutputArray  
+    Mat& m 
+cv._OutputArray._OutputArray  
+    std::vector<Mat>& vec 
+cv._OutputArray._OutputArray  
+    cuda::GpuMat& d_mat 
+cv._OutputArray._OutputArray  
+    ogl::Buffer& buf 
+cv._OutputArray._OutputArray  
+    cuda::HostMem& cuda_mem 
+cv._OutputArray._OutputArray  
+    UMat& m 
+cv._OutputArray._OutputArray  
+    std::vector<UMat>& vec 
+cv._OutputArray._OutputArray  
+    const Mat& m 
+cv._OutputArray._OutputArray  
+    const std::vector<Mat>& vec 
+cv._OutputArray._OutputArray  
+    const cuda::GpuMat& d_mat 
+cv._OutputArray._OutputArray  
+    const ogl::Buffer& buf 
+cv._OutputArray._OutputArray  
+    const cuda::HostMem& cuda_mem 
+cv._OutputArray._OutputArray  
+    const UMat& m 
+cv._OutputArray._OutputArray  
+    const std::vector<UMat>& vec 
+cv._OutputArray.fixedSize bool /C
+cv._OutputArray.fixedType bool /C
+cv._OutputArray.needed bool /C
+cv._OutputArray.getMatRef Mat& /C
+    int i -1
+cv._OutputArray.getUMatRef UMat& /C
+    int i -1
+cv._OutputArray.getGpuMatRef cuda::GpuMat& /C
+cv._OutputArray.getOGlBufferRef ogl::Buffer& /C
+cv._OutputArray.getHostMemRef cuda::HostMem& /C
+cv._OutputArray.create void /C
+    Size sz 
+    int type 
+    int i -1
+    bool allowTransposed false
+    int fixedDepthMask 0
+cv._OutputArray.create void /C
+    int rows 
+    int cols 
+    int type 
+    int i -1
+    bool allowTransposed false
+    int fixedDepthMask 0
+cv._OutputArray.create void /C
+    int dims 
+    const int* size 
+    int type 
+    int i -1
+    bool allowTransposed false
+    int fixedDepthMask 0
+cv._OutputArray.createSameSize void /C
+    const _InputArray& arr 
+    int mtype 
+cv._OutputArray.release void /C
+cv._OutputArray.clear void /C
+cv._OutputArray.setTo void /C
+    const _InputArray& value 
+    const _InputArray & mask _InputArray()
+cv._OutputArray.assign void /C
+    const UMat& u 
+cv._OutputArray.assign void /C
+    const Mat& m 
+class cv._InputOutputArray : cv::_OutputArray 
+cv._InputOutputArray._InputOutputArray  
+cv._InputOutputArray._InputOutputArray  
+    int _flags 
+    void* _obj 
+cv._InputOutputArray._InputOutputArray  
+    Mat& m 
+cv._InputOutputArray._InputOutputArray  
+    std::vector<Mat>& vec 
+cv._InputOutputArray._InputOutputArray  
+    cuda::GpuMat& d_mat 
+cv._InputOutputArray._InputOutputArray  
+    ogl::Buffer& buf 
+cv._InputOutputArray._InputOutputArray  
+    cuda::HostMem& cuda_mem 
+cv._InputOutputArray._InputOutputArray  
+    UMat& m 
+cv._InputOutputArray._InputOutputArray  
+    std::vector<UMat>& vec 
+cv._InputOutputArray._InputOutputArray  
+    const Mat& m 
+cv._InputOutputArray._InputOutputArray  
+    const std::vector<Mat>& vec 
+cv._InputOutputArray._InputOutputArray  
+    const cuda::GpuMat& d_mat 
+cv._InputOutputArray._InputOutputArray  
+    const ogl::Buffer& buf 
+cv._InputOutputArray._InputOutputArray  
+    const cuda::HostMem& cuda_mem 
+cv._InputOutputArray._InputOutputArray  
+    const UMat& m 
+cv._InputOutputArray._InputOutputArray  
+    const std::vector<UMat>& vec 
+cv.noArray InputOutputArray 
+const cv.USAGE_DEFAULT 0 
+const cv.USAGE_ALLOCATE_HOST_MEMORY 1 << 0 
+const cv.USAGE_ALLOCATE_DEVICE_MEMORY 1 << 1 
+const cv.USAGE_ALLOCATE_SHARED_MEMORY 1 << 2 
+const cv.__UMAT_USAGE_FLAGS_32BIT 0x7fffffff 
+class cv.MatAllocator  
+cv.MatAllocator.MatAllocator  
+cv.MatAllocator.~MatAllocator  
+cv.MatAllocator.allocate UMatData* /A;/C
+    int dims 
+    const int* sizes 
+    int type 
+    void* data 
+    size_t* step 
+    int flags 
+    UMatUsageFlags usageFlags 
+cv.MatAllocator.allocate bool /A;/C
+    UMatData* data 
+    int accessflags 
+    UMatUsageFlags usageFlags 
+cv.MatAllocator.deallocate void /A;/C
+    UMatData* data 
+cv.MatAllocator.map void /C
+    UMatData* data 
+    int accessflags 
+cv.MatAllocator.unmap void /C
+    UMatData* data 
+cv.MatAllocator.download void /C
+    UMatData* data 
+    void* dst 
+    int dims 
+    const size_t[] sz 
+    const size_t[] srcofs 
+    const size_t[] srcstep 
+    const size_t[] dststep 
+cv.MatAllocator.upload void /C
+    UMatData* data 
+    const void* src 
+    int dims 
+    const size_t[] sz 
+    const size_t[] dstofs 
+    const size_t[] dststep 
+    const size_t[] srcstep 
+cv.MatAllocator.copy void /C
+    UMatData* srcdata 
+    UMatData* dstdata 
+    int dims 
+    const size_t[] sz 
+    const size_t[] srcofs 
+    const size_t[] srcstep 
+    const size_t[] dstofs 
+    const size_t[] dststep 
+    bool sync 
+cv.MatAllocator.getBufferPoolController BufferPoolController* /C
+    const char* id NULL
+struct cv.UMatData  
+const cv.UMatData.COPY_ON_MAP 1 
+const cv.UMatData.HOST_COPY_OBSOLETE 2 
+const cv.UMatData.DEVICE_COPY_OBSOLETE 4 
+const cv.UMatData.TEMP_UMAT 8 
+const cv.UMatData.TEMP_COPIED_UMAT 24 
+const cv.UMatData.USER_ALLOCATED 32 
+const cv.UMatData.DEVICE_MEM_MAPPED 64 
+cv.UMatData.UMatData  
+    const MatAllocator* allocator 
+cv.UMatData.~UMatData  
+cv.UMatData.lock void 
+cv.UMatData.unlock void 
+cv.UMatData.hostCopyObsolete bool /C
+cv.UMatData.deviceCopyObsolete bool /C
+cv.UMatData.deviceMemMapped bool /C
+cv.UMatData.copyOnMap bool /C
+cv.UMatData.tempUMat bool /C
+cv.UMatData.tempCopiedUMat bool /C
+cv.UMatData.markHostCopyObsolete void 
+    bool flag 
+cv.UMatData.markDeviceCopyObsolete void 
+    bool flag 
+cv.UMatData.markDeviceMemMapped void 
+    bool flag 
+struct cv.UMatDataAutoLock  
+cv.UMatDataAutoLock.UMatDataAutoLock  /E
+    UMatData* u 
+cv.UMatDataAutoLock.~UMatDataAutoLock  
+struct cv.MatSize  
+cv.MatSize.MatSize  /E
+    int* _p 
+cv.MatSize.operator () Size /C
+cv.MatSize.operator[] const int& /C
+    int i 
+cv.MatSize.operator[] int& 
+    int i 
+cv.MatSize.operator const int* operator const /C
+cv.MatSize.operator == bool /C
+    const MatSize& sz 
+cv.MatSize.operator != bool /C
+    const MatSize& sz 
+struct cv.MatStep  
+cv.MatStep.MatStep  
+cv.MatStep.MatStep  /E
+    size_t s 
+cv.MatStep.operator[] const size_t& /C
+    int i 
+cv.MatStep.operator[] size_t& 
+    int i 
+cv.MatStep.operator size_t  /C
+cv.MatStep.operator = MatStep& 
+    size_t s 
+cv.MatStep.operator = MatStep& 
+    const MatStep&  
+class cv.Mat  
+cv.Mat.Mat  
+cv.Mat.Mat  
+    int rows 
+    int cols 
+    int type 
+cv.Mat.Mat  
+    Size size 
+    int type 
+cv.Mat.Mat  
+    int rows 
+    int cols 
+    int type 
+    const Scalar& s 
+cv.Mat.Mat  
+    Size size 
+    int type 
+    const Scalar& s 
+cv.Mat.Mat  
+    int ndims 
+    const int* sizes 
+    int type 
+cv.Mat.Mat  
+    int ndims 
+    const int* sizes 
+    int type 
+    const Scalar& s 
+cv.Mat.Mat  
+    const Mat& m 
+cv.Mat.Mat  
+    int rows 
+    int cols 
+    int type 
+    void* data 
+    size_t step AUTO_STEP
+cv.Mat.Mat  
+    Size size 
+    int type 
+    void* data 
+    size_t step AUTO_STEP
+cv.Mat.Mat  
+    int ndims 
+    const int* sizes 
+    int type 
+    void* data 
+    const size_t* steps 0
+cv.Mat.Mat  
+    const Mat& m 
+    const Range& rowRange 
+    const Range& colRange Range::all()
+cv.Mat.Mat  
+    const Mat& m 
+    const Rect& roi 
+cv.Mat.Mat  
+    const Mat& m 
+    const Range* ranges 
+cv.Mat.Mat  /E
+    const cuda::GpuMat& m 
+cv.Mat.~Mat  
+cv.Mat.operator = Mat& 
+    const Mat& m 
+cv.Mat.operator = Mat& 
+    const MatExpr& expr 
+cv.Mat.getUMat UMat /C
+    int accessFlags 
+    UMatUsageFlags usageFlags USAGE_DEFAULT
+cv.Mat.row Mat /C
+    int y 
+cv.Mat.col Mat /C
+    int x 
+cv.Mat.rowRange Mat /C
+    int startrow 
+    int endrow 
+cv.Mat.rowRange Mat /C
+    const Range& r 
+cv.Mat.colRange Mat /C
+    int startcol 
+    int endcol 
+cv.Mat.colRange Mat /C
+    const Range& r 
+cv.Mat.diag Mat /C
+    int d 0
+cv.Mat.diag Mat /S
+    const Mat& d 
+cv.Mat.clone Mat /C
+cv.Mat.copyTo void /C
+    OutputArray m 
+cv.Mat.copyTo void /C
+    OutputArray m 
+    InputArray mask 
+cv.Mat.convertTo void /C
+    OutputArray m 
+    int rtype 
+    double alpha 1
+    double beta 0
+cv.Mat.assignTo void /C
+    Mat& m 
+    int type -1
+cv.Mat.operator = Mat& 
+    const Scalar& s 
+cv.Mat.setTo Mat& 
+    InputArray value 
+    InputArray mask noArray()
+cv.Mat.reshape Mat /C
+    int cn 
+    int rows 0
+cv.Mat.reshape Mat /C
+    int cn 
+    int newndims 
+    const int* newsz 
+cv.Mat.t MatExpr /C
+cv.Mat.inv MatExpr /C
+    int method DECOMP_LU
+cv.Mat.mul MatExpr /C
+    InputArray m 
+    double scale 1
+cv.Mat.cross Mat /C
+    InputArray m 
+cv.Mat.dot double /C
+    InputArray m 
+cv.Mat.zeros MatExpr /S
+    int rows 
+    int cols 
+    int type 
+cv.Mat.zeros MatExpr /S
+    Size size 
+    int type 
+cv.Mat.zeros MatExpr /S
+    int ndims 
+    const int* sz 
+    int type 
+cv.Mat.ones MatExpr /S
+    int rows 
+    int cols 
+    int type 
+cv.Mat.ones MatExpr /S
+    Size size 
+    int type 
+cv.Mat.ones MatExpr /S
+    int ndims 
+    const int* sz 
+    int type 
+cv.Mat.eye MatExpr /S
+    int rows 
+    int cols 
+    int type 
+cv.Mat.eye MatExpr /S
+    Size size 
+    int type 
+cv.Mat.create void 
+    int rows 
+    int cols 
+    int type 
+cv.Mat.create void 
+    Size size 
+    int type 
+cv.Mat.create void 
+    int ndims 
+    const int* sizes 
+    int type 
+cv.Mat.addref void 
+cv.Mat.release void 
+cv.Mat.deallocate void 
+cv.Mat.copySize void 
+    const Mat& m 
+cv.Mat.reserve void 
+    size_t sz 
+cv.Mat.resize void 
+    size_t sz 
+cv.Mat.resize void 
+    size_t sz 
+    const Scalar& s 
+cv.Mat.push_back_ void 
+    const void* elem 
+cv.Mat.push_back void 
+    const Mat& m 
+cv.Mat.pop_back void 
+    size_t nelems 1
+cv.Mat.locateROI void /C
+    Size& wholeSize 
+    Point& ofs 
+cv.Mat.adjustROI Mat& 
+    int dtop 
+    int dbottom 
+    int dleft 
+    int dright 
+cv.Mat.operator () Mat /C
+    Range rowRange 
+    Range colRange 
+cv.Mat.operator () Mat /C
+    const Rect& roi 
+cv.Mat.operator () Mat /C
+    const Range* ranges 
+cv.Mat.isContinuous bool /C
+cv.Mat.isSubmatrix bool /C
+cv.Mat.elemSize size_t /C
+cv.Mat.elemSize1 size_t /C
+cv.Mat.type int /C
+cv.Mat.depth int /C
+cv.Mat.channels int /C
+cv.Mat.step1 size_t /C
+    int i 0
+cv.Mat.empty bool /C
+cv.Mat.total size_t /C
+cv.Mat.checkVector int /C
+    int elemChannels 
+    int depth -1
+    bool requireContinuous true
+cv.Mat.ptr uchar* 
+    int i0 0
+cv.Mat.ptr const uchar* /C
+    int i0 0
+cv.Mat.ptr uchar* 
+    int i0 
+    int i1 
+cv.Mat.ptr const uchar* /C
+    int i0 
+    int i1 
+cv.Mat.ptr uchar* 
+    int i0 
+    int i1 
+    int i2 
+cv.Mat.ptr const uchar* /C
+    int i0 
+    int i1 
+    int i2 
+cv.Mat.ptr uchar* 
+    const int* idx 
+cv.Mat.ptr const uchar* /C
+    const int* idx 
+const cv.Mat.MAGIC_VAL 0x42FF0000 
+const cv.Mat.AUTO_STEP 0 
+const cv.Mat.CONTINUOUS_FLAG CV_MAT_CONT_FLAG 
+const cv.Mat.SUBMATRIX_FLAG CV_SUBMAT_FLAG 
+const cv.Mat.MAGIC_MASK 0xFFFF0000 
+const cv.Mat.TYPE_MASK 0x00000FFF 
+const cv.Mat.DEPTH_MASK 7 
+cv.Mat.getStdAllocator MatAllocator* /S
+class cv.UMat  
+cv.UMat.UMat  
+    UMatUsageFlags usageFlags USAGE_DEFAULT
+cv.UMat.UMat  
+    int rows 
+    int cols 
+    int type 
+    UMatUsageFlags usageFlags USAGE_DEFAULT
+cv.UMat.UMat  
+    Size size 
+    int type 
+    UMatUsageFlags usageFlags USAGE_DEFAULT
+cv.UMat.UMat  
+    int rows 
+    int cols 
+    int type 
+    const Scalar& s 
+    UMatUsageFlags usageFlags USAGE_DEFAULT
+cv.UMat.UMat  
+    Size size 
+    int type 
+    const Scalar& s 
+    UMatUsageFlags usageFlags USAGE_DEFAULT
+cv.UMat.UMat  
+    int ndims 
+    const int* sizes 
+    int type 
+    UMatUsageFlags usageFlags USAGE_DEFAULT
+cv.UMat.UMat  
+    int ndims 
+    const int* sizes 
+    int type 
+    const Scalar& s 
+    UMatUsageFlags usageFlags USAGE_DEFAULT
+cv.UMat.UMat  
+    const UMat& m 
+cv.UMat.UMat  
+    const UMat& m 
+    const Range& rowRange 
+    const Range& colRange Range::all()
+cv.UMat.UMat  
+    const UMat& m 
+    const Rect& roi 
+cv.UMat.UMat  
+    const UMat& m 
+    const Range* ranges 
+cv.UMat.~UMat  
+cv.UMat.operator = UMat& 
+    const UMat& m 
+cv.UMat.getMat Mat /C
+    int flags 
+cv.UMat.row UMat /C
+    int y 
+cv.UMat.col UMat /C
+    int x 
+cv.UMat.rowRange UMat /C
+    int startrow 
+    int endrow 
+cv.UMat.rowRange UMat /C
+    const Range& r 
+cv.UMat.colRange UMat /C
+    int startcol 
+    int endcol 
+cv.UMat.colRange UMat /C
+    const Range& r 
+cv.UMat.diag UMat /C
+    int d 0
+cv.UMat.diag UMat /S
+    const UMat& d 
+cv.UMat.clone UMat /C
+cv.UMat.copyTo void /C
+    OutputArray m 
+cv.UMat.copyTo void /C
+    OutputArray m 
+    InputArray mask 
+cv.UMat.convertTo void /C
+    OutputArray m 
+    int rtype 
+    double alpha 1
+    double beta 0
+cv.UMat.assignTo void /C
+    UMat& m 
+    int type -1
+cv.UMat.operator = UMat& 
+    const Scalar& s 
+cv.UMat.setTo UMat& 
+    InputArray value 
+    InputArray mask noArray()
+cv.UMat.reshape UMat /C
+    int cn 
+    int rows 0
+cv.UMat.reshape UMat /C
+    int cn 
+    int newndims 
+    const int* newsz 
+cv.UMat.t UMat /C
+cv.UMat.inv UMat /C
+    int method DECOMP_LU
+cv.UMat.mul UMat /C
+    InputArray m 
+    double scale 1
+cv.UMat.dot double /C
+    InputArray m 
+cv.UMat.zeros UMat /S
+    int rows 
+    int cols 
+    int type 
+cv.UMat.zeros UMat /S
+    Size size 
+    int type 
+cv.UMat.zeros UMat /S
+    int ndims 
+    const int* sz 
+    int type 
+cv.UMat.ones UMat /S
+    int rows 
+    int cols 
+    int type 
+cv.UMat.ones UMat /S
+    Size size 
+    int type 
+cv.UMat.ones UMat /S
+    int ndims 
+    const int* sz 
+    int type 
+cv.UMat.eye UMat /S
+    int rows 
+    int cols 
+    int type 
+cv.UMat.eye UMat /S
+    Size size 
+    int type 
+cv.UMat.create void 
+    int rows 
+    int cols 
+    int type 
+    UMatUsageFlags usageFlags USAGE_DEFAULT
+cv.UMat.create void 
+    Size size 
+    int type 
+    UMatUsageFlags usageFlags USAGE_DEFAULT
+cv.UMat.create void 
+    int ndims 
+    const int* sizes 
+    int type 
+    UMatUsageFlags usageFlags USAGE_DEFAULT
+cv.UMat.addref void 
+cv.UMat.release void 
+cv.UMat.deallocate void 
+cv.UMat.copySize void 
+    const UMat& m 
+cv.UMat.locateROI void /C
+    Size& wholeSize 
+    Point& ofs 
+cv.UMat.adjustROI UMat& 
+    int dtop 
+    int dbottom 
+    int dleft 
+    int dright 
+cv.UMat.operator () UMat /C
+    Range rowRange 
+    Range colRange 
+cv.UMat.operator () UMat /C
+    const Rect& roi 
+cv.UMat.operator () UMat /C
+    const Range* ranges 
+cv.UMat.isContinuous bool /C
+cv.UMat.isSubmatrix bool /C
+cv.UMat.elemSize size_t /C
+cv.UMat.elemSize1 size_t /C
+cv.UMat.type int /C
+cv.UMat.depth int /C
+cv.UMat.channels int /C
+cv.UMat.step1 size_t /C
+    int i 0
+cv.UMat.empty bool /C
+cv.UMat.total size_t /C
+cv.UMat.checkVector int /C
+    int elemChannels 
+    int depth -1
+    bool requireContinuous true
+cv.UMat.handle void* /C
+    int accessFlags 
+cv.UMat.ndoffset void /C
+    size_t* ofs 
+const cv.UMat.MAGIC_VAL 0x42FF0000 
+const cv.UMat.AUTO_STEP 0 
+const cv.UMat.CONTINUOUS_FLAG CV_MAT_CONT_FLAG 
+const cv.UMat.SUBMATRIX_FLAG CV_SUBMAT_FLAG 
+const cv.UMat.MAGIC_MASK 0xFFFF0000 
+const cv.UMat.TYPE_MASK 0x00000FFF 
+const cv.UMat.DEPTH_MASK 7 
+cv.UMat.getStdAllocator MatAllocator* /S
+class cv.SparseMat  
+const cv.SparseMat.MAGIC_VAL 0x42FD0000 
+const cv.SparseMat.MAX_DIM 32 
+const cv.SparseMat.HASH_SCALE 0x5bd1e995 
+const cv.SparseMat.HASH_BIT 0x80000000 
+struct cv.SparseMat.Hdr  
+cv.SparseMat.Hdr.Hdr  
+    int _dims 
+    const int* _sizes 
+    int _type 
+cv.SparseMat.Hdr.clear void 
+struct cv.SparseMat.Node  
+cv.SparseMat.SparseMat  
+cv.SparseMat.SparseMat  
+    int dims 
+    const int* _sizes 
+    int _type 
+cv.SparseMat.SparseMat  
+    const SparseMat& m 
+cv.SparseMat.SparseMat  /E
+    const Mat& m 
+cv.SparseMat.~SparseMat  
+cv.SparseMat.operator = SparseMat& 
+    const SparseMat& m 
+cv.SparseMat.operator = SparseMat& 
+    const Mat& m 
+cv.SparseMat.clone SparseMat /C
+cv.SparseMat.copyTo void /C
+    SparseMat& m 
+cv.SparseMat.copyTo void /C
+    Mat& m 
+cv.SparseMat.convertTo void /C
+    SparseMat& m 
+    int rtype 
+    double alpha 1
+cv.SparseMat.convertTo void /C
+    Mat& m 
+    int rtype 
+    double alpha 1
+    double beta 0
+cv.SparseMat.assignTo void /C
+    SparseMat& m 
+    int type -1
+cv.SparseMat.create void 
+    int dims 
+    const int* _sizes 
+    int _type 
+cv.SparseMat.clear void 
+cv.SparseMat.addref void 
+cv.SparseMat.release void 
+cv.SparseMat.elemSize size_t /C
+cv.SparseMat.elemSize1 size_t /C
+cv.SparseMat.type int /C
+cv.SparseMat.depth int /C
+cv.SparseMat.channels int /C
+cv.SparseMat.size const int* /C
+cv.SparseMat.size int /C
+    int i 
+cv.SparseMat.dims int /C
+cv.SparseMat.nzcount size_t /C
+cv.SparseMat.hash size_t /C
+    int i0 
+cv.SparseMat.hash size_t /C
+    int i0 
+    int i1 
+cv.SparseMat.hash size_t /C
+    int i0 
+    int i1 
+    int i2 
+cv.SparseMat.hash size_t /C
+    const int* idx 
+cv.SparseMat.ptr uchar* 
+    int i0 
+    bool createMissing 
+    size_t* hashval 0
+cv.SparseMat.ptr uchar* 
+    int i0 
+    int i1 
+    bool createMissing 
+    size_t* hashval 0
+cv.SparseMat.ptr uchar* 
+    int i0 
+    int i1 
+    int i2 
+    bool createMissing 
+    size_t* hashval 0
+cv.SparseMat.ptr uchar* 
+    const int* idx 
+    bool createMissing 
+    size_t* hashval 0
+cv.SparseMat.erase void 
+    int i0 
+    int i1 
+    size_t* hashval 0
+cv.SparseMat.erase void 
+    int i0 
+    int i1 
+    int i2 
+    size_t* hashval 0
+cv.SparseMat.erase void 
+    const int* idx 
+    size_t* hashval 0
+cv.SparseMat.begin SparseMatIterator 
+cv.SparseMat.begin SparseMatConstIterator /C
+cv.SparseMat.end SparseMatIterator 
+cv.SparseMat.end SparseMatConstIterator /C
+cv.SparseMat.node Node* 
+    size_t nidx 
+cv.SparseMat.node const Node* /C
+    size_t nidx 
+cv.SparseMat.newNode uchar* 
+    const int* idx 
+    size_t hashval 
+cv.SparseMat.removeNode void 
+    size_t hidx 
+    size_t nidx 
+    size_t previdx 
+cv.SparseMat.resizeHashTab void 
+    size_t newsize 
+class cv.MatConstIterator  
+cv.MatConstIterator.MatConstIterator  
+cv.MatConstIterator.MatConstIterator  
+    const Mat* _m 
+cv.MatConstIterator.MatConstIterator  
+    const Mat* _m 
+    int _row 
+    int _col 0
+cv.MatConstIterator.MatConstIterator  
+    const Mat* _m 
+    Point _pt 
+cv.MatConstIterator.MatConstIterator  
+    const Mat* _m 
+    const int* _idx 
+cv.MatConstIterator.MatConstIterator  
+    const MatConstIterator& it 
+cv.MatConstIterator.operator = MatConstIterator& 
+    const MatConstIterator& it 
+cv.MatConstIterator.operator * const uchar* /C
+cv.MatConstIterator.operator [] const uchar* /C
+    ptrdiff_t i 
+cv.MatConstIterator.operator += MatConstIterator& 
+    ptrdiff_t ofs 
+cv.MatConstIterator.operator -= MatConstIterator& 
+    ptrdiff_t ofs 
+cv.MatConstIterator.operator -- MatConstIterator& 
+cv.MatConstIterator.operator -- MatConstIterator 
+    int  
+cv.MatConstIterator.operator ++ MatConstIterator& 
+cv.MatConstIterator.operator ++ MatConstIterator 
+    int  
+cv.MatConstIterator.pos Point /C
+cv.MatConstIterator.pos void /C
+    int* _idx 
+cv.MatConstIterator.lpos ptrdiff_t /C
+cv.MatConstIterator.seek void 
+    ptrdiff_t ofs 
+    bool relative false
+cv.MatConstIterator.seek void 
+    const int* _idx 
+    bool relative false
+class cv.SparseMatConstIterator  
+cv.SparseMatConstIterator.SparseMatConstIterator  
+cv.SparseMatConstIterator.SparseMatConstIterator  
+    const SparseMat* _m 
+cv.SparseMatConstIterator.SparseMatConstIterator  
+    const SparseMatConstIterator& it 
+cv.SparseMatConstIterator.operator = SparseMatConstIterator& 
+    const SparseMatConstIterator& it 
+cv.SparseMatConstIterator.node const SparseMat::Node* /C
+cv.SparseMatConstIterator.operator -- SparseMatConstIterator& 
+cv.SparseMatConstIterator.operator -- SparseMatConstIterator 
+    int  
+cv.SparseMatConstIterator.operator ++ SparseMatConstIterator& 
+cv.SparseMatConstIterator.operator ++ SparseMatConstIterator 
+    int  
+cv.SparseMatConstIterator.seekEnd void 
+class cv.SparseMatIterator : cv::SparseMatConstIterator 
+cv.SparseMatIterator.SparseMatIterator  
+cv.SparseMatIterator.SparseMatIterator  
+    SparseMat* _m 
+cv.SparseMatIterator.SparseMatIterator  
+    SparseMat* _m 
+    const int* idx 
+cv.SparseMatIterator.SparseMatIterator  
+    const SparseMatIterator& it 
+cv.SparseMatIterator.operator = SparseMatIterator& 
+    const SparseMatIterator& it 
+cv.SparseMatIterator.node SparseMat::Node* /C
+cv.SparseMatIterator.operator ++ SparseMatIterator& 
+cv.SparseMatIterator.operator ++ SparseMatIterator 
+    int  
+class cv.NAryMatIterator  
+cv.NAryMatIterator.NAryMatIterator  
+cv.NAryMatIterator.NAryMatIterator  
+    const Mat** arrays 
+    uchar** ptrs 
+    int narrays -1
+cv.NAryMatIterator.NAryMatIterator  
+    const Mat** arrays 
+    Mat* planes 
+    int narrays -1
+cv.NAryMatIterator.init void 
+    const Mat** arrays 
+    Mat* planes 
+    uchar** ptrs 
+    int narrays -1
+cv.NAryMatIterator.operator ++ NAryMatIterator& 
+cv.NAryMatIterator.operator ++ NAryMatIterator 
+    int  
+class cv.MatOp  
+cv.MatOp.MatOp  
+cv.MatOp.~MatOp  
+cv.MatOp.elementWise bool /C
+    const MatExpr& expr 
+cv.MatOp.assign void /A;/C
+    const MatExpr& expr 
+    Mat& m 
+    int type -1
+cv.MatOp.roi void /C
+    const MatExpr& expr 
+    const Range& rowRange 
+    const Range& colRange 
+    MatExpr& res 
+cv.MatOp.diag void /C
+    const MatExpr& expr 
+    int d 
+    MatExpr& res 
+cv.MatOp.augAssignAdd void /C
+    const MatExpr& expr 
+    Mat& m 
+cv.MatOp.augAssignSubtract void /C
+    const MatExpr& expr 
+    Mat& m 
+cv.MatOp.augAssignMultiply void /C
+    const MatExpr& expr 
+    Mat& m 
+cv.MatOp.augAssignDivide void /C
+    const MatExpr& expr 
+    Mat& m 
+cv.MatOp.augAssignAnd void /C
+    const MatExpr& expr 
+    Mat& m 
+cv.MatOp.augAssignOr void /C
+    const MatExpr& expr 
+    Mat& m 
+cv.MatOp.augAssignXor void /C
+    const MatExpr& expr 
+    Mat& m 
+cv.MatOp.add void /C
+    const MatExpr& expr1 
+    const MatExpr& expr2 
+    MatExpr& res 
+cv.MatOp.add void /C
+    const MatExpr& expr1 
+    const Scalar& s 
+    MatExpr& res 
+cv.MatOp.subtract void /C
+    const MatExpr& expr1 
+    const MatExpr& expr2 
+    MatExpr& res 
+cv.MatOp.subtract void /C
+    const Scalar& s 
+    const MatExpr& expr 
+    MatExpr& res 
+cv.MatOp.multiply void /C
+    const MatExpr& expr1 
+    const MatExpr& expr2 
+    MatExpr& res 
+    double scale 1
+cv.MatOp.multiply void /C
+    const MatExpr& expr1 
+    double s 
+    MatExpr& res 
+cv.MatOp.divide void /C
+    const MatExpr& expr1 
+    const MatExpr& expr2 
+    MatExpr& res 
+    double scale 1
+cv.MatOp.divide void /C
+    double s 
+    const MatExpr& expr 
+    MatExpr& res 
+cv.MatOp.abs void /C
+    const MatExpr& expr 
+    MatExpr& res 
+cv.MatOp.transpose void /C
+    const MatExpr& expr 
+    MatExpr& res 
+cv.MatOp.matmul void /C
+    const MatExpr& expr1 
+    const MatExpr& expr2 
+    MatExpr& res 
+cv.MatOp.invert void /C
+    const MatExpr& expr 
+    int method 
+    MatExpr& res 
+cv.MatOp.size Size /C
+    const MatExpr& expr 
+cv.MatOp.type int /C
+    const MatExpr& expr 
+class cv.MatExpr  
+cv.MatExpr.MatExpr  
+cv.MatExpr.MatExpr  /E
+    const Mat& m 
+cv.MatExpr.MatExpr  
+    const MatOp* _op 
+    int _flags 
+    const Mat& _a Mat()
+    const Mat& _b Mat()
+    const Mat& _c Mat()
+    double _alpha 1
+    double _beta 1
+    const Scalar& _s Scalar()
+cv.MatExpr.operator Mat  /C
+cv.MatExpr.size Size /C
+cv.MatExpr.type int /C
+cv.MatExpr.row MatExpr /C
+    int y 
+cv.MatExpr.col MatExpr /C
+    int x 
+cv.MatExpr.diag MatExpr /C
+    int d 0
+cv.MatExpr.operator () MatExpr /C
+    const Range& rowRange 
+    const Range& colRange 
+cv.MatExpr.operator () MatExpr /C
+    const Rect& roi 
+cv.MatExpr.t MatExpr /C
+cv.MatExpr.inv MatExpr /C
+    int method DECOMP_LU
+cv.MatExpr.mul MatExpr /C
+    const MatExpr& e 
+    double scale 1
+cv.MatExpr.mul MatExpr /C
+    const Mat& m 
+    double scale 1
+cv.MatExpr.cross Mat /C
+    const Mat& m 
+cv.MatExpr.dot double /C
+    const Mat& m 
+cv.operator + MatExpr 
+    const Mat& a 
+    const Mat& b 
+cv.operator + MatExpr 
+    const Mat& a 
+    const Scalar& s 
+cv.operator + MatExpr 
+    const Scalar& s 
+    const Mat& a 
+cv.operator + MatExpr 
+    const MatExpr& e 
+    const Mat& m 
+cv.operator + MatExpr 
+    const Mat& m 
+    const MatExpr& e 
+cv.operator + MatExpr 
+    const MatExpr& e 
+    const Scalar& s 
+cv.operator + MatExpr 
+    const Scalar& s 
+    const MatExpr& e 
+cv.operator + MatExpr 
+    const MatExpr& e1 
+    const MatExpr& e2 
+cv.operator - MatExpr 
+    const Mat& a 
+    const Mat& b 
+cv.operator - MatExpr 
+    const Mat& a 
+    const Scalar& s 
+cv.operator - MatExpr 
+    const Scalar& s 
+    const Mat& a 
+cv.operator - MatExpr 
+    const MatExpr& e 
+    const Mat& m 
+cv.operator - MatExpr 
+    const Mat& m 
+    const MatExpr& e 
+cv.operator - MatExpr 
+    const MatExpr& e 
+    const Scalar& s 
+cv.operator - MatExpr 
+    const Scalar& s 
+    const MatExpr& e 
+cv.operator - MatExpr 
+    const MatExpr& e1 
+    const MatExpr& e2 
+cv.operator - MatExpr 
+    const Mat& m 
+cv.operator - MatExpr 
+    const MatExpr& e 
+cv.operator * MatExpr 
+    const Mat& a 
+    const Mat& b 
+cv.operator * MatExpr 
+    const Mat& a 
+    double s 
+cv.operator * MatExpr 
+    double s 
+    const Mat& a 
+cv.operator * MatExpr 
+    const MatExpr& e 
+    const Mat& m 
+cv.operator * MatExpr 
+    const Mat& m 
+    const MatExpr& e 
+cv.operator * MatExpr 
+    const MatExpr& e 
+    double s 
+cv.operator * MatExpr 
+    double s 
+    const MatExpr& e 
+cv.operator * MatExpr 
+    const MatExpr& e1 
+    const MatExpr& e2 
+cv.operator / MatExpr 
+    const Mat& a 
+    const Mat& b 
+cv.operator / MatExpr 
+    const Mat& a 
+    double s 
+cv.operator / MatExpr 
+    double s 
+    const Mat& a 
+cv.operator / MatExpr 
+    const MatExpr& e 
+    const Mat& m 
+cv.operator / MatExpr 
+    const Mat& m 
+    const MatExpr& e 
+cv.operator / MatExpr 
+    const MatExpr& e 
+    double s 
+cv.operator / MatExpr 
+    double s 
+    const MatExpr& e 
+cv.operator / MatExpr 
+    const MatExpr& e1 
+    const MatExpr& e2 
+cv.operator < MatExpr 
+    const Mat& a 
+    const Mat& b 
+cv.operator < MatExpr 
+    const Mat& a 
+    double s 
+cv.operator < MatExpr 
+    double s 
+    const Mat& a 
+cv.operator <= MatExpr 
+    const Mat& a 
+    const Mat& b 
+cv.operator <= MatExpr 
+    const Mat& a 
+    double s 
+cv.operator <= MatExpr 
+    double s 
+    const Mat& a 
+cv.operator == MatExpr 
+    const Mat& a 
+    const Mat& b 
+cv.operator == MatExpr 
+    const Mat& a 
+    double s 
+cv.operator == MatExpr 
+    double s 
+    const Mat& a 
+cv.operator != MatExpr 
+    const Mat& a 
+    const Mat& b 
+cv.operator != MatExpr 
+    const Mat& a 
+    double s 
+cv.operator != MatExpr 
+    double s 
+    const Mat& a 
+cv.operator >= MatExpr 
+    const Mat& a 
+    const Mat& b 
+cv.operator >= MatExpr 
+    const Mat& a 
+    double s 
+cv.operator >= MatExpr 
+    double s 
+    const Mat& a 
+cv.operator > MatExpr 
+    const Mat& a 
+    const Mat& b 
+cv.operator > MatExpr 
+    const Mat& a 
+    double s 
+cv.operator > MatExpr 
+    double s 
+    const Mat& a 
+cv.operator & MatExpr 
+    const Mat& a 
+    const Mat& b 
+cv.operator & MatExpr 
+    const Mat& a 
+    const Scalar& s 
+cv.operator & MatExpr 
+    const Scalar& s 
+    const Mat& a 
+cv.operator | MatExpr 
+    const Mat& a 
+    const Mat& b 
+cv.operator | MatExpr 
+    const Mat& a 
+    const Scalar& s 
+cv.operator | MatExpr 
+    const Scalar& s 
+    const Mat& a 
+cv.operator ^ MatExpr 
+    const Mat& a 
+    const Mat& b 
+cv.operator ^ MatExpr 
+    const Mat& a 
+    const Scalar& s 
+cv.operator ^ MatExpr 
+    const Scalar& s 
+    const Mat& a 
+cv.operator ~ MatExpr 
+    const Mat& m 
+cv.min MatExpr 
+    const Mat& a 
+    const Mat& b 
+cv.min MatExpr 
+    const Mat& a 
+    double s 
+cv.min MatExpr 
+    double s 
+    const Mat& a 
+cv.max MatExpr 
+    const Mat& a 
+    const Mat& b 
+cv.max MatExpr 
+    const Mat& a 
+    double s 
+cv.max MatExpr 
+    double s 
+    const Mat& a 
+cv.abs MatExpr 
+    const Mat& m 
+cv.abs MatExpr 
+    const MatExpr& e 
+576
+namespaces: cv

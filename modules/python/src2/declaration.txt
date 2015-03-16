@@ -1,0 +1,3267 @@
+## ../../core/include/opencv2/core.hpp
+const cv.SORT_EVERY_ROW 0 
+const cv.SORT_EVERY_COLUMN 1 
+const cv.SORT_ASCENDING 0 
+const cv.SORT_DESCENDING 16 
+const cv.COVAR_SCRAMBLED 0 
+const cv.COVAR_NORMAL 1 
+const cv.COVAR_USE_AVG 2 
+const cv.COVAR_SCALE 4 
+const cv.COVAR_ROWS 8 
+const cv.COVAR_COLS 16 
+const cv.KMEANS_RANDOM_CENTERS 0 
+const cv.KMEANS_PP_CENTERS 2 
+const cv.KMEANS_USE_INITIAL_LABELS 1 
+const cv.FILLED -1 
+const cv.LINE_4 4 
+const cv.LINE_8 8 
+const cv.LINE_AA 16 
+const cv.FONT_HERSHEY_SIMPLEX 0 
+const cv.FONT_HERSHEY_PLAIN 1 
+const cv.FONT_HERSHEY_DUPLEX 2 
+const cv.FONT_HERSHEY_COMPLEX 3 
+const cv.FONT_HERSHEY_TRIPLEX 4 
+const cv.FONT_HERSHEY_COMPLEX_SMALL 5 
+const cv.FONT_HERSHEY_SCRIPT_SIMPLEX 6 
+const cv.FONT_HERSHEY_SCRIPT_COMPLEX 7 
+const cv.FONT_ITALIC 16 
+const cv.REDUCE_SUM 0 
+const cv.REDUCE_AVG 1 
+const cv.REDUCE_MAX 2 
+const cv.REDUCE_MIN 3 
+cv.borderInterpolate int 
+    int p 
+    int len 
+    int borderType 
+cv.copyMakeBorder void 
+    Mat src 
+    Mat dst /O
+    int top 
+    int bottom 
+    int left 
+    int right 
+    int borderType 
+    Scalar value Scalar()
+cv.add void 
+    Mat src1 
+    Mat src2 
+    Mat dst /O
+    Mat mask Mat()
+    int dtype -1
+cv.subtract void 
+    Mat src1 
+    Mat src2 
+    Mat dst /O
+    Mat mask Mat()
+    int dtype -1
+cv.multiply void 
+    Mat src1 
+    Mat src2 
+    Mat dst /O
+    double scale 1
+    int dtype -1
+cv.divide void 
+    Mat src1 
+    Mat src2 
+    Mat dst /O
+    double scale 1
+    int dtype -1
+cv.divide void 
+    double scale 
+    Mat src2 
+    Mat dst /O
+    int dtype -1
+cv.scaleAdd void 
+    Mat src1 
+    double alpha 
+    Mat src2 
+    Mat dst /O
+cv.addWeighted void 
+    Mat src1 
+    double alpha 
+    Mat src2 
+    double beta 
+    double gamma 
+    Mat dst /O
+    int dtype -1
+cv.convertScaleAbs void 
+    Mat src 
+    Mat dst /O
+    double alpha 1
+    double beta 0
+cv.LUT void 
+    Mat src 
+    Mat lut 
+    Mat dst /O
+cv.sum Scalar =sumElems
+    Mat src 
+cv.countNonZero int 
+    Mat src 
+cv.findNonZero void 
+    Mat src 
+    Mat idx /O
+cv.mean Scalar 
+    Mat src 
+    Mat mask Mat()
+cv.meanStdDev void 
+    Mat src 
+    Mat mean /O
+    Mat stddev /O
+    Mat mask Mat()
+cv.norm double 
+    Mat src1 
+    int normType NORM_L2
+    Mat mask Mat()
+cv.norm double 
+    Mat src1 
+    Mat src2 
+    int normType NORM_L2
+    Mat mask Mat()
+cv.PSNR double 
+    Mat src1 
+    Mat src2 
+cv.batchDistance void 
+    Mat src1 
+    Mat src2 
+    Mat dist /O
+    int dtype 
+    Mat nidx /O
+    int normType NORM_L2
+    int K 0
+    Mat mask Mat()
+    int update 0
+    bool crosscheck false
+cv.normalize void 
+    Mat src 
+    Mat dst /IO
+    double alpha 1
+    double beta 0
+    int norm_type NORM_L2
+    int dtype -1
+    Mat mask Mat()
+cv.minMaxLoc void 
+    Mat src 
+    double* minVal /O
+    double* maxVal 0/O
+    Point* minLoc 0/O
+    Point* maxLoc 0/O
+    Mat mask Mat()
+cv.reduce void 
+    Mat src 
+    Mat dst /O
+    int dim 
+    int rtype 
+    int dtype -1
+cv.merge void 
+    vector_Mat mv 
+    Mat dst /O
+cv.split void 
+    Mat m 
+    vector_Mat mv /O
+cv.mixChannels void 
+    vector_Mat src 
+    vector_Mat dst /IO
+    vector_int fromTo 
+cv.extractChannel void 
+    Mat src 
+    Mat dst /O
+    int coi 
+cv.insertChannel void 
+    Mat src 
+    Mat dst /IO
+    int coi 
+cv.flip void 
+    Mat src 
+    Mat dst /O
+    int flipCode 
+cv.repeat void 
+    Mat src 
+    int ny 
+    int nx 
+    Mat dst /O
+cv.hconcat void 
+    vector_Mat src 
+    Mat dst /O
+cv.vconcat void 
+    vector_Mat src 
+    Mat dst /O
+cv.bitwise_and void 
+    Mat src1 
+    Mat src2 
+    Mat dst /O
+    Mat mask Mat()
+cv.bitwise_or void 
+    Mat src1 
+    Mat src2 
+    Mat dst /O
+    Mat mask Mat()
+cv.bitwise_xor void 
+    Mat src1 
+    Mat src2 
+    Mat dst /O
+    Mat mask Mat()
+cv.bitwise_not void 
+    Mat src 
+    Mat dst /O
+    Mat mask Mat()
+cv.absdiff void 
+    Mat src1 
+    Mat src2 
+    Mat dst /O
+cv.inRange void 
+    Mat src 
+    Mat lowerb 
+    Mat upperb 
+    Mat dst /O
+cv.compare void 
+    Mat src1 
+    Mat src2 
+    Mat dst /O
+    int cmpop 
+cv.min void 
+    Mat src1 
+    Mat src2 
+    Mat dst /O
+cv.max void 
+    Mat src1 
+    Mat src2 
+    Mat dst /O
+cv.sqrt void 
+    Mat src 
+    Mat dst /O
+cv.pow void 
+    Mat src 
+    double power 
+    Mat dst /O
+cv.exp void 
+    Mat src 
+    Mat dst /O
+cv.log void 
+    Mat src 
+    Mat dst /O
+cv.polarToCart void 
+    Mat magnitude 
+    Mat angle 
+    Mat x /O
+    Mat y /O
+    bool angleInDegrees false
+cv.cartToPolar void 
+    Mat x 
+    Mat y 
+    Mat magnitude /O
+    Mat angle /O
+    bool angleInDegrees false
+cv.phase void 
+    Mat x 
+    Mat y 
+    Mat angle /O
+    bool angleInDegrees false
+cv.magnitude void 
+    Mat x 
+    Mat y 
+    Mat magnitude /O
+cv.checkRange bool 
+    Mat a 
+    bool quiet true
+    Point* pos 0/O
+    double minVal -DBL_MAX
+    double maxVal DBL_MAX
+cv.patchNaNs void 
+    Mat a /IO
+    double val 0
+cv.gemm void 
+    Mat src1 
+    Mat src2 
+    double alpha 
+    Mat src3 
+    double beta 
+    Mat dst /O
+    int flags 0
+cv.mulTransposed void 
+    Mat src 
+    Mat dst /O
+    bool aTa 
+    Mat delta Mat()
+    double scale 1
+    int dtype -1
+cv.transpose void 
+    Mat src 
+    Mat dst /O
+cv.transform void 
+    Mat src 
+    Mat dst /O
+    Mat m 
+cv.perspectiveTransform void 
+    Mat src 
+    Mat dst /O
+    Mat m 
+cv.completeSymm void 
+    Mat mtx /IO
+    bool lowerToUpper false
+cv.setIdentity void 
+    Mat mtx /IO
+    Scalar s Scalar(1)
+cv.determinant double 
+    Mat mtx 
+cv.trace Scalar 
+    Mat mtx 
+cv.invert double 
+    Mat src 
+    Mat dst /O
+    int flags DECOMP_LU
+cv.solve bool 
+    Mat src1 
+    Mat src2 
+    Mat dst /O
+    int flags DECOMP_LU
+cv.sort void 
+    Mat src 
+    Mat dst /O
+    int flags 
+cv.sortIdx void 
+    Mat src 
+    Mat dst /O
+    int flags 
+cv.solveCubic int 
+    Mat coeffs 
+    Mat roots /O
+cv.solvePoly double 
+    Mat coeffs 
+    Mat roots /O
+    int maxIters 300
+cv.eigen bool 
+    Mat src 
+    Mat eigenvalues /O
+    Mat eigenvectors Mat()/O
+cv.calcCovarMatrix void 
+    Mat samples 
+    Mat covar /O
+    Mat mean /IO
+    int flags 
+    int ctype CV_64F
+cv.PCACompute void 
+    Mat data 
+    Mat mean /IO
+    Mat eigenvectors /O
+    int maxComponents 0
+cv.PCACompute void 
+    Mat data 
+    Mat mean /IO
+    Mat eigenvectors /O
+    double retainedVariance 
+cv.PCAProject void 
+    Mat data 
+    Mat mean 
+    Mat eigenvectors 
+    Mat result /O
+cv.PCABackProject void 
+    Mat data 
+    Mat mean 
+    Mat eigenvectors 
+    Mat result /O
+cv.SVDecomp void 
+    Mat src 
+    Mat w /O
+    Mat u /O
+    Mat vt /O
+    int flags 0
+cv.SVBackSubst void 
+    Mat w 
+    Mat u 
+    Mat vt 
+    Mat rhs 
+    Mat dst /O
+cv.Mahalanobis double 
+    Mat v1 
+    Mat v2 
+    Mat icovar 
+cv.dft void 
+    Mat src 
+    Mat dst /O
+    int flags 0
+    int nonzeroRows 0
+cv.idft void 
+    Mat src 
+    Mat dst /O
+    int flags 0
+    int nonzeroRows 0
+cv.dct void 
+    Mat src 
+    Mat dst /O
+    int flags 0
+cv.idct void 
+    Mat src 
+    Mat dst /O
+    int flags 0
+cv.mulSpectrums void 
+    Mat a 
+    Mat b 
+    Mat c /O
+    int flags 
+    bool conjB false
+cv.getOptimalDFTSize int 
+    int vecsize 
+cv.randu void 
+    Mat dst /IO
+    Mat low 
+    Mat high 
+cv.randn void 
+    Mat dst /IO
+    Mat mean 
+    Mat stddev 
+cv.randShuffle void 
+    Mat dst /IO
+    double iterFactor 1.
+    RNG* rng 0
+const cv.PCA.DATA_AS_ROW 0 
+const cv.PCA.DATA_AS_COL 1 
+const cv.PCA.USE_AVG 2 
+const cv.SVD.MODIFY_A 1 
+const cv.SVD.NO_UV 2 
+const cv.SVD.FULL_UV 4 
+const cv.RNG.UNIFORM 0 
+const cv.RNG.NORMAL 1 
+cv.kmeans double 
+    Mat data 
+    int K 
+    Mat bestLabels /IO
+    TermCriteria criteria 
+    int attempts 
+    int flags 
+    Mat centers Mat()/O
+const cv.Formatter.FMT_DEFAULT 0 
+const cv.Formatter.FMT_MATLAB 1 
+const cv.Formatter.FMT_CSV 2 
+const cv.Formatter.FMT_PYTHON 3 
+const cv.Formatter.FMT_NUMPY 4 
+const cv.Formatter.FMT_C 5 
+class cv.Algorithm  
+cv.Algorithm.getInt int 
+    String name 
+cv.Algorithm.getDouble double 
+    String name 
+cv.Algorithm.getBool bool 
+    String name 
+cv.Algorithm.getString String 
+    String name 
+cv.Algorithm.getMat Mat 
+    String name 
+cv.Algorithm.getMatVector vector_Mat 
+    String name 
+cv.Algorithm.getAlgorithm Ptr_Algorithm 
+    String name 
+cv.Algorithm.setInt void 
+    String name 
+    int value 
+cv.Algorithm.setDouble void 
+    String name 
+    double value 
+cv.Algorithm.setBool void 
+    String name 
+    bool value 
+cv.Algorithm.setString void 
+    String name 
+    String value 
+cv.Algorithm.setMat void 
+    String name 
+    Mat value 
+cv.Algorithm.setMatVector void 
+    String name 
+    vector_Mat value 
+cv.Algorithm.setAlgorithm void 
+    String name 
+    Ptr_Algorithm value 
+cv.Algorithm.paramHelp String 
+    String name 
+cv.Algorithm.paramType int 
+    String name 
+cv.Algorithm.getParams void 
+    vector_String names /O
+cv.Algorithm.getList void /S
+    vector_String algorithms /O
+cv.Algorithm._create Ptr_Algorithm /S
+    String name 
+const cv.Param.INT 0 
+const cv.Param.BOOLEAN 1 
+const cv.Param.REAL 2 
+const cv.Param.STRING 3 
+const cv.Param.MAT 4 
+const cv.Param.MAT_VECTOR 5 
+const cv.Param.ALGORITHM 6 
+const cv.Param.FLOAT 7 
+const cv.Param.UNSIGNED_INT 8 
+const cv.Param.UINT64 9 
+const cv.Param.UCHAR 11 
+## ../../core/include/opencv2/core/ocl.hpp
+cv.ocl.haveOpenCL bool 
+cv.ocl.useOpenCL bool 
+cv.ocl.haveAmdBlas bool 
+cv.ocl.haveAmdFft bool 
+cv.ocl.setUseOpenCL void 
+    bool flag 
+cv.ocl.finish void 
+const cv.ocl.Device.TYPE_DEFAULT (1 << 0) 
+const cv.ocl.Device.TYPE_CPU (1 << 1) 
+const cv.ocl.Device.TYPE_GPU (1 << 2) 
+const cv.ocl.Device.TYPE_ACCELERATOR (1 << 3) 
+const cv.ocl.Device.TYPE_DGPU TYPE_GPU + (1 << 16) 
+const cv.ocl.Device.TYPE_IGPU TYPE_GPU + (1 << 17) 
+const cv.ocl.Device.TYPE_ALL 0xFFFFFFFF 
+const cv.ocl.Device.FP_DENORM (1 << 0) 
+const cv.ocl.Device.FP_INF_NAN (1 << 1) 
+const cv.ocl.Device.FP_ROUND_TO_NEAREST (1 << 2) 
+const cv.ocl.Device.FP_ROUND_TO_ZERO (1 << 3) 
+const cv.ocl.Device.FP_ROUND_TO_INF (1 << 4) 
+const cv.ocl.Device.FP_FMA (1 << 5) 
+const cv.ocl.Device.FP_SOFT_FLOAT (1 << 6) 
+const cv.ocl.Device.FP_CORRECTLY_ROUNDED_DIVIDE_SQRT (1 << 7) 
+const cv.ocl.Device.EXEC_KERNEL (1 << 0) 
+const cv.ocl.Device.EXEC_NATIVE_KERNEL (1 << 1) 
+const cv.ocl.Device.NO_CACHE 0 
+const cv.ocl.Device.READ_ONLY_CACHE 1 
+const cv.ocl.Device.READ_WRITE_CACHE 2 
+const cv.ocl.Device.NO_LOCAL_MEM 0 
+const cv.ocl.Device.LOCAL_IS_LOCAL 1 
+const cv.ocl.Device.LOCAL_IS_GLOBAL 2 
+const cv.ocl.Device.UNKNOWN_VENDOR 0 
+const cv.ocl.Device.VENDOR_AMD 1 
+const cv.ocl.Device.VENDOR_INTEL 2 
+const cv.ocl.Device.VENDOR_NVIDIA 3 
+const cv.ocl.KernelArg.LOCAL 1 
+const cv.ocl.KernelArg.READ_ONLY 2 
+const cv.ocl.KernelArg.WRITE_ONLY 4 
+const cv.ocl.KernelArg.READ_WRITE 6 
+const cv.ocl.KernelArg.CONSTANT 8 
+const cv.ocl.KernelArg.PTR_ONLY 16 
+const cv.ocl.KernelArg.NO_SIZE 256 
+const cv.ocl.OCL_VECTOR_OWN 0 
+const cv.ocl.OCL_VECTOR_MAX 1 
+const cv.ocl.OCL_VECTOR_DEFAULT OCL_VECTOR_OWN 
+## ../../flann/include/opencv2/flann/miniflann.hpp
+class cv.flann.Index  
+cv.flann.Index.Index  
+cv.flann.Index.Index  
+    Mat features 
+    IndexParams params 
+    cvflann_flann_distance_t distType cvflann::FLANN_DIST_L2
+cv.flann.Index.build void 
+    Mat features 
+    IndexParams params 
+    cvflann_flann_distance_t distType cvflann::FLANN_DIST_L2
+cv.flann.Index.knnSearch void 
+    Mat query 
+    Mat indices /O
+    Mat dists /O
+    int knn 
+    SearchParams params SearchParams()
+cv.flann.Index.radiusSearch int 
+    Mat query 
+    Mat indices /O
+    Mat dists /O
+    double radius 
+    int maxResults 
+    SearchParams params SearchParams()
+cv.flann.Index.save void 
+    String filename 
+cv.flann.Index.load bool 
+    Mat features 
+    String filename 
+cv.flann.Index.release void 
+cv.flann.Index.getDistance cvflann_flann_distance_t 
+cv.flann.Index.getAlgorithm cvflann_flann_algorithm_t 
+## ../../ml/include/opencv2/ml.hpp
+const cv.ml.VAR_NUMERICAL 0 
+const cv.ml.VAR_ORDERED 0 
+const cv.ml.VAR_CATEGORICAL 1 
+const cv.ml.TEST_ERROR 0 
+const cv.ml.TRAIN_ERROR 1 
+const cv.ml.ROW_SAMPLE 0 
+const cv.ml.COL_SAMPLE 1 
+class cv.ml.ParamGrid  /Map
+    double minVal /RW
+    double maxVal /RW
+    double logStep /RW
+class cv.ml.StatModel : cv::Algorithm 
+const cv.ml.StatModel.UPDATE_MODEL 1 
+const cv.ml.StatModel.RAW_OUTPUT 1 
+const cv.ml.StatModel.COMPRESSED_INPUT 2 
+const cv.ml.StatModel.PREPROCESSED_INPUT 4 
+class cv.ml.NormalBayesClassifier : cv::ml::StatModel 
+class cv.ml.NormalBayesClassifier.Params  
+class cv.ml.KNearest : cv::ml::StatModel 
+class cv.ml.KNearest.Params  /Map
+    int defaultK /RW
+    bool isclassifier /RW
+    int Emax /RW
+    int algorithmType /RW
+const cv.ml.KNearest.BRUTE_FORCE 1 
+const cv.ml.KNearest.KDTREE 2 
+class cv.ml.SVM : cv::ml::StatModel 
+class cv.ml.SVM.Params  /Map
+    int svmType /RW
+    int kernelType /RW
+    double gamma /RW
+    double coef0 /RW
+    double degree /RW
+    double C /RW
+    double nu /RW
+    double p /RW
+    Mat classWeights /RW
+    TermCriteria termCrit /RW
+const cv.ml.SVM.C_SVC 100 
+const cv.ml.SVM.NU_SVC 101 
+const cv.ml.SVM.ONE_CLASS 102 
+const cv.ml.SVM.EPS_SVR 103 
+const cv.ml.SVM.NU_SVR 104 
+const cv.ml.SVM.CUSTOM -1 
+const cv.ml.SVM.LINEAR 0 
+const cv.ml.SVM.POLY 1 
+const cv.ml.SVM.RBF 2 
+const cv.ml.SVM.SIGMOID 3 
+const cv.ml.SVM.CHI2 4 
+const cv.ml.SVM.INTER 5 
+const cv.ml.SVM.C 0 
+const cv.ml.SVM.GAMMA 1 
+const cv.ml.SVM.P 2 
+const cv.ml.SVM.NU 3 
+const cv.ml.SVM.COEF 4 
+const cv.ml.SVM.DEGREE 5 
+cv.ml.SVM.getSupportVectors Mat 
+class cv.ml.EM : cv::ml::StatModel 
+const cv.ml.EM.COV_MAT_SPHERICAL 0 
+const cv.ml.EM.COV_MAT_DIAGONAL 1 
+const cv.ml.EM.COV_MAT_GENERIC 2 
+const cv.ml.EM.COV_MAT_DEFAULT COV_MAT_DIAGONAL 
+const cv.ml.EM.DEFAULT_NCLUSTERS 5 
+const cv.ml.EM.DEFAULT_MAX_ITERS 100 
+const cv.ml.EM.START_E_STEP 1 
+const cv.ml.EM.START_M_STEP 2 
+const cv.ml.EM.START_AUTO_STEP 0 
+class cv.ml.EM.Params  /Map
+    int nclusters /RW
+    int covMatType /RW
+    TermCriteria termCrit /RW
+cv.ml.EM.predict2 Vec2d 
+    Mat sample 
+    Mat probs /O
+class cv.ml.DTrees : cv::ml::StatModel 
+const cv.ml.DTrees.PREDICT_AUTO 0 
+const cv.ml.DTrees.PREDICT_SUM (1<<8) 
+const cv.ml.DTrees.PREDICT_MAX_VOTE (2<<8) 
+const cv.ml.DTrees.PREDICT_MASK (3<<8) 
+class cv.ml.DTrees.Params  /Map
+    int maxCategories /RW
+    int maxDepth /RW
+    int minSampleCount /RW
+    int CVFolds /RW
+    bool useSurrogates /RW
+    bool use1SERule /RW
+    bool truncatePrunedTree /RW
+    float regressionAccuracy /RW
+    Mat priors /RW
+class cv.ml.RTrees : cv::ml::DTrees 
+class cv.ml.RTrees.Params : cv::ml::DTrees::Params /Map
+    bool calcVarImportance /RW
+    int nactiveVars /RW
+    TermCriteria termCrit /RW
+class cv.ml.Boost : cv::ml::DTrees 
+class cv.ml.Boost.Params : cv::ml::DTrees::Params /Map
+    int boostType /RW
+    int weakCount /RW
+    double weightTrimRate /RW
+const cv.ml.Boost.DISCRETE 0 
+const cv.ml.Boost.REAL 1 
+const cv.ml.Boost.LOGIT 2 
+const cv.ml.Boost.GENTLE 3 
+class cv.ml.ANN_MLP : cv::ml::StatModel 
+struct cv.ml.ANN_MLP.Params  /Map
+    Mat layerSizes /RW
+    int activateFunc /RW
+    double fparam1 /RW
+    double fparam2 /RW
+    TermCriteria termCrit /RW
+    int trainMethod /RW
+    double bpDWScale /RW
+    double bpMomentScale /RW
+    double rpDW0 /RW
+    double rpDWPlus /RW
+    double rpDWMinus /RW
+    double rpDWMin /RW
+    double rpDWMax /RW
+const cv.ml.ANN_MLP.Params.BACKPROP 0 
+const cv.ml.ANN_MLP.Params.RPROP 1 
+const cv.ml.ANN_MLP.IDENTITY 0 
+const cv.ml.ANN_MLP.SIGMOID_SYM 1 
+const cv.ml.ANN_MLP.GAUSSIAN 2 
+const cv.ml.ANN_MLP.UPDATE_WEIGHTS 1 
+const cv.ml.ANN_MLP.NO_INPUT_SCALE 2 
+const cv.ml.ANN_MLP.NO_OUTPUT_SCALE 4 
+const cv.ml.LogisticRegression.REG_L1 0 
+const cv.ml.LogisticRegression.REG_L2 1 
+const cv.ml.LogisticRegression.BATCH 0 
+const cv.ml.LogisticRegression.MINI_BATCH 1 
+## ../../imgproc/include/opencv2/imgproc.hpp
+const cv.MORPH_ERODE 0 
+const cv.MORPH_DILATE 1 
+const cv.MORPH_OPEN 2 
+const cv.MORPH_CLOSE 3 
+const cv.MORPH_GRADIENT 4 
+const cv.MORPH_TOPHAT 5 
+const cv.MORPH_BLACKHAT 6 
+const cv.MORPH_RECT 0 
+const cv.MORPH_CROSS 1 
+const cv.MORPH_ELLIPSE 2 
+const cv.INTER_NEAREST 0 
+const cv.INTER_LINEAR 1 
+const cv.INTER_CUBIC 2 
+const cv.INTER_AREA 3 
+const cv.INTER_LANCZOS4 4 
+const cv.INTER_MAX 7 
+const cv.WARP_FILL_OUTLIERS 8 
+const cv.WARP_INVERSE_MAP 16 
+const cv.INTER_BITS 5 
+const cv.INTER_BITS2 INTER_BITS * 2 
+const cv.INTER_TAB_SIZE 1 << INTER_BITS 
+const cv.INTER_TAB_SIZE2 INTER_TAB_SIZE * INTER_TAB_SIZE 
+const cv.DIST_USER -1 
+const cv.DIST_L1 1 
+const cv.DIST_L2 2 
+const cv.DIST_C 3 
+const cv.DIST_L12 4 
+const cv.DIST_FAIR 5 
+const cv.DIST_WELSCH 6 
+const cv.DIST_HUBER 7 
+const cv.DIST_MASK_3 3 
+const cv.DIST_MASK_5 5 
+const cv.DIST_MASK_PRECISE 0 
+const cv.THRESH_BINARY 0 
+const cv.THRESH_BINARY_INV 1 
+const cv.THRESH_TRUNC 2 
+const cv.THRESH_TOZERO 3 
+const cv.THRESH_TOZERO_INV 4 
+const cv.THRESH_MASK 7 
+const cv.THRESH_OTSU 8 
+const cv.THRESH_TRIANGLE 16 
+const cv.ADAPTIVE_THRESH_MEAN_C 0 
+const cv.ADAPTIVE_THRESH_GAUSSIAN_C 1 
+const cv.PROJ_SPHERICAL_ORTHO 0 
+const cv.PROJ_SPHERICAL_EQRECT 1 
+const cv.GC_BGD 0 
+const cv.GC_FGD 1 
+const cv.GC_PR_BGD 2 
+const cv.GC_PR_FGD 3 
+const cv.GC_INIT_WITH_RECT 0 
+const cv.GC_INIT_WITH_MASK 1 
+const cv.GC_EVAL 2 
+const cv.DIST_LABEL_CCOMP 0 
+const cv.DIST_LABEL_PIXEL 1 
+const cv.FLOODFILL_FIXED_RANGE 1 << 16 
+const cv.FLOODFILL_MASK_ONLY 1 << 17 
+const cv.CC_STAT_LEFT 0 
+const cv.CC_STAT_TOP 1 
+const cv.CC_STAT_WIDTH 2 
+const cv.CC_STAT_HEIGHT 3 
+const cv.CC_STAT_AREA 4 
+const cv.CC_STAT_MAX 5 
+const cv.RETR_EXTERNAL 0 
+const cv.RETR_LIST 1 
+const cv.RETR_CCOMP 2 
+const cv.RETR_TREE 3 
+const cv.RETR_FLOODFILL 4 
+const cv.CHAIN_APPROX_NONE 1 
+const cv.CHAIN_APPROX_SIMPLE 2 
+const cv.CHAIN_APPROX_TC89_L1 3 
+const cv.CHAIN_APPROX_TC89_KCOS 4 
+const cv.HOUGH_STANDARD 0 
+const cv.HOUGH_PROBABILISTIC 1 
+const cv.HOUGH_MULTI_SCALE 2 
+const cv.HOUGH_GRADIENT 3 
+const cv.LSD_REFINE_NONE 0 
+const cv.LSD_REFINE_STD 1 
+const cv.LSD_REFINE_ADV 2 
+const cv.HISTCMP_CORREL 0 
+const cv.HISTCMP_CHISQR 1 
+const cv.HISTCMP_INTERSECT 2 
+const cv.HISTCMP_BHATTACHARYYA 3 
+const cv.HISTCMP_HELLINGER HISTCMP_BHATTACHARYYA 
+const cv.HISTCMP_CHISQR_ALT 4 
+const cv.HISTCMP_KL_DIV 5 
+const cv.COLOR_BGR2BGRA 0 
+const cv.COLOR_RGB2RGBA COLOR_BGR2BGRA 
+const cv.COLOR_BGRA2BGR 1 
+const cv.COLOR_RGBA2RGB COLOR_BGRA2BGR 
+const cv.COLOR_BGR2RGBA 2 
+const cv.COLOR_RGB2BGRA COLOR_BGR2RGBA 
+const cv.COLOR_RGBA2BGR 3 
+const cv.COLOR_BGRA2RGB COLOR_RGBA2BGR 
+const cv.COLOR_BGR2RGB 4 
+const cv.COLOR_RGB2BGR COLOR_BGR2RGB 
+const cv.COLOR_BGRA2RGBA 5 
+const cv.COLOR_RGBA2BGRA COLOR_BGRA2RGBA 
+const cv.COLOR_BGR2GRAY 6 
+const cv.COLOR_RGB2GRAY 7 
+const cv.COLOR_GRAY2BGR 8 
+const cv.COLOR_GRAY2RGB COLOR_GRAY2BGR 
+const cv.COLOR_GRAY2BGRA 9 
+const cv.COLOR_GRAY2RGBA COLOR_GRAY2BGRA 
+const cv.COLOR_BGRA2GRAY 10 
+const cv.COLOR_RGBA2GRAY 11 
+const cv.COLOR_BGR2BGR565 12 
+const cv.COLOR_RGB2BGR565 13 
+const cv.COLOR_BGR5652BGR 14 
+const cv.COLOR_BGR5652RGB 15 
+const cv.COLOR_BGRA2BGR565 16 
+const cv.COLOR_RGBA2BGR565 17 
+const cv.COLOR_BGR5652BGRA 18 
+const cv.COLOR_BGR5652RGBA 19 
+const cv.COLOR_GRAY2BGR565 20 
+const cv.COLOR_BGR5652GRAY 21 
+const cv.COLOR_BGR2BGR555 22 
+const cv.COLOR_RGB2BGR555 23 
+const cv.COLOR_BGR5552BGR 24 
+const cv.COLOR_BGR5552RGB 25 
+const cv.COLOR_BGRA2BGR555 26 
+const cv.COLOR_RGBA2BGR555 27 
+const cv.COLOR_BGR5552BGRA 28 
+const cv.COLOR_BGR5552RGBA 29 
+const cv.COLOR_GRAY2BGR555 30 
+const cv.COLOR_BGR5552GRAY 31 
+const cv.COLOR_BGR2XYZ 32 
+const cv.COLOR_RGB2XYZ 33 
+const cv.COLOR_XYZ2BGR 34 
+const cv.COLOR_XYZ2RGB 35 
+const cv.COLOR_BGR2YCrCb 36 
+const cv.COLOR_RGB2YCrCb 37 
+const cv.COLOR_YCrCb2BGR 38 
+const cv.COLOR_YCrCb2RGB 39 
+const cv.COLOR_BGR2HSV 40 
+const cv.COLOR_RGB2HSV 41 
+const cv.COLOR_BGR2Lab 44 
+const cv.COLOR_RGB2Lab 45 
+const cv.COLOR_BGR2Luv 50 
+const cv.COLOR_RGB2Luv 51 
+const cv.COLOR_BGR2HLS 52 
+const cv.COLOR_RGB2HLS 53 
+const cv.COLOR_HSV2BGR 54 
+const cv.COLOR_HSV2RGB 55 
+const cv.COLOR_Lab2BGR 56 
+const cv.COLOR_Lab2RGB 57 
+const cv.COLOR_Luv2BGR 58 
+const cv.COLOR_Luv2RGB 59 
+const cv.COLOR_HLS2BGR 60 
+const cv.COLOR_HLS2RGB 61 
+const cv.COLOR_BGR2HSV_FULL 66 
+const cv.COLOR_RGB2HSV_FULL 67 
+const cv.COLOR_BGR2HLS_FULL 68 
+const cv.COLOR_RGB2HLS_FULL 69 
+const cv.COLOR_HSV2BGR_FULL 70 
+const cv.COLOR_HSV2RGB_FULL 71 
+const cv.COLOR_HLS2BGR_FULL 72 
+const cv.COLOR_HLS2RGB_FULL 73 
+const cv.COLOR_LBGR2Lab 74 
+const cv.COLOR_LRGB2Lab 75 
+const cv.COLOR_LBGR2Luv 76 
+const cv.COLOR_LRGB2Luv 77 
+const cv.COLOR_Lab2LBGR 78 
+const cv.COLOR_Lab2LRGB 79 
+const cv.COLOR_Luv2LBGR 80 
+const cv.COLOR_Luv2LRGB 81 
+const cv.COLOR_BGR2YUV 82 
+const cv.COLOR_RGB2YUV 83 
+const cv.COLOR_YUV2BGR 84 
+const cv.COLOR_YUV2RGB 85 
+const cv.COLOR_YUV2RGB_NV12 90 
+const cv.COLOR_YUV2BGR_NV12 91 
+const cv.COLOR_YUV2RGB_NV21 92 
+const cv.COLOR_YUV2BGR_NV21 93 
+const cv.COLOR_YUV420sp2RGB COLOR_YUV2RGB_NV21 
+const cv.COLOR_YUV420sp2BGR COLOR_YUV2BGR_NV21 
+const cv.COLOR_YUV2RGBA_NV12 94 
+const cv.COLOR_YUV2BGRA_NV12 95 
+const cv.COLOR_YUV2RGBA_NV21 96 
+const cv.COLOR_YUV2BGRA_NV21 97 
+const cv.COLOR_YUV420sp2RGBA COLOR_YUV2RGBA_NV21 
+const cv.COLOR_YUV420sp2BGRA COLOR_YUV2BGRA_NV21 
+const cv.COLOR_YUV2RGB_YV12 98 
+const cv.COLOR_YUV2BGR_YV12 99 
+const cv.COLOR_YUV2RGB_IYUV 100 
+const cv.COLOR_YUV2BGR_IYUV 101 
+const cv.COLOR_YUV2RGB_I420 COLOR_YUV2RGB_IYUV 
+const cv.COLOR_YUV2BGR_I420 COLOR_YUV2BGR_IYUV 
+const cv.COLOR_YUV420p2RGB COLOR_YUV2RGB_YV12 
+const cv.COLOR_YUV420p2BGR COLOR_YUV2BGR_YV12 
+const cv.COLOR_YUV2RGBA_YV12 102 
+const cv.COLOR_YUV2BGRA_YV12 103 
+const cv.COLOR_YUV2RGBA_IYUV 104 
+const cv.COLOR_YUV2BGRA_IYUV 105 
+const cv.COLOR_YUV2RGBA_I420 COLOR_YUV2RGBA_IYUV 
+const cv.COLOR_YUV2BGRA_I420 COLOR_YUV2BGRA_IYUV 
+const cv.COLOR_YUV420p2RGBA COLOR_YUV2RGBA_YV12 
+const cv.COLOR_YUV420p2BGRA COLOR_YUV2BGRA_YV12 
+const cv.COLOR_YUV2GRAY_420 106 
+const cv.COLOR_YUV2GRAY_NV21 COLOR_YUV2GRAY_420 
+const cv.COLOR_YUV2GRAY_NV12 COLOR_YUV2GRAY_420 
+const cv.COLOR_YUV2GRAY_YV12 COLOR_YUV2GRAY_420 
+const cv.COLOR_YUV2GRAY_IYUV COLOR_YUV2GRAY_420 
+const cv.COLOR_YUV2GRAY_I420 COLOR_YUV2GRAY_420 
+const cv.COLOR_YUV420sp2GRAY COLOR_YUV2GRAY_420 
+const cv.COLOR_YUV420p2GRAY COLOR_YUV2GRAY_420 
+const cv.COLOR_YUV2RGB_UYVY 107 
+const cv.COLOR_YUV2BGR_UYVY 108 
+const cv.COLOR_YUV2RGB_Y422 COLOR_YUV2RGB_UYVY 
+const cv.COLOR_YUV2BGR_Y422 COLOR_YUV2BGR_UYVY 
+const cv.COLOR_YUV2RGB_UYNV COLOR_YUV2RGB_UYVY 
+const cv.COLOR_YUV2BGR_UYNV COLOR_YUV2BGR_UYVY 
+const cv.COLOR_YUV2RGBA_UYVY 111 
+const cv.COLOR_YUV2BGRA_UYVY 112 
+const cv.COLOR_YUV2RGBA_Y422 COLOR_YUV2RGBA_UYVY 
+const cv.COLOR_YUV2BGRA_Y422 COLOR_YUV2BGRA_UYVY 
+const cv.COLOR_YUV2RGBA_UYNV COLOR_YUV2RGBA_UYVY 
+const cv.COLOR_YUV2BGRA_UYNV COLOR_YUV2BGRA_UYVY 
+const cv.COLOR_YUV2RGB_YUY2 115 
+const cv.COLOR_YUV2BGR_YUY2 116 
+const cv.COLOR_YUV2RGB_YVYU 117 
+const cv.COLOR_YUV2BGR_YVYU 118 
+const cv.COLOR_YUV2RGB_YUYV COLOR_YUV2RGB_YUY2 
+const cv.COLOR_YUV2BGR_YUYV COLOR_YUV2BGR_YUY2 
+const cv.COLOR_YUV2RGB_YUNV COLOR_YUV2RGB_YUY2 
+const cv.COLOR_YUV2BGR_YUNV COLOR_YUV2BGR_YUY2 
+const cv.COLOR_YUV2RGBA_YUY2 119 
+const cv.COLOR_YUV2BGRA_YUY2 120 
+const cv.COLOR_YUV2RGBA_YVYU 121 
+const cv.COLOR_YUV2BGRA_YVYU 122 
+const cv.COLOR_YUV2RGBA_YUYV COLOR_YUV2RGBA_YUY2 
+const cv.COLOR_YUV2BGRA_YUYV COLOR_YUV2BGRA_YUY2 
+const cv.COLOR_YUV2RGBA_YUNV COLOR_YUV2RGBA_YUY2 
+const cv.COLOR_YUV2BGRA_YUNV COLOR_YUV2BGRA_YUY2 
+const cv.COLOR_YUV2GRAY_UYVY 123 
+const cv.COLOR_YUV2GRAY_YUY2 124 
+const cv.COLOR_YUV2GRAY_Y422 COLOR_YUV2GRAY_UYVY 
+const cv.COLOR_YUV2GRAY_UYNV COLOR_YUV2GRAY_UYVY 
+const cv.COLOR_YUV2GRAY_YVYU COLOR_YUV2GRAY_YUY2 
+const cv.COLOR_YUV2GRAY_YUYV COLOR_YUV2GRAY_YUY2 
+const cv.COLOR_YUV2GRAY_YUNV COLOR_YUV2GRAY_YUY2 
+const cv.COLOR_RGBA2mRGBA 125 
+const cv.COLOR_mRGBA2RGBA 126 
+const cv.COLOR_RGB2YUV_I420 127 
+const cv.COLOR_BGR2YUV_I420 128 
+const cv.COLOR_RGB2YUV_IYUV COLOR_RGB2YUV_I420 
+const cv.COLOR_BGR2YUV_IYUV COLOR_BGR2YUV_I420 
+const cv.COLOR_RGBA2YUV_I420 129 
+const cv.COLOR_BGRA2YUV_I420 130 
+const cv.COLOR_RGBA2YUV_IYUV COLOR_RGBA2YUV_I420 
+const cv.COLOR_BGRA2YUV_IYUV COLOR_BGRA2YUV_I420 
+const cv.COLOR_RGB2YUV_YV12 131 
+const cv.COLOR_BGR2YUV_YV12 132 
+const cv.COLOR_RGBA2YUV_YV12 133 
+const cv.COLOR_BGRA2YUV_YV12 134 
+const cv.COLOR_BayerBG2BGR 46 
+const cv.COLOR_BayerGB2BGR 47 
+const cv.COLOR_BayerRG2BGR 48 
+const cv.COLOR_BayerGR2BGR 49 
+const cv.COLOR_BayerBG2RGB COLOR_BayerRG2BGR 
+const cv.COLOR_BayerGB2RGB COLOR_BayerGR2BGR 
+const cv.COLOR_BayerRG2RGB COLOR_BayerBG2BGR 
+const cv.COLOR_BayerGR2RGB COLOR_BayerGB2BGR 
+const cv.COLOR_BayerBG2GRAY 86 
+const cv.COLOR_BayerGB2GRAY 87 
+const cv.COLOR_BayerRG2GRAY 88 
+const cv.COLOR_BayerGR2GRAY 89 
+const cv.COLOR_BayerBG2BGR_VNG 62 
+const cv.COLOR_BayerGB2BGR_VNG 63 
+const cv.COLOR_BayerRG2BGR_VNG 64 
+const cv.COLOR_BayerGR2BGR_VNG 65 
+const cv.COLOR_BayerBG2RGB_VNG COLOR_BayerRG2BGR_VNG 
+const cv.COLOR_BayerGB2RGB_VNG COLOR_BayerGR2BGR_VNG 
+const cv.COLOR_BayerRG2RGB_VNG COLOR_BayerBG2BGR_VNG 
+const cv.COLOR_BayerGR2RGB_VNG COLOR_BayerGB2BGR_VNG 
+const cv.COLOR_BayerBG2BGR_EA 135 
+const cv.COLOR_BayerGB2BGR_EA 136 
+const cv.COLOR_BayerRG2BGR_EA 137 
+const cv.COLOR_BayerGR2BGR_EA 138 
+const cv.COLOR_BayerBG2RGB_EA COLOR_BayerRG2BGR_EA 
+const cv.COLOR_BayerGB2RGB_EA COLOR_BayerGR2BGR_EA 
+const cv.COLOR_BayerRG2RGB_EA COLOR_BayerBG2BGR_EA 
+const cv.COLOR_BayerGR2RGB_EA COLOR_BayerGB2BGR_EA 
+const cv.COLOR_COLORCVT_MAX 139 
+const cv.INTERSECT_NONE 0 
+const cv.INTERSECT_PARTIAL 1 
+const cv.INTERSECT_FULL 2 
+class cv.CLAHE : cv::Algorithm 
+cv.CLAHE.apply void 
+    Mat src 
+    Mat dst /O
+cv.CLAHE.setClipLimit void 
+    double clipLimit 
+cv.CLAHE.getClipLimit double 
+cv.CLAHE.setTilesGridSize void 
+    Size tileGridSize 
+cv.CLAHE.getTilesGridSize Size 
+cv.CLAHE.collectGarbage void 
+class cv.Subdiv2D  
+const cv.Subdiv2D.PTLOC_ERROR -2 
+const cv.Subdiv2D.PTLOC_OUTSIDE_RECT -1 
+const cv.Subdiv2D.PTLOC_INSIDE 0 
+const cv.Subdiv2D.PTLOC_VERTEX 1 
+const cv.Subdiv2D.PTLOC_ON_EDGE 2 
+const cv.Subdiv2D.NEXT_AROUND_ORG 0x00 
+const cv.Subdiv2D.NEXT_AROUND_DST 0x22 
+const cv.Subdiv2D.PREV_AROUND_ORG 0x11 
+const cv.Subdiv2D.PREV_AROUND_DST 0x33 
+const cv.Subdiv2D.NEXT_AROUND_LEFT 0x13 
+const cv.Subdiv2D.NEXT_AROUND_RIGHT 0x31 
+const cv.Subdiv2D.PREV_AROUND_LEFT 0x20 
+const cv.Subdiv2D.PREV_AROUND_RIGHT 0x02 
+cv.Subdiv2D.Subdiv2D  
+cv.Subdiv2D.Subdiv2D  
+    Rect rect 
+cv.Subdiv2D.initDelaunay void 
+    Rect rect 
+cv.Subdiv2D.insert int 
+    Point2f pt 
+cv.Subdiv2D.insert void 
+    vector_Point2f ptvec 
+cv.Subdiv2D.locate int 
+    Point2f pt 
+    int edge /O
+    int vertex /O
+cv.Subdiv2D.findNearest int 
+    Point2f pt 
+    Point2f* nearestPt 0/O
+cv.Subdiv2D.getEdgeList void 
+    vector_Vec4f edgeList /O
+cv.Subdiv2D.getTriangleList void 
+    vector_Vec6f triangleList /O
+cv.Subdiv2D.getVoronoiFacetList void 
+    vector_int idx 
+    vector_vector_Point2f facetList /O
+    vector_Point2f facetCenters /O
+cv.Subdiv2D.getVertex Point2f 
+    int vertex 
+    int* firstEdge 0/O
+cv.Subdiv2D.getEdge int 
+    int edge 
+    int nextEdgeType 
+cv.Subdiv2D.nextEdge int 
+    int edge 
+cv.Subdiv2D.rotateEdge int 
+    int edge 
+    int rotate 
+cv.Subdiv2D.symEdge int 
+    int edge 
+cv.Subdiv2D.edgeOrg int 
+    int edge 
+    Point2f* orgpt 0/O
+cv.Subdiv2D.edgeDst int 
+    int edge 
+    Point2f* dstpt 0/O
+class cv.LineSegmentDetector : cv::Algorithm 
+cv.LineSegmentDetector.detect void 
+    Mat _image 
+    Mat _lines /O
+    Mat width Mat()/O
+    Mat prec Mat()/O
+    Mat nfa Mat()/O
+cv.LineSegmentDetector.drawSegments void 
+    Mat _image /IO
+    Mat lines 
+cv.LineSegmentDetector.compareSegments int 
+    Size size 
+    Mat lines1 
+    Mat lines2 
+    Mat _image Mat()/IO
+cv.createLineSegmentDetector Ptr_LineSegmentDetector 
+    int _refine LSD_REFINE_STD
+    double _scale 0.8
+    double _sigma_scale 0.6
+    double _quant 2.0
+    double _ang_th 22.5
+    double _log_eps 0
+    double _density_th 0.7
+    int _n_bins 1024
+cv.getGaussianKernel Mat 
+    int ksize 
+    double sigma 
+    int ktype CV_64F
+cv.getDerivKernels void 
+    Mat kx /O
+    Mat ky /O
+    int dx 
+    int dy 
+    int ksize 
+    bool normalize false
+    int ktype CV_32F
+cv.getGaborKernel Mat 
+    Size ksize 
+    double sigma 
+    double theta 
+    double lambd 
+    double gamma 
+    double psi CV_PI*0.5
+    int ktype CV_64F
+cv.getStructuringElement Mat 
+    int shape 
+    Size ksize 
+    Point anchor Point(-1,-1)
+cv.medianBlur void 
+    Mat src 
+    Mat dst /O
+    int ksize 
+cv.GaussianBlur void 
+    Mat src 
+    Mat dst /O
+    Size ksize 
+    double sigmaX 
+    double sigmaY 0
+    int borderType BORDER_DEFAULT
+cv.bilateralFilter void 
+    Mat src 
+    Mat dst /O
+    int d 
+    double sigmaColor 
+    double sigmaSpace 
+    int borderType BORDER_DEFAULT
+cv.boxFilter void 
+    Mat src 
+    Mat dst /O
+    int ddepth 
+    Size ksize 
+    Point anchor Point(-1,-1)
+    bool normalize true
+    int borderType BORDER_DEFAULT
+cv.sqrBoxFilter void 
+    Mat _src 
+    Mat _dst /O
+    int ddepth 
+    Size ksize 
+    Point anchor Point(-1, -1)
+    bool normalize true
+    int borderType BORDER_DEFAULT
+cv.blur void 
+    Mat src 
+    Mat dst /O
+    Size ksize 
+    Point anchor Point(-1,-1)
+    int borderType BORDER_DEFAULT
+cv.filter2D void 
+    Mat src 
+    Mat dst /O
+    int ddepth 
+    Mat kernel 
+    Point anchor Point(-1,-1)
+    double delta 0
+    int borderType BORDER_DEFAULT
+cv.sepFilter2D void 
+    Mat src 
+    Mat dst /O
+    int ddepth 
+    Mat kernelX 
+    Mat kernelY 
+    Point anchor Point(-1,-1)
+    double delta 0
+    int borderType BORDER_DEFAULT
+cv.Sobel void 
+    Mat src 
+    Mat dst /O
+    int ddepth 
+    int dx 
+    int dy 
+    int ksize 3
+    double scale 1
+    double delta 0
+    int borderType BORDER_DEFAULT
+cv.Scharr void 
+    Mat src 
+    Mat dst /O
+    int ddepth 
+    int dx 
+    int dy 
+    double scale 1
+    double delta 0
+    int borderType BORDER_DEFAULT
+cv.Laplacian void 
+    Mat src 
+    Mat dst /O
+    int ddepth 
+    int ksize 1
+    double scale 1
+    double delta 0
+    int borderType BORDER_DEFAULT
+cv.Canny void 
+    Mat image 
+    Mat edges /O
+    double threshold1 
+    double threshold2 
+    int apertureSize 3
+    bool L2gradient false
+cv.cornerMinEigenVal void 
+    Mat src 
+    Mat dst /O
+    int blockSize 
+    int ksize 3
+    int borderType BORDER_DEFAULT
+cv.cornerHarris void 
+    Mat src 
+    Mat dst /O
+    int blockSize 
+    int ksize 
+    double k 
+    int borderType BORDER_DEFAULT
+cv.cornerEigenValsAndVecs void 
+    Mat src 
+    Mat dst /O
+    int blockSize 
+    int ksize 
+    int borderType BORDER_DEFAULT
+cv.preCornerDetect void 
+    Mat src 
+    Mat dst /O
+    int ksize 
+    int borderType BORDER_DEFAULT
+cv.cornerSubPix void 
+    Mat image 
+    Mat corners /IO
+    Size winSize 
+    Size zeroZone 
+    TermCriteria criteria 
+cv.goodFeaturesToTrack void 
+    Mat image 
+    Mat corners /O
+    int maxCorners 
+    double qualityLevel 
+    double minDistance 
+    Mat mask Mat()
+    int blockSize 3
+    bool useHarrisDetector false
+    double k 0.04
+cv.HoughLines void 
+    Mat image 
+    Mat lines /O
+    double rho 
+    double theta 
+    int threshold 
+    double srn 0
+    double stn 0
+    double min_theta 0
+    double max_theta CV_PI
+cv.HoughLinesP void 
+    Mat image 
+    Mat lines /O
+    double rho 
+    double theta 
+    int threshold 
+    double minLineLength 0
+    double maxLineGap 0
+cv.HoughCircles void 
+    Mat image 
+    Mat circles /O
+    int method 
+    double dp 
+    double minDist 
+    double param1 100
+    double param2 100
+    int minRadius 0
+    int maxRadius 0
+cv.erode void 
+    Mat src 
+    Mat dst /O
+    Mat kernel 
+    Point anchor Point(-1,-1)
+    int iterations 1
+    int borderType BORDER_CONSTANT
+    Scalar borderValue morphologyDefaultBorderValue()
+cv.dilate void 
+    Mat src 
+    Mat dst /O
+    Mat kernel 
+    Point anchor Point(-1,-1)
+    int iterations 1
+    int borderType BORDER_CONSTANT
+    Scalar borderValue morphologyDefaultBorderValue()
+cv.morphologyEx void 
+    Mat src 
+    Mat dst /O
+    int op 
+    Mat kernel 
+    Point anchor Point(-1,-1)
+    int iterations 1
+    int borderType BORDER_CONSTANT
+    Scalar borderValue morphologyDefaultBorderValue()
+cv.resize void 
+    Mat src 
+    Mat dst /O
+    Size dsize 
+    double fx 0
+    double fy 0
+    int interpolation INTER_LINEAR
+cv.warpAffine void 
+    Mat src 
+    Mat dst /O
+    Mat M 
+    Size dsize 
+    int flags INTER_LINEAR
+    int borderMode BORDER_CONSTANT
+    Scalar borderValue Scalar()
+cv.warpPerspective void 
+    Mat src 
+    Mat dst /O
+    Mat M 
+    Size dsize 
+    int flags INTER_LINEAR
+    int borderMode BORDER_CONSTANT
+    Scalar borderValue Scalar()
+cv.remap void 
+    Mat src 
+    Mat dst /O
+    Mat map1 
+    Mat map2 
+    int interpolation 
+    int borderMode BORDER_CONSTANT
+    Scalar borderValue Scalar()
+cv.convertMaps void 
+    Mat map1 
+    Mat map2 
+    Mat dstmap1 /O
+    Mat dstmap2 /O
+    int dstmap1type 
+    bool nninterpolation false
+cv.getRotationMatrix2D Mat 
+    Point2f center 
+    double angle 
+    double scale 
+cv.invertAffineTransform void 
+    Mat M 
+    Mat iM /O
+cv.getPerspectiveTransform Mat 
+    Mat src 
+    Mat dst 
+cv.getAffineTransform Mat 
+    Mat src 
+    Mat dst 
+cv.getRectSubPix void 
+    Mat image 
+    Size patchSize 
+    Point2f center 
+    Mat patch /O
+    int patchType -1
+cv.logPolar void 
+    Mat src 
+    Mat dst /O
+    Point2f center 
+    double M 
+    int flags 
+cv.linearPolar void 
+    Mat src 
+    Mat dst /O
+    Point2f center 
+    double maxRadius 
+    int flags 
+cv.integral void 
+    Mat src 
+    Mat sum /O
+    int sdepth -1
+cv.integral void =integral2
+    Mat src 
+    Mat sum /O
+    Mat sqsum /O
+    int sdepth -1
+    int sqdepth -1
+cv.integral void =integral3
+    Mat src 
+    Mat sum /O
+    Mat sqsum /O
+    Mat tilted /O
+    int sdepth -1
+    int sqdepth -1
+cv.accumulate void 
+    Mat src 
+    Mat dst /IO
+    Mat mask Mat()
+cv.accumulateSquare void 
+    Mat src 
+    Mat dst /IO
+    Mat mask Mat()
+cv.accumulateProduct void 
+    Mat src1 
+    Mat src2 
+    Mat dst /IO
+    Mat mask Mat()
+cv.accumulateWeighted void 
+    Mat src 
+    Mat dst /IO
+    double alpha 
+    Mat mask Mat()
+cv.phaseCorrelate Point2d 
+    Mat src1 
+    Mat src2 
+    Mat window Mat()
+    double* response 0/O
+cv.createHanningWindow void 
+    Mat dst /O
+    Size winSize 
+    int type 
+cv.threshold double 
+    Mat src 
+    Mat dst /O
+    double thresh 
+    double maxval 
+    int type 
+cv.adaptiveThreshold void 
+    Mat src 
+    Mat dst /O
+    double maxValue 
+    int adaptiveMethod 
+    int thresholdType 
+    int blockSize 
+    double C 
+cv.pyrDown void 
+    Mat src 
+    Mat dst /O
+    Size dstsize Size()
+    int borderType BORDER_DEFAULT
+cv.pyrUp void 
+    Mat src 
+    Mat dst /O
+    Size dstsize Size()
+    int borderType BORDER_DEFAULT
+cv.undistort void 
+    Mat src 
+    Mat dst /O
+    Mat cameraMatrix 
+    Mat distCoeffs 
+    Mat newCameraMatrix Mat()
+cv.initUndistortRectifyMap void 
+    Mat cameraMatrix 
+    Mat distCoeffs 
+    Mat R 
+    Mat newCameraMatrix 
+    Size size 
+    int m1type 
+    Mat map1 /O
+    Mat map2 /O
+cv.initWideAngleProjMap float 
+    Mat cameraMatrix 
+    Mat distCoeffs 
+    Size imageSize 
+    int destImageWidth 
+    int m1type 
+    Mat map1 /O
+    Mat map2 /O
+    int projType PROJ_SPHERICAL_EQRECT
+    double alpha 0
+cv.getDefaultNewCameraMatrix Mat 
+    Mat cameraMatrix 
+    Size imgsize Size()
+    bool centerPrincipalPoint false
+cv.undistortPoints void 
+    Mat src 
+    Mat dst /O
+    Mat cameraMatrix 
+    Mat distCoeffs 
+    Mat R Mat()
+    Mat P Mat()
+cv.calcHist void 
+    vector_Mat images 
+    vector_int channels 
+    Mat mask 
+    Mat hist /O
+    vector_int histSize 
+    vector_float ranges 
+    bool accumulate false
+cv.calcBackProject void 
+    vector_Mat images 
+    vector_int channels 
+    Mat hist 
+    Mat dst /O
+    vector_float ranges 
+    double scale 
+cv.compareHist double 
+    Mat H1 
+    Mat H2 
+    int method 
+cv.equalizeHist void 
+    Mat src 
+    Mat dst /O
+cv.watershed void 
+    Mat image 
+    Mat markers /IO
+cv.pyrMeanShiftFiltering void 
+    Mat src 
+    Mat dst /O
+    double sp 
+    double sr 
+    int maxLevel 1
+    TermCriteria termcrit TermCriteria(TermCriteria::MAX_ITER+TermCriteria::EPS,5,1)
+cv.grabCut void 
+    Mat img 
+    Mat mask /IO
+    Rect rect 
+    Mat bgdModel /IO
+    Mat fgdModel /IO
+    int iterCount 
+    int mode GC_EVAL
+cv.distanceTransform void =distanceTransformWithLabels
+    Mat src 
+    Mat dst /O
+    Mat labels /O
+    int distanceType 
+    int maskSize 
+    int labelType DIST_LABEL_CCOMP
+cv.distanceTransform void 
+    Mat src 
+    Mat dst /O
+    int distanceType 
+    int maskSize 
+    int dstType CV_32F
+cv.floodFill int 
+    Mat image /IO
+    Mat mask /IO
+    Point seedPoint 
+    Scalar newVal 
+    Rect* rect 0/O
+    Scalar loDiff Scalar()
+    Scalar upDiff Scalar()
+    int flags 4
+cv.cvtColor void 
+    Mat src 
+    Mat dst /O
+    int code 
+    int dstCn 0
+cv.demosaicing void 
+    Mat _src 
+    Mat _dst /O
+    int code 
+    int dcn 0
+cv.moments Moments 
+    Mat array 
+    bool binaryImage false
+cv.HuMoments void 
+    Moments m 
+    Mat hu /O
+const cv.TM_SQDIFF 0 
+const cv.TM_SQDIFF_NORMED 1 
+const cv.TM_CCORR 2 
+const cv.TM_CCORR_NORMED 3 
+const cv.TM_CCOEFF 4 
+const cv.TM_CCOEFF_NORMED 5 
+cv.matchTemplate void 
+    Mat image 
+    Mat templ 
+    Mat result /O
+    int method 
+    Mat mask Mat()
+cv.connectedComponents int 
+    Mat image 
+    Mat labels /O
+    int connectivity 8
+    int ltype CV_32S
+cv.connectedComponentsWithStats int 
+    Mat image 
+    Mat labels /O
+    Mat stats /O
+    Mat centroids /O
+    int connectivity 8
+    int ltype CV_32S
+cv.findContours void 
+    Mat image /IO
+    vector_Mat contours /O
+    Mat hierarchy /O
+    int mode 
+    int method 
+    Point offset Point()
+cv.approxPolyDP void 
+    Mat curve 
+    Mat approxCurve /O
+    double epsilon 
+    bool closed 
+cv.arcLength double 
+    Mat curve 
+    bool closed 
+cv.boundingRect Rect 
+    Mat points 
+cv.contourArea double 
+    Mat contour 
+    bool oriented false
+cv.minAreaRect RotatedRect 
+    Mat points 
+cv.boxPoints void 
+    RotatedRect box 
+    Mat points /O
+cv.minEnclosingCircle void 
+    Mat points 
+    Point2f center /O
+    float radius /O
+cv.minEnclosingTriangle double 
+    Mat points 
+    Mat triangle /O; /O
+cv.matchShapes double 
+    Mat contour1 
+    Mat contour2 
+    int method 
+    double parameter 
+cv.convexHull void 
+    Mat points 
+    Mat hull /O
+    bool clockwise false
+    bool returnPoints true
+cv.convexityDefects void 
+    Mat contour 
+    Mat convexhull 
+    Mat convexityDefects /O
+cv.isContourConvex bool 
+    Mat contour 
+cv.intersectConvexConvex float 
+    Mat _p1 
+    Mat _p2 
+    Mat _p12 /O
+    bool handleNested true
+cv.fitEllipse RotatedRect 
+    Mat points 
+cv.fitLine void 
+    Mat points 
+    Mat line /O
+    int distType 
+    double param 
+    double reps 
+    double aeps 
+cv.pointPolygonTest double 
+    Mat contour 
+    Point2f pt 
+    bool measureDist 
+cv.rotatedRectangleIntersection int 
+    RotatedRect rect1 
+    RotatedRect rect2 
+    Mat intersectingRegion /O
+cv.createCLAHE Ptr_CLAHE 
+    double clipLimit 40.0
+    Size tileGridSize Size(8, 8)
+const cv.COLORMAP_AUTUMN 0 
+const cv.COLORMAP_BONE 1 
+const cv.COLORMAP_JET 2 
+const cv.COLORMAP_WINTER 3 
+const cv.COLORMAP_RAINBOW 4 
+const cv.COLORMAP_OCEAN 5 
+const cv.COLORMAP_SUMMER 6 
+const cv.COLORMAP_SPRING 7 
+const cv.COLORMAP_COOL 8 
+const cv.COLORMAP_HSV 9 
+const cv.COLORMAP_PINK 10 
+const cv.COLORMAP_HOT 11 
+cv.applyColorMap void 
+    Mat src 
+    Mat dst /O
+    int colormap 
+cv.line void 
+    Mat img /IO
+    Point pt1 
+    Point pt2 
+    Scalar color 
+    int thickness 1
+    int lineType LINE_8
+    int shift 0
+cv.arrowedLine void 
+    Mat img /IO
+    Point pt1 
+    Point pt2 
+    Scalar color 
+    int thickness 1
+    int line_type 8
+    int shift 0
+    double tipLength 0.1
+cv.rectangle void 
+    Mat img /IO
+    Point pt1 
+    Point pt2 
+    Scalar color 
+    int thickness 1
+    int lineType LINE_8
+    int shift 0
+cv.circle void 
+    Mat img /IO
+    Point center 
+    int radius 
+    Scalar color 
+    int thickness 1
+    int lineType LINE_8
+    int shift 0
+cv.ellipse void 
+    Mat img /IO
+    Point center 
+    Size axes 
+    double angle 
+    double startAngle 
+    double endAngle 
+    Scalar color 
+    int thickness 1
+    int lineType LINE_8
+    int shift 0
+cv.ellipse void 
+    Mat img /IO
+    RotatedRect box 
+    Scalar color 
+    int thickness 1
+    int lineType LINE_8
+cv.fillConvexPoly void 
+    Mat img /IO
+    Mat points 
+    Scalar color 
+    int lineType LINE_8
+    int shift 0
+cv.fillPoly void 
+    Mat img /IO
+    vector_Mat pts 
+    Scalar color 
+    int lineType LINE_8
+    int shift 0
+    Point offset Point()
+cv.polylines void 
+    Mat img /IO
+    vector_Mat pts 
+    bool isClosed 
+    Scalar color 
+    int thickness 1
+    int lineType LINE_8
+    int shift 0
+cv.drawContours void 
+    Mat image /IO
+    vector_Mat contours 
+    int contourIdx 
+    Scalar color 
+    int thickness 1
+    int lineType LINE_8
+    Mat hierarchy Mat()
+    int maxLevel INT_MAX
+    Point offset Point()
+cv.clipLine bool 
+    Rect imgRect 
+    Point pt1 /O; /IO
+    Point pt2 /O; /IO
+cv.ellipse2Poly void 
+    Point center 
+    Size axes 
+    int angle 
+    int arcStart 
+    int arcEnd 
+    int delta 
+    vector_Point pts /O
+cv.putText void 
+    Mat img /IO
+    String text 
+    Point org 
+    int fontFace 
+    double fontScale 
+    Scalar color 
+    int thickness 1
+    int lineType LINE_8
+    bool bottomLeftOrigin false
+cv.getTextSize Size 
+    String text 
+    int fontFace 
+    double fontScale 
+    int thickness 
+    int* baseLine /O
+## ../../calib3d/include/opencv2/calib3d.hpp
+const cv.LMEDS 4 
+const cv.RANSAC 8 
+const cv.SOLVEPNP_ITERATIVE 0 
+const cv.SOLVEPNP_EPNP 1 
+const cv.SOLVEPNP_P3P 2 
+const cv.SOLVEPNP_DLS 3 
+const cv.SOLVEPNP_UPNP 4 
+const cv.CALIB_CB_ADAPTIVE_THRESH 1 
+const cv.CALIB_CB_NORMALIZE_IMAGE 2 
+const cv.CALIB_CB_FILTER_QUADS 4 
+const cv.CALIB_CB_FAST_CHECK 8 
+const cv.CALIB_CB_SYMMETRIC_GRID 1 
+const cv.CALIB_CB_ASYMMETRIC_GRID 2 
+const cv.CALIB_CB_CLUSTERING 4 
+const cv.CALIB_USE_INTRINSIC_GUESS 0x00001 
+const cv.CALIB_FIX_ASPECT_RATIO 0x00002 
+const cv.CALIB_FIX_PRINCIPAL_POINT 0x00004 
+const cv.CALIB_ZERO_TANGENT_DIST 0x00008 
+const cv.CALIB_FIX_FOCAL_LENGTH 0x00010 
+const cv.CALIB_FIX_K1 0x00020 
+const cv.CALIB_FIX_K2 0x00040 
+const cv.CALIB_FIX_K3 0x00080 
+const cv.CALIB_FIX_K4 0x00800 
+const cv.CALIB_FIX_K5 0x01000 
+const cv.CALIB_FIX_K6 0x02000 
+const cv.CALIB_RATIONAL_MODEL 0x04000 
+const cv.CALIB_THIN_PRISM_MODEL 0x08000 
+const cv.CALIB_FIX_S1_S2_S3_S4 0x10000 
+const cv.CALIB_FIX_INTRINSIC 0x00100 
+const cv.CALIB_SAME_FOCAL_LENGTH 0x00200 
+const cv.CALIB_ZERO_DISPARITY 0x00400 
+const cv.FM_7POINT 1 
+const cv.FM_8POINT 2 
+const cv.FM_LMEDS 4 
+const cv.FM_RANSAC 8 
+cv.Rodrigues void 
+    Mat src 
+    Mat dst /O
+    Mat jacobian Mat()/O
+cv.findHomography Mat 
+    Mat srcPoints 
+    Mat dstPoints 
+    int method 0
+    double ransacReprojThreshold 3
+    Mat mask Mat()/O
+    int maxIters 2000
+    double confidence 0.995
+cv.RQDecomp3x3 Vec3d 
+    Mat src 
+    Mat mtxR /O
+    Mat mtxQ /O
+    Mat Qx Mat()/O
+    Mat Qy Mat()/O
+    Mat Qz Mat()/O
+cv.decomposeProjectionMatrix void 
+    Mat projMatrix 
+    Mat cameraMatrix /O
+    Mat rotMatrix /O
+    Mat transVect /O
+    Mat rotMatrixX Mat()/O
+    Mat rotMatrixY Mat()/O
+    Mat rotMatrixZ Mat()/O
+    Mat eulerAngles Mat()/O
+cv.matMulDeriv void 
+    Mat A 
+    Mat B 
+    Mat dABdA /O
+    Mat dABdB /O
+cv.composeRT void 
+    Mat rvec1 
+    Mat tvec1 
+    Mat rvec2 
+    Mat tvec2 
+    Mat rvec3 /O
+    Mat tvec3 /O
+    Mat dr3dr1 Mat()/O
+    Mat dr3dt1 Mat()/O
+    Mat dr3dr2 Mat()/O
+    Mat dr3dt2 Mat()/O
+    Mat dt3dr1 Mat()/O
+    Mat dt3dt1 Mat()/O
+    Mat dt3dr2 Mat()/O
+    Mat dt3dt2 Mat()/O
+cv.projectPoints void 
+    Mat objectPoints 
+    Mat rvec 
+    Mat tvec 
+    Mat cameraMatrix 
+    Mat distCoeffs 
+    Mat imagePoints /O
+    Mat jacobian Mat()/O
+    double aspectRatio 0
+cv.solvePnP bool 
+    Mat objectPoints 
+    Mat imagePoints 
+    Mat cameraMatrix 
+    Mat distCoeffs 
+    Mat rvec /O
+    Mat tvec /O
+    bool useExtrinsicGuess false
+    int flags SOLVEPNP_ITERATIVE
+cv.solvePnPRansac bool 
+    Mat objectPoints 
+    Mat imagePoints 
+    Mat cameraMatrix 
+    Mat distCoeffs 
+    Mat rvec /O
+    Mat tvec /O
+    bool useExtrinsicGuess false
+    int iterationsCount 100
+    float reprojectionError 8.0
+    double confidence 0.99
+    Mat inliers Mat()/O
+    int flags SOLVEPNP_ITERATIVE
+cv.initCameraMatrix2D Mat 
+    vector_Mat objectPoints 
+    vector_Mat imagePoints 
+    Size imageSize 
+    double aspectRatio 1.0
+cv.findChessboardCorners bool 
+    Mat image 
+    Size patternSize 
+    Mat corners /O
+    int flags CALIB_CB_ADAPTIVE_THRESH + CALIB_CB_NORMALIZE_IMAGE
+cv.drawChessboardCorners void 
+    Mat image /IO
+    Size patternSize 
+    Mat corners 
+    bool patternWasFound 
+cv.findCirclesGrid bool 
+    Mat image 
+    Size patternSize 
+    Mat centers /O
+    int flags CALIB_CB_SYMMETRIC_GRID
+    Ptr_FeatureDetector blobDetector SimpleBlobDetector::create()
+cv.calibrateCamera double 
+    vector_Mat objectPoints 
+    vector_Mat imagePoints 
+    Size imageSize 
+    Mat cameraMatrix /IO
+    Mat distCoeffs /IO
+    vector_Mat rvecs /O
+    vector_Mat tvecs /O
+    int flags 0
+    TermCriteria criteria TermCriteria( TermCriteria::COUNT + TermCriteria::EPS, 30, DBL_EPSILON)
+cv.calibrationMatrixValues void 
+    Mat cameraMatrix 
+    Size imageSize 
+    double apertureWidth 
+    double apertureHeight 
+    double fovx /O
+    double fovy /O
+    double focalLength /O
+    Point2d principalPoint /O
+    double aspectRatio /O
+cv.stereoCalibrate double 
+    vector_Mat objectPoints 
+    vector_Mat imagePoints1 
+    vector_Mat imagePoints2 
+    Mat cameraMatrix1 /IO
+    Mat distCoeffs1 /IO
+    Mat cameraMatrix2 /IO
+    Mat distCoeffs2 /IO
+    Size imageSize 
+    Mat R /O
+    Mat T /O
+    Mat E /O
+    Mat F /O
+    int flags CALIB_FIX_INTRINSIC
+    TermCriteria criteria TermCriteria(TermCriteria::COUNT+TermCriteria::EPS, 30, 1e-6)
+cv.stereoRectify void 
+    Mat cameraMatrix1 
+    Mat distCoeffs1 
+    Mat cameraMatrix2 
+    Mat distCoeffs2 
+    Size imageSize 
+    Mat R 
+    Mat T 
+    Mat R1 /O
+    Mat R2 /O
+    Mat P1 /O
+    Mat P2 /O
+    Mat Q /O
+    int flags CALIB_ZERO_DISPARITY
+    double alpha -1
+    Size newImageSize Size()
+    Rect* validPixROI1 0/O
+    Rect* validPixROI2 0/O
+cv.stereoRectifyUncalibrated bool 
+    Mat points1 
+    Mat points2 
+    Mat F 
+    Size imgSize 
+    Mat H1 /O
+    Mat H2 /O
+    double threshold 5
+cv.rectify3Collinear float 
+    Mat cameraMatrix1 
+    Mat distCoeffs1 
+    Mat cameraMatrix2 
+    Mat distCoeffs2 
+    Mat cameraMatrix3 
+    Mat distCoeffs3 
+    vector_Mat imgpt1 
+    vector_Mat imgpt3 
+    Size imageSize 
+    Mat R12 
+    Mat T12 
+    Mat R13 
+    Mat T13 
+    Mat R1 /O
+    Mat R2 /O
+    Mat R3 /O
+    Mat P1 /O
+    Mat P2 /O
+    Mat P3 /O
+    Mat Q /O
+    double alpha 
+    Size newImgSize 
+    Rect* roi1 /O
+    Rect* roi2 /O
+    int flags 
+cv.getOptimalNewCameraMatrix Mat 
+    Mat cameraMatrix 
+    Mat distCoeffs 
+    Size imageSize 
+    double alpha 
+    Size newImgSize Size()
+    Rect* validPixROI 0/O
+    bool centerPrincipalPoint false
+cv.convertPointsToHomogeneous void 
+    Mat src 
+    Mat dst /O
+cv.convertPointsFromHomogeneous void 
+    Mat src 
+    Mat dst /O
+cv.findFundamentalMat Mat 
+    Mat points1 
+    Mat points2 
+    int method FM_RANSAC
+    double param1 3.
+    double param2 0.99
+    Mat mask Mat()/O
+cv.findEssentialMat Mat 
+    Mat points1 
+    Mat points2 
+    double focal 1.0
+    Point2d pp Point2d(0, 0)
+    int method RANSAC
+    double prob 0.999
+    double threshold 1.0
+    Mat mask Mat()/O
+cv.decomposeEssentialMat void 
+    Mat E 
+    Mat R1 /O
+    Mat R2 /O
+    Mat t /O
+cv.recoverPose int 
+    Mat E 
+    Mat points1 
+    Mat points2 
+    Mat R /O
+    Mat t /O
+    double focal 1.0
+    Point2d pp Point2d(0, 0)
+    Mat mask Mat()/IO
+cv.computeCorrespondEpilines void 
+    Mat points 
+    int whichImage 
+    Mat F 
+    Mat lines /O
+cv.triangulatePoints void 
+    Mat projMatr1 
+    Mat projMatr2 
+    Mat projPoints1 
+    Mat projPoints2 
+    Mat points4D /O
+cv.correctMatches void 
+    Mat F 
+    Mat points1 
+    Mat points2 
+    Mat newPoints1 /O
+    Mat newPoints2 /O
+cv.filterSpeckles void 
+    Mat img /IO
+    double newVal 
+    int maxSpeckleSize 
+    double maxDiff 
+    Mat buf Mat()/IO
+cv.getValidDisparityROI Rect 
+    Rect roi1 
+    Rect roi2 
+    int minDisparity 
+    int numberOfDisparities 
+    int SADWindowSize 
+cv.validateDisparity void 
+    Mat disparity /IO
+    Mat cost 
+    int minDisparity 
+    int numberOfDisparities 
+    int disp12MaxDisp 1
+cv.reprojectImageTo3D void 
+    Mat disparity 
+    Mat _3dImage /O
+    Mat Q 
+    bool handleMissingValues false
+    int ddepth -1
+cv.estimateAffine3D int 
+    Mat src 
+    Mat dst 
+    Mat out /O
+    Mat inliers /O
+    double ransacThreshold 3
+    double confidence 0.99
+cv.decomposeHomographyMat int 
+    Mat H 
+    Mat K 
+    vector_Mat rotations /O
+    vector_Mat translations /O
+    vector_Mat normals /O
+class cv.StereoMatcher : cv::Algorithm 
+const cv.StereoMatcher.DISP_SHIFT 4 
+const cv.StereoMatcher.DISP_SCALE (1 << DISP_SHIFT) 
+cv.StereoMatcher.compute void 
+    Mat left 
+    Mat right 
+    Mat disparity /O
+cv.StereoMatcher.getMinDisparity int 
+cv.StereoMatcher.setMinDisparity void 
+    int minDisparity 
+cv.StereoMatcher.getNumDisparities int 
+cv.StereoMatcher.setNumDisparities void 
+    int numDisparities 
+cv.StereoMatcher.getBlockSize int 
+cv.StereoMatcher.setBlockSize void 
+    int blockSize 
+cv.StereoMatcher.getSpeckleWindowSize int 
+cv.StereoMatcher.setSpeckleWindowSize void 
+    int speckleWindowSize 
+cv.StereoMatcher.getSpeckleRange int 
+cv.StereoMatcher.setSpeckleRange void 
+    int speckleRange 
+cv.StereoMatcher.getDisp12MaxDiff int 
+cv.StereoMatcher.setDisp12MaxDiff void 
+    int disp12MaxDiff 
+class cv.StereoBM : cv::StereoMatcher 
+const cv.StereoBM.PREFILTER_NORMALIZED_RESPONSE 0 
+const cv.StereoBM.PREFILTER_XSOBEL 1 
+cv.StereoBM.getPreFilterType int 
+cv.StereoBM.setPreFilterType void 
+    int preFilterType 
+cv.StereoBM.getPreFilterSize int 
+cv.StereoBM.setPreFilterSize void 
+    int preFilterSize 
+cv.StereoBM.getPreFilterCap int 
+cv.StereoBM.setPreFilterCap void 
+    int preFilterCap 
+cv.StereoBM.getTextureThreshold int 
+cv.StereoBM.setTextureThreshold void 
+    int textureThreshold 
+cv.StereoBM.getUniquenessRatio int 
+cv.StereoBM.setUniquenessRatio void 
+    int uniquenessRatio 
+cv.StereoBM.getSmallerBlockSize int 
+cv.StereoBM.setSmallerBlockSize void 
+    int blockSize 
+cv.StereoBM.getROI1 Rect 
+cv.StereoBM.setROI1 void 
+    Rect roi1 
+cv.StereoBM.getROI2 Rect 
+cv.StereoBM.setROI2 void 
+    Rect roi2 
+cv.StereoBM.create Ptr_StereoBM /S
+    int numDisparities 0
+    int blockSize 21
+class cv.StereoSGBM : cv::StereoMatcher 
+const cv.StereoSGBM.MODE_SGBM 0 
+const cv.StereoSGBM.MODE_HH 1 
+cv.StereoSGBM.getPreFilterCap int 
+cv.StereoSGBM.setPreFilterCap void 
+    int preFilterCap 
+cv.StereoSGBM.getUniquenessRatio int 
+cv.StereoSGBM.setUniquenessRatio void 
+    int uniquenessRatio 
+cv.StereoSGBM.getP1 int 
+cv.StereoSGBM.setP1 void 
+    int P1 
+cv.StereoSGBM.getP2 int 
+cv.StereoSGBM.setP2 void 
+    int P2 
+cv.StereoSGBM.getMode int 
+cv.StereoSGBM.setMode void 
+    int mode 
+cv.StereoSGBM.create Ptr_StereoSGBM /S
+    int minDisparity 
+    int numDisparities 
+    int blockSize 
+    int P1 0
+    int P2 0
+    int disp12MaxDiff 0
+    int preFilterCap 0
+    int uniquenessRatio 0
+    int speckleWindowSize 0
+    int speckleRange 0
+    int mode StereoSGBM::MODE_SGBM
+const cv.fisheye.CALIB_USE_INTRINSIC_GUESS 1 
+const cv.fisheye.CALIB_RECOMPUTE_EXTRINSIC 2 
+const cv.fisheye.CALIB_CHECK_COND 4 
+const cv.fisheye.CALIB_FIX_SKEW 8 
+const cv.fisheye.CALIB_FIX_K1 16 
+const cv.fisheye.CALIB_FIX_K2 32 
+const cv.fisheye.CALIB_FIX_K3 64 
+const cv.fisheye.CALIB_FIX_K4 128 
+const cv.fisheye.CALIB_FIX_INTRINSIC 256 
+cv.fisheye.projectPoints void 
+    Mat objectPoints 
+    Mat imagePoints /O
+    Mat rvec 
+    Mat tvec 
+    Mat K 
+    Mat D 
+    double alpha 0
+    Mat jacobian Mat()/O
+cv.fisheye.distortPoints void 
+    Mat undistorted 
+    Mat distorted /O
+    Mat K 
+    Mat D 
+    double alpha 0
+cv.fisheye.undistortPoints void 
+    Mat distorted 
+    Mat undistorted /O
+    Mat K 
+    Mat D 
+    Mat R Mat()
+    Mat P Mat()
+cv.fisheye.initUndistortRectifyMap void 
+    Mat K 
+    Mat D 
+    Mat R 
+    Mat P 
+    Size size 
+    int m1type 
+    Mat map1 /O
+    Mat map2 /O
+cv.fisheye.undistortImage void 
+    Mat distorted 
+    Mat undistorted /O
+    Mat K 
+    Mat D 
+    Mat Knew cv::Mat()
+    Size new_size Size()
+cv.fisheye.estimateNewCameraMatrixForUndistortRectify void 
+    Mat K 
+    Mat D 
+    Size image_size 
+    Mat R 
+    Mat P /O
+    double balance 0.0
+    Size new_size Size()
+    double fov_scale 1.0
+cv.fisheye.calibrate double 
+    vector_Mat objectPoints 
+    vector_Mat imagePoints 
+    Size image_size 
+    Mat K /IO
+    Mat D /IO
+    vector_Mat rvecs /O
+    vector_Mat tvecs /O
+    int flags 0
+    TermCriteria criteria TermCriteria(TermCriteria::COUNT + TermCriteria::EPS, 100, DBL_EPSILON)
+cv.fisheye.stereoRectify void 
+    Mat K1 
+    Mat D1 
+    Mat K2 
+    Mat D2 
+    Size imageSize 
+    Mat R 
+    Mat tvec 
+    Mat R1 /O
+    Mat R2 /O
+    Mat P1 /O
+    Mat P2 /O
+    Mat Q /O
+    int flags 
+    Size newImageSize Size()
+    double balance 0.0
+    double fov_scale 1.0
+cv.fisheye.stereoCalibrate double 
+    vector_Mat objectPoints 
+    vector_Mat imagePoints1 
+    vector_Mat imagePoints2 
+    Mat K1 /IO
+    Mat D1 /IO
+    Mat K2 /IO
+    Mat D2 /IO
+    Size imageSize 
+    Mat R /O
+    Mat T /O
+    int flags fisheye::CALIB_FIX_INTRINSIC
+    TermCriteria criteria TermCriteria(TermCriteria::COUNT + TermCriteria::EPS, 100, DBL_EPSILON)
+## ../../features2d/include/opencv2/features2d.hpp
+class cv.Feature2D : cv::Algorithm 
+cv.Feature2D.detect void 
+    Mat image 
+    vector_KeyPoint keypoints /O
+    Mat mask Mat()
+cv.Feature2D.compute void 
+    Mat image 
+    vector_KeyPoint keypoints /O; /IO
+    Mat descriptors /O
+cv.Feature2D.detectAndCompute void 
+    Mat image 
+    Mat mask 
+    vector_KeyPoint keypoints /O
+    Mat descriptors /O
+    bool useProvidedKeypoints false
+cv.Feature2D.descriptorSize int 
+cv.Feature2D.descriptorType int 
+cv.Feature2D.defaultNorm int 
+cv.Feature2D.empty bool 
+class cv.BRISK : cv::Feature2D 
+cv.BRISK.create Ptr_BRISK /S
+    int thresh 30
+    int octaves 3
+    float patternScale 1.0f
+cv.BRISK.create Ptr_BRISK /S
+    vector_float radiusList 
+    vector_int numberList 
+    float dMax 5.85f
+    float dMin 8.2f
+    vector_int indexChange std::vector<int>()
+class cv.ORB : cv::Feature2D 
+const cv.ORB.kBytes 32 
+const cv.ORB.HARRIS_SCORE 0 
+const cv.ORB.FAST_SCORE 1 
+cv.ORB.create Ptr_ORB /S
+    int nfeatures 500
+    float scaleFactor 1.2f
+    int nlevels 8
+    int edgeThreshold 31
+    int firstLevel 0
+    int WTA_K 2
+    int scoreType ORB::HARRIS_SCORE
+    int patchSize 31
+    int fastThreshold 20
+cv.ORB.setMaxFeatures void 
+    int maxFeatures 
+cv.ORB.getMaxFeatures int 
+cv.ORB.setScaleFactor void 
+    double scaleFactor 
+cv.ORB.getScaleFactor double 
+cv.ORB.setNLevels void 
+    int nlevels 
+cv.ORB.getNLevels int 
+cv.ORB.setEdgeThreshold void 
+    int edgeThreshold 
+cv.ORB.getEdgeThreshold int 
+cv.ORB.setFirstLevel void 
+    int firstLevel 
+cv.ORB.getFirstLevel int 
+cv.ORB.setWTA_K void 
+    int wta_k 
+cv.ORB.getWTA_K int 
+cv.ORB.setScoreType void 
+    int scoreType 
+cv.ORB.getScoreType int 
+cv.ORB.setPatchSize void 
+    int patchSize 
+cv.ORB.getPatchSize int 
+cv.ORB.setFastThreshold void 
+    int fastThreshold 
+cv.ORB.getFastThreshold int 
+class cv.MSER : cv::Feature2D 
+cv.MSER.create Ptr_MSER /S
+    int _delta 5
+    int _min_area 60
+    int _max_area 14400
+    double _max_variation 0.25
+    double _min_diversity .2
+    int _max_evolution 200
+    double _area_threshold 1.01
+    double _min_margin 0.003
+    int _edge_blur_size 5
+cv.MSER.detectRegions void 
+    Mat image 
+    vector_vector_Point msers /O
+    vector_Rect bboxes 
+cv.MSER.setDelta void 
+    int delta 
+cv.MSER.getDelta int 
+cv.MSER.setMinArea void 
+    int minArea 
+cv.MSER.getMinArea int 
+cv.MSER.setMaxArea void 
+    int maxArea 
+cv.MSER.getMaxArea int 
+cv.MSER.setPass2Only void 
+    bool f 
+cv.MSER.getPass2Only bool 
+class cv.FastFeatureDetector : cv::Feature2D 
+const cv.FastFeatureDetector.TYPE_5_8 0 
+const cv.FastFeatureDetector.TYPE_7_12 1 
+const cv.FastFeatureDetector.TYPE_9_16 2 
+const cv.FastFeatureDetector.THRESHOLD 10000 
+const cv.FastFeatureDetector.NONMAX_SUPPRESSION 10001 
+const cv.FastFeatureDetector.FAST_N 10002 
+cv.FastFeatureDetector.create Ptr_FastFeatureDetector /S
+    int threshold 10
+    bool nonmaxSuppression true
+    int type FastFeatureDetector::TYPE_9_16
+cv.FastFeatureDetector.setThreshold void 
+    int threshold 
+cv.FastFeatureDetector.getThreshold int 
+cv.FastFeatureDetector.setNonmaxSuppression void 
+    bool f 
+cv.FastFeatureDetector.getNonmaxSuppression bool 
+cv.FastFeatureDetector.setType void 
+    int type 
+cv.FastFeatureDetector.getType int 
+class cv.GFTTDetector : cv::Feature2D 
+cv.GFTTDetector.create Ptr_GFTTDetector /S
+    int maxCorners 1000
+    double qualityLevel 0.01
+    double minDistance 1
+    int blockSize 3
+    bool useHarrisDetector false
+    double k 0.04
+cv.GFTTDetector.setMaxFeatures void 
+    int maxFeatures 
+cv.GFTTDetector.getMaxFeatures int 
+cv.GFTTDetector.setQualityLevel void 
+    double qlevel 
+cv.GFTTDetector.getQualityLevel double 
+cv.GFTTDetector.setMinDistance void 
+    double minDistance 
+cv.GFTTDetector.getMinDistance double 
+cv.GFTTDetector.setBlockSize void 
+    int blockSize 
+cv.GFTTDetector.getBlockSize int 
+cv.GFTTDetector.setHarrisDetector void 
+    bool val 
+cv.GFTTDetector.getHarrisDetector bool 
+cv.GFTTDetector.setK void 
+    double k 
+cv.GFTTDetector.getK double 
+class cv.SimpleBlobDetector : cv::Feature2D 
+struct cv.SimpleBlobDetector.Params  /Simple
+    float thresholdStep /RW
+    float minThreshold /RW
+    float maxThreshold /RW
+    size_t minRepeatability /RW
+    float minDistBetweenBlobs /RW
+    bool filterByColor /RW
+    uchar blobColor /RW
+    bool filterByArea /RW
+    float minArea /RW
+    float maxArea /RW
+    bool filterByCircularity /RW
+    float minCircularity /RW
+    float maxCircularity /RW
+    bool filterByInertia /RW
+    float minInertiaRatio /RW
+    float maxInertiaRatio /RW
+    bool filterByConvexity /RW
+    float minConvexity /RW
+    float maxConvexity /RW
+cv.SimpleBlobDetector.Params.Params  
+cv.SimpleBlobDetector.create Ptr_SimpleBlobDetector /S
+    SimpleBlobDetector_Params parameters SimpleBlobDetector::Params()
+class cv.KAZE : cv::Feature2D 
+const cv.KAZE.DIFF_PM_G1 0 
+const cv.KAZE.DIFF_PM_G2 1 
+const cv.KAZE.DIFF_WEICKERT 2 
+const cv.KAZE.DIFF_CHARBONNIER 3 
+cv.KAZE.create Ptr_KAZE /S
+    bool extended false
+    bool upright false
+    float threshold 0.001f
+    int nOctaves 4
+    int nOctaveLayers 4
+    int diffusivity KAZE::DIFF_PM_G2
+cv.KAZE.setExtended void 
+    bool extended 
+cv.KAZE.getExtended bool 
+cv.KAZE.setUpright void 
+    bool upright 
+cv.KAZE.getUpright bool 
+cv.KAZE.setThreshold void 
+    double threshold 
+cv.KAZE.getThreshold double 
+cv.KAZE.setNOctaves void 
+    int octaves 
+cv.KAZE.getNOctaves int 
+cv.KAZE.setNOctaveLayers void 
+    int octaveLayers 
+cv.KAZE.getNOctaveLayers int 
+cv.KAZE.setDiffusivity void 
+    int diff 
+cv.KAZE.getDiffusivity int 
+class cv.AKAZE : cv::Feature2D 
+const cv.AKAZE.DESCRIPTOR_KAZE_UPRIGHT 2 
+const cv.AKAZE.DESCRIPTOR_KAZE 3 
+const cv.AKAZE.DESCRIPTOR_MLDB_UPRIGHT 4 
+const cv.AKAZE.DESCRIPTOR_MLDB 5 
+cv.AKAZE.create Ptr_AKAZE /S
+    int descriptor_type AKAZE::DESCRIPTOR_MLDB
+    int descriptor_size 0
+    int descriptor_channels 3
+    float threshold 0.001f
+    int nOctaves 4
+    int nOctaveLayers 4
+    int diffusivity KAZE::DIFF_PM_G2
+cv.AKAZE.setDescriptorType void 
+    int dtype 
+cv.AKAZE.getDescriptorType int 
+cv.AKAZE.setDescriptorSize void 
+    int dsize 
+cv.AKAZE.getDescriptorSize int 
+cv.AKAZE.setDescriptorChannels void 
+    int dch 
+cv.AKAZE.getDescriptorChannels int 
+cv.AKAZE.setThreshold void 
+    double threshold 
+cv.AKAZE.getThreshold double 
+cv.AKAZE.setNOctaves void 
+    int octaves 
+cv.AKAZE.getNOctaves int 
+cv.AKAZE.setNOctaveLayers void 
+    int octaveLayers 
+cv.AKAZE.getNOctaveLayers int 
+cv.AKAZE.setDiffusivity void 
+    int diff 
+cv.AKAZE.getDiffusivity int 
+const cv.Hamming.normType NORM_HAMMING 
+class cv.DescriptorMatcher : cv::Algorithm 
+cv.DescriptorMatcher.add void 
+    vector_Mat descriptors 
+cv.DescriptorMatcher.getTrainDescriptors vector_Mat 
+cv.DescriptorMatcher.clear void 
+cv.DescriptorMatcher.empty bool 
+cv.DescriptorMatcher.isMaskSupported bool 
+cv.DescriptorMatcher.train void 
+cv.DescriptorMatcher.match void 
+    Mat queryDescriptors 
+    Mat trainDescriptors 
+    vector_DMatch matches /O
+    Mat mask Mat()
+cv.DescriptorMatcher.knnMatch void 
+    Mat queryDescriptors 
+    Mat trainDescriptors 
+    vector_vector_DMatch matches /O
+    int k 
+    Mat mask Mat()
+    bool compactResult false
+cv.DescriptorMatcher.match void 
+    Mat queryDescriptors 
+    vector_DMatch matches /O
+    vector_Mat masks vector_Mat()
+cv.DescriptorMatcher.knnMatch void 
+    Mat queryDescriptors 
+    vector_vector_DMatch matches /O
+    int k 
+    vector_Mat masks vector_Mat()
+    bool compactResult false
+cv.DescriptorMatcher.create Ptr_DescriptorMatcher /S
+    String descriptorMatcherType 
+class cv.BFMatcher : cv::DescriptorMatcher 
+cv.BFMatcher.BFMatcher  
+    int normType NORM_L2
+    bool crossCheck false
+class cv.FlannBasedMatcher : cv::DescriptorMatcher 
+cv.FlannBasedMatcher.FlannBasedMatcher  
+    Ptr_flann_IndexParams indexParams makePtr<flann::KDTreeIndexParams>()
+    Ptr_flann_SearchParams searchParams makePtr<flann::SearchParams>()
+const cv.DrawMatchesFlags.DEFAULT 0 
+const cv.DrawMatchesFlags.DRAW_OVER_OUTIMG 1 
+const cv.DrawMatchesFlags.NOT_DRAW_SINGLE_POINTS 2 
+const cv.DrawMatchesFlags.DRAW_RICH_KEYPOINTS 4 
+cv.drawKeypoints void 
+    Mat image 
+    vector_KeyPoint keypoints 
+    Mat outImage /IO
+    Scalar color Scalar::all(-1)
+    int flags DrawMatchesFlags::DEFAULT
+cv.drawMatches void 
+    Mat img1 
+    vector_KeyPoint keypoints1 
+    Mat img2 
+    vector_KeyPoint keypoints2 
+    vector_DMatch matches1to2 
+    Mat outImg /IO
+    Scalar matchColor Scalar::all(-1)
+    Scalar singlePointColor Scalar::all(-1)
+    vector_char matchesMask std::vector<char>()
+    int flags DrawMatchesFlags::DEFAULT
+cv.drawMatches void =drawMatchesKnn
+    Mat img1 
+    vector_KeyPoint keypoints1 
+    Mat img2 
+    vector_KeyPoint keypoints2 
+    vector_vector_DMatch matches1to2 
+    Mat outImg /IO
+    Scalar matchColor Scalar::all(-1)
+    Scalar singlePointColor Scalar::all(-1)
+    vector_vector_char matchesMask std::vector<std::vector<char> >()
+    int flags DrawMatchesFlags::DEFAULT
+class cv.BOWTrainer  
+cv.BOWTrainer.add void 
+    Mat descriptors 
+cv.BOWTrainer.getDescriptors vector_Mat 
+cv.BOWTrainer.descriptorsCount int 
+cv.BOWTrainer.clear void 
+cv.BOWTrainer.cluster Mat 
+cv.BOWTrainer.cluster Mat 
+    Mat descriptors 
+class cv.BOWKMeansTrainer : cv::BOWTrainer 
+cv.BOWKMeansTrainer.BOWKMeansTrainer  
+    int clusterCount 
+    TermCriteria termcrit TermCriteria()
+    int attempts 3
+    int flags KMEANS_PP_CENTERS
+cv.BOWKMeansTrainer.cluster Mat 
+cv.BOWKMeansTrainer.cluster Mat 
+    Mat descriptors 
+class cv.BOWImgDescriptorExtractor  
+cv.BOWImgDescriptorExtractor.BOWImgDescriptorExtractor  
+    Ptr_DescriptorExtractor dextractor 
+    Ptr_DescriptorMatcher dmatcher 
+cv.BOWImgDescriptorExtractor.setVocabulary void 
+    Mat vocabulary 
+cv.BOWImgDescriptorExtractor.getVocabulary Mat 
+cv.BOWImgDescriptorExtractor.compute2 void =compute
+    Mat image 
+    vector_KeyPoint keypoints 
+    Mat imgDescriptor /O
+cv.BOWImgDescriptorExtractor.descriptorSize int 
+cv.BOWImgDescriptorExtractor.descriptorType int 
+## ../../video/include/opencv2/video/tracking.hpp
+const cv.OPTFLOW_USE_INITIAL_FLOW 4 
+const cv.OPTFLOW_LK_GET_MIN_EIGENVALS 8 
+const cv.OPTFLOW_FARNEBACK_GAUSSIAN 256 
+cv.CamShift RotatedRect 
+    Mat probImage 
+    Rect window /IO
+    TermCriteria criteria 
+cv.meanShift int 
+    Mat probImage 
+    Rect window /IO
+    TermCriteria criteria 
+cv.buildOpticalFlowPyramid int 
+    Mat img 
+    vector_Mat pyramid /O
+    Size winSize 
+    int maxLevel 
+    bool withDerivatives true
+    int pyrBorder BORDER_REFLECT_101
+    int derivBorder BORDER_CONSTANT
+    bool tryReuseInputImage true
+cv.calcOpticalFlowPyrLK void 
+    Mat prevImg 
+    Mat nextImg 
+    Mat prevPts 
+    Mat nextPts /IO
+    Mat status /O
+    Mat err /O
+    Size winSize Size(21,21)
+    int maxLevel 3
+    TermCriteria criteria TermCriteria(TermCriteria::COUNT+TermCriteria::EPS, 30, 0.01)
+    int flags 0
+    double minEigThreshold 1e-4
+cv.calcOpticalFlowFarneback void 
+    Mat prev 
+    Mat next 
+    Mat flow /IO
+    double pyr_scale 
+    int levels 
+    int winsize 
+    int iterations 
+    int poly_n 
+    double poly_sigma 
+    int flags 
+cv.estimateRigidTransform Mat 
+    Mat src 
+    Mat dst 
+    bool fullAffine 
+const cv.MOTION_TRANSLATION 0 
+const cv.MOTION_EUCLIDEAN 1 
+const cv.MOTION_AFFINE 2 
+const cv.MOTION_HOMOGRAPHY 3 
+cv.findTransformECC double 
+    Mat templateImage 
+    Mat inputImage 
+    Mat warpMatrix /IO
+    int motionType MOTION_AFFINE
+    TermCriteria criteria TermCriteria(TermCriteria::COUNT+TermCriteria::EPS, 50, 0.001)
+class cv.KalmanFilter  
+    Mat statePre /RW
+    Mat statePost /RW
+    Mat transitionMatrix /RW
+    Mat controlMatrix /RW
+    Mat measurementMatrix /RW
+    Mat processNoiseCov /RW
+    Mat measurementNoiseCov /RW
+    Mat errorCovPre /RW
+    Mat gain /RW
+    Mat errorCovPost /RW
+cv.KalmanFilter.KalmanFilter  
+cv.KalmanFilter.KalmanFilter  
+    int dynamParams 
+    int measureParams 
+    int controlParams 0
+    int type CV_32F
+cv.KalmanFilter.predict Mat 
+    Mat control Mat()
+cv.KalmanFilter.correct Mat 
+    Mat measurement 
+class cv.DenseOpticalFlow : cv::Algorithm 
+cv.DenseOpticalFlow.calc void 
+    Mat I0 
+    Mat I1 
+    Mat flow /IO
+cv.DenseOpticalFlow.collectGarbage void 
+cv.createOptFlow_DualTVL1 Ptr_DenseOpticalFlow 
+## ../../video/include/opencv2/video/background_segm.hpp
+class cv.BackgroundSubtractor : cv::Algorithm 
+cv.BackgroundSubtractor.apply void 
+    Mat image 
+    Mat fgmask /O
+    double learningRate -1
+cv.BackgroundSubtractor.getBackgroundImage void 
+    Mat backgroundImage /O
+class cv.BackgroundSubtractorMOG2 : cv::BackgroundSubtractor 
+cv.BackgroundSubtractorMOG2.getHistory int 
+cv.BackgroundSubtractorMOG2.setHistory void 
+    int history 
+cv.BackgroundSubtractorMOG2.getNMixtures int 
+cv.BackgroundSubtractorMOG2.setNMixtures void 
+    int nmixtures 
+cv.BackgroundSubtractorMOG2.getBackgroundRatio double 
+cv.BackgroundSubtractorMOG2.setBackgroundRatio void 
+    double ratio 
+cv.BackgroundSubtractorMOG2.getVarThreshold double 
+cv.BackgroundSubtractorMOG2.setVarThreshold void 
+    double varThreshold 
+cv.BackgroundSubtractorMOG2.getVarThresholdGen double 
+cv.BackgroundSubtractorMOG2.setVarThresholdGen void 
+    double varThresholdGen 
+cv.BackgroundSubtractorMOG2.getVarInit double 
+cv.BackgroundSubtractorMOG2.setVarInit void 
+    double varInit 
+cv.BackgroundSubtractorMOG2.getVarMin double 
+cv.BackgroundSubtractorMOG2.setVarMin void 
+    double varMin 
+cv.BackgroundSubtractorMOG2.getVarMax double 
+cv.BackgroundSubtractorMOG2.setVarMax void 
+    double varMax 
+cv.BackgroundSubtractorMOG2.getComplexityReductionThreshold double 
+cv.BackgroundSubtractorMOG2.setComplexityReductionThreshold void 
+    double ct 
+cv.BackgroundSubtractorMOG2.getDetectShadows bool 
+cv.BackgroundSubtractorMOG2.setDetectShadows void 
+    bool detectShadows 
+cv.BackgroundSubtractorMOG2.getShadowValue int 
+cv.BackgroundSubtractorMOG2.setShadowValue void 
+    int value 
+cv.BackgroundSubtractorMOG2.getShadowThreshold double 
+cv.BackgroundSubtractorMOG2.setShadowThreshold void 
+    double threshold 
+cv.createBackgroundSubtractorMOG2 Ptr_BackgroundSubtractorMOG2 
+    int history 500
+    double varThreshold 16
+    bool detectShadows true
+class cv.BackgroundSubtractorKNN : cv::BackgroundSubtractor 
+cv.BackgroundSubtractorKNN.getHistory int 
+cv.BackgroundSubtractorKNN.setHistory void 
+    int history 
+cv.BackgroundSubtractorKNN.getNSamples int 
+cv.BackgroundSubtractorKNN.setNSamples void 
+    int _nN 
+cv.BackgroundSubtractorKNN.getDist2Threshold double 
+cv.BackgroundSubtractorKNN.setDist2Threshold void 
+    double _dist2Threshold 
+cv.BackgroundSubtractorKNN.getkNNSamples int 
+cv.BackgroundSubtractorKNN.setkNNSamples void 
+    int _nkNN 
+cv.BackgroundSubtractorKNN.getDetectShadows bool 
+cv.BackgroundSubtractorKNN.setDetectShadows void 
+    bool detectShadows 
+cv.BackgroundSubtractorKNN.getShadowValue int 
+cv.BackgroundSubtractorKNN.setShadowValue void 
+    int value 
+cv.BackgroundSubtractorKNN.getShadowThreshold double 
+cv.BackgroundSubtractorKNN.setShadowThreshold void 
+    double threshold 
+cv.createBackgroundSubtractorKNN Ptr_BackgroundSubtractorKNN 
+    int history 500
+    double dist2Threshold 400.0
+    bool detectShadows true
+## ../../objdetect/include/opencv2/objdetect.hpp
+cv.groupRectangles void 
+    vector_Rect rectList /IO
+    vector_int weights /O
+    int groupThreshold 
+    double eps 0.2
+const cv.CASCADE_DO_CANNY_PRUNING 1 
+const cv.CASCADE_SCALE_IMAGE 2 
+const cv.CASCADE_FIND_BIGGEST_OBJECT 4 
+const cv.CASCADE_DO_ROUGH_SEARCH 8 
+class cv.BaseCascadeClassifier : cv::Algorithm 
+class cv.CascadeClassifier  
+cv.CascadeClassifier.CascadeClassifier  
+cv.CascadeClassifier.CascadeClassifier  
+    String filename 
+cv.CascadeClassifier.empty bool 
+cv.CascadeClassifier.load bool 
+    String filename 
+cv.CascadeClassifier.read bool 
+    FileNode node 
+cv.CascadeClassifier.detectMultiScale void 
+    Mat image 
+    vector_Rect objects /O
+    double scaleFactor 1.1
+    int minNeighbors 3
+    int flags 0
+    Size minSize Size()
+    Size maxSize Size()
+cv.CascadeClassifier.detectMultiScale void =detectMultiScale2
+    Mat image 
+    vector_Rect objects /O
+    vector_int numDetections /O
+    double scaleFactor 1.1
+    int minNeighbors 3
+    int flags 0
+    Size minSize Size()
+    Size maxSize Size()
+cv.CascadeClassifier.detectMultiScale void =detectMultiScale3
+    Mat image 
+    vector_Rect objects /O
+    vector_int rejectLevels /O
+    vector_double levelWeights /O
+    double scaleFactor 1.1
+    int minNeighbors 3
+    int flags 0
+    Size minSize Size()
+    Size maxSize Size()
+    bool outputRejectLevels false
+cv.CascadeClassifier.isOldFormatCascade bool 
+cv.CascadeClassifier.getOriginalWindowSize Size 
+cv.CascadeClassifier.getFeatureType int 
+cv.CascadeClassifier.convert bool /S
+    String oldcascade 
+    String newcascade 
+struct cv.HOGDescriptor  
+    Size winSize 
+    Size blockSize 
+    Size blockStride 
+    Size cellSize 
+    int nbins 
+    int derivAperture 
+    double winSigma 
+    int histogramNormType 
+    double L2HysThreshold 
+    bool gammaCorrection 
+    vector_float svmDetector 
+    int nlevels 
+const cv.HOGDescriptor.L2Hys 0 
+const cv.HOGDescriptor.DEFAULT_NLEVELS 64 
+cv.HOGDescriptor.HOGDescriptor  
+cv.HOGDescriptor.HOGDescriptor  
+    Size _winSize 
+    Size _blockSize 
+    Size _blockStride 
+    Size _cellSize 
+    int _nbins 
+    int _derivAperture 1
+    double _winSigma -1
+    int _histogramNormType HOGDescriptor::L2Hys
+    double _L2HysThreshold 0.2
+    bool _gammaCorrection false
+    int _nlevels HOGDescriptor::DEFAULT_NLEVELS
+cv.HOGDescriptor.HOGDescriptor  
+    String filename 
+cv.HOGDescriptor.getDescriptorSize size_t 
+cv.HOGDescriptor.checkDetectorSize bool 
+cv.HOGDescriptor.getWinSigma double 
+cv.HOGDescriptor.setSVMDetector void 
+    Mat _svmdetector 
+cv.HOGDescriptor.load bool 
+    String filename 
+    String objname String()
+cv.HOGDescriptor.save void 
+    String filename 
+    String objname String()
+cv.HOGDescriptor.compute void 
+    Mat img 
+    vector_float descriptors /O
+    Size winStride Size()
+    Size padding Size()
+    vector_Point locations std::vector<Point>()
+cv.HOGDescriptor.detect void 
+    Mat img 
+    vector_Point foundLocations /O
+    vector_double weights /O
+    double hitThreshold 0
+    Size winStride Size()
+    Size padding Size()
+    vector_Point searchLocations std::vector<Point>()
+cv.HOGDescriptor.detectMultiScale void 
+    Mat img 
+    vector_Rect foundLocations /O
+    vector_double foundWeights /O
+    double hitThreshold 0
+    Size winStride Size()
+    Size padding Size()
+    double scale 1.05
+    double finalThreshold 2.0
+    bool useMeanshiftGrouping false
+cv.HOGDescriptor.computeGradient void 
+    Mat img 
+    Mat grad /O
+    Mat angleOfs /O
+    Size paddingTL Size()
+    Size paddingBR Size()
+cv.HOGDescriptor.getDefaultPeopleDetector vector_float /S
+cv.HOGDescriptor.getDaimlerPeopleDetector vector_float /S
+## ../../imgcodecs/include/opencv2/imgcodecs.hpp
+const cv.IMREAD_UNCHANGED -1 
+const cv.IMREAD_GRAYSCALE 0 
+const cv.IMREAD_COLOR 1 
+const cv.IMREAD_ANYDEPTH 2 
+const cv.IMREAD_ANYCOLOR 4 
+const cv.IMREAD_LOAD_GDAL 8 
+const cv.IMWRITE_JPEG_QUALITY 1 
+const cv.IMWRITE_JPEG_PROGRESSIVE 2 
+const cv.IMWRITE_JPEG_OPTIMIZE 3 
+const cv.IMWRITE_JPEG_RST_INTERVAL 4 
+const cv.IMWRITE_JPEG_LUMA_QUALITY 5 
+const cv.IMWRITE_JPEG_CHROMA_QUALITY 6 
+const cv.IMWRITE_PNG_COMPRESSION 16 
+const cv.IMWRITE_PNG_STRATEGY 17 
+const cv.IMWRITE_PNG_BILEVEL 18 
+const cv.IMWRITE_PXM_BINARY 32 
+const cv.IMWRITE_WEBP_QUALITY 64 
+const cv.IMWRITE_PNG_STRATEGY_DEFAULT 0 
+const cv.IMWRITE_PNG_STRATEGY_FILTERED 1 
+const cv.IMWRITE_PNG_STRATEGY_HUFFMAN_ONLY 2 
+const cv.IMWRITE_PNG_STRATEGY_RLE 3 
+const cv.IMWRITE_PNG_STRATEGY_FIXED 4 
+cv.imread Mat 
+    String filename 
+    int flags IMREAD_COLOR
+cv.imreadmulti bool 
+    String filename 
+    vector_Mat mats 
+    int flags IMREAD_ANYCOLOR
+cv.imwrite bool 
+    String filename 
+    Mat img 
+    vector_int params std::vector<int>()
+cv.imdecode Mat 
+    Mat buf 
+    int flags 
+cv.imencode bool 
+    String ext 
+    Mat img 
+    vector_uchar buf /O
+    vector_int params std::vector<int>()
+## ../../videoio/include/opencv2/videoio.hpp
+const cv.CAP_ANY 0 
+const cv.CAP_VFW 200 
+const cv.CAP_V4L 200 
+const cv.CAP_V4L2 CAP_V4L 
+const cv.CAP_FIREWARE 300 
+const cv.CAP_FIREWIRE CAP_FIREWARE 
+const cv.CAP_IEEE1394 CAP_FIREWARE 
+const cv.CAP_DC1394 CAP_FIREWARE 
+const cv.CAP_CMU1394 CAP_FIREWARE 
+const cv.CAP_QT 500 
+const cv.CAP_UNICAP 600 
+const cv.CAP_DSHOW 700 
+const cv.CAP_PVAPI 800 
+const cv.CAP_OPENNI 900 
+const cv.CAP_OPENNI_ASUS 910 
+const cv.CAP_ANDROID 1000 
+const cv.CAP_XIAPI 1100 
+const cv.CAP_AVFOUNDATION 1200 
+const cv.CAP_GIGANETIX 1300 
+const cv.CAP_MSMF 1400 
+const cv.CAP_INTELPERC 1500 
+const cv.CAP_OPENNI2 1600 
+const cv.CAP_OPENNI2_ASUS 1610 
+const cv.CAP_PROP_POS_MSEC 0 
+const cv.CAP_PROP_POS_FRAMES 1 
+const cv.CAP_PROP_POS_AVI_RATIO 2 
+const cv.CAP_PROP_FRAME_WIDTH 3 
+const cv.CAP_PROP_FRAME_HEIGHT 4 
+const cv.CAP_PROP_FPS 5 
+const cv.CAP_PROP_FOURCC 6 
+const cv.CAP_PROP_FRAME_COUNT 7 
+const cv.CAP_PROP_FORMAT 8 
+const cv.CAP_PROP_MODE 9 
+const cv.CAP_PROP_BRIGHTNESS 10 
+const cv.CAP_PROP_CONTRAST 11 
+const cv.CAP_PROP_SATURATION 12 
+const cv.CAP_PROP_HUE 13 
+const cv.CAP_PROP_GAIN 14 
+const cv.CAP_PROP_EXPOSURE 15 
+const cv.CAP_PROP_CONVERT_RGB 16 
+const cv.CAP_PROP_WHITE_BALANCE_BLUE_U 17 
+const cv.CAP_PROP_RECTIFICATION 18 
+const cv.CAP_PROP_MONOCROME 19 
+const cv.CAP_PROP_MONOCHROME CAP_PROP_MONOCROME 
+const cv.CAP_PROP_SHARPNESS 20 
+const cv.CAP_PROP_AUTO_EXPOSURE 21 
+const cv.CAP_PROP_GAMMA 22 
+const cv.CAP_PROP_TEMPERATURE 23 
+const cv.CAP_PROP_TRIGGER 24 
+const cv.CAP_PROP_TRIGGER_DELAY 25 
+const cv.CAP_PROP_WHITE_BALANCE_RED_V 26 
+const cv.CAP_PROP_ZOOM 27 
+const cv.CAP_PROP_FOCUS 28 
+const cv.CAP_PROP_GUID 29 
+const cv.CAP_PROP_ISO_SPEED 30 
+const cv.CAP_PROP_BACKLIGHT 32 
+const cv.CAP_PROP_PAN 33 
+const cv.CAP_PROP_TILT 34 
+const cv.CAP_PROP_ROLL 35 
+const cv.CAP_PROP_IRIS 36 
+const cv.CAP_PROP_SETTINGS 37 
+const cv.CAP_MODE_BGR 0 
+const cv.CAP_MODE_RGB 1 
+const cv.CAP_MODE_GRAY 2 
+const cv.CAP_PROP_DC1394_OFF -4 
+const cv.CAP_PROP_DC1394_MODE_MANUAL -3 
+const cv.CAP_PROP_DC1394_MODE_AUTO -2 
+const cv.CAP_PROP_DC1394_MODE_ONE_PUSH_AUTO -1 
+const cv.CAP_PROP_DC1394_MAX 31 
+const cv.CAP_OPENNI_DEPTH_GENERATOR 1 << 31 
+const cv.CAP_OPENNI_IMAGE_GENERATOR 1 << 30 
+const cv.CAP_OPENNI_GENERATORS_MASK CAP_OPENNI_DEPTH_GENERATOR + CAP_OPENNI_IMAGE_GENERATOR 
+const cv.CAP_PROP_OPENNI_OUTPUT_MODE 100 
+const cv.CAP_PROP_OPENNI_FRAME_MAX_DEPTH 101 
+const cv.CAP_PROP_OPENNI_BASELINE 102 
+const cv.CAP_PROP_OPENNI_FOCAL_LENGTH 103 
+const cv.CAP_PROP_OPENNI_REGISTRATION 104 
+const cv.CAP_PROP_OPENNI_REGISTRATION_ON CAP_PROP_OPENNI_REGISTRATION 
+const cv.CAP_PROP_OPENNI_APPROX_FRAME_SYNC 105 
+const cv.CAP_PROP_OPENNI_MAX_BUFFER_SIZE 106 
+const cv.CAP_PROP_OPENNI_CIRCLE_BUFFER 107 
+const cv.CAP_PROP_OPENNI_MAX_TIME_DURATION 108 
+const cv.CAP_PROP_OPENNI_GENERATOR_PRESENT 109 
+const cv.CAP_PROP_OPENNI2_SYNC 110 
+const cv.CAP_PROP_OPENNI2_MIRROR 111 
+const cv.CAP_OPENNI_IMAGE_GENERATOR_PRESENT CAP_OPENNI_IMAGE_GENERATOR + CAP_PROP_OPENNI_GENERATOR_PRESENT 
+const cv.CAP_OPENNI_IMAGE_GENERATOR_OUTPUT_MODE CAP_OPENNI_IMAGE_GENERATOR + CAP_PROP_OPENNI_OUTPUT_MODE 
+const cv.CAP_OPENNI_DEPTH_GENERATOR_BASELINE CAP_OPENNI_DEPTH_GENERATOR + CAP_PROP_OPENNI_BASELINE 
+const cv.CAP_OPENNI_DEPTH_GENERATOR_FOCAL_LENGTH CAP_OPENNI_DEPTH_GENERATOR + CAP_PROP_OPENNI_FOCAL_LENGTH 
+const cv.CAP_OPENNI_DEPTH_GENERATOR_REGISTRATION CAP_OPENNI_DEPTH_GENERATOR + CAP_PROP_OPENNI_REGISTRATION 
+const cv.CAP_OPENNI_DEPTH_GENERATOR_REGISTRATION_ON CAP_OPENNI_DEPTH_GENERATOR_REGISTRATION 
+const cv.CAP_OPENNI_DEPTH_MAP 0 
+const cv.CAP_OPENNI_POINT_CLOUD_MAP 1 
+const cv.CAP_OPENNI_DISPARITY_MAP 2 
+const cv.CAP_OPENNI_DISPARITY_MAP_32F 3 
+const cv.CAP_OPENNI_VALID_DEPTH_MASK 4 
+const cv.CAP_OPENNI_BGR_IMAGE 5 
+const cv.CAP_OPENNI_GRAY_IMAGE 6 
+const cv.CAP_OPENNI_VGA_30HZ 0 
+const cv.CAP_OPENNI_SXGA_15HZ 1 
+const cv.CAP_OPENNI_SXGA_30HZ 2 
+const cv.CAP_OPENNI_QVGA_30HZ 3 
+const cv.CAP_OPENNI_QVGA_60HZ 4 
+const cv.CAP_PROP_GSTREAMER_QUEUE_LENGTH 200 
+const cv.CAP_PROP_PVAPI_MULTICASTIP 300 
+const cv.CAP_PROP_PVAPI_FRAMESTARTTRIGGERMODE 301 
+const cv.CAP_PROP_PVAPI_DECIMATIONHORIZONTAL 302 
+const cv.CAP_PROP_PVAPI_DECIMATIONVERTICAL 303 
+const cv.CAP_PROP_PVAPI_BINNINGX 304 
+const cv.CAP_PROP_PVAPI_BINNINGY 305 
+const cv.CAP_PVAPI_FSTRIGMODE_FREERUN 0 
+const cv.CAP_PVAPI_FSTRIGMODE_SYNCIN1 1 
+const cv.CAP_PVAPI_FSTRIGMODE_SYNCIN2 2 
+const cv.CAP_PVAPI_FSTRIGMODE_FIXEDRATE 3 
+const cv.CAP_PVAPI_FSTRIGMODE_SOFTWARE 4 
+const cv.CAP_PVAPI_DECIMATION_OFF 1 
+const cv.CAP_PVAPI_DECIMATION_2OUTOF4 2 
+const cv.CAP_PVAPI_DECIMATION_2OUTOF8 4 
+const cv.CAP_PVAPI_DECIMATION_2OUTOF16 8 
+const cv.CAP_PROP_XI_DOWNSAMPLING 400 
+const cv.CAP_PROP_XI_DATA_FORMAT 401 
+const cv.CAP_PROP_XI_OFFSET_X 402 
+const cv.CAP_PROP_XI_OFFSET_Y 403 
+const cv.CAP_PROP_XI_TRG_SOURCE 404 
+const cv.CAP_PROP_XI_TRG_SOFTWARE 405 
+const cv.CAP_PROP_XI_GPI_SELECTOR 406 
+const cv.CAP_PROP_XI_GPI_MODE 407 
+const cv.CAP_PROP_XI_GPI_LEVEL 408 
+const cv.CAP_PROP_XI_GPO_SELECTOR 409 
+const cv.CAP_PROP_XI_GPO_MODE 410 
+const cv.CAP_PROP_XI_LED_SELECTOR 411 
+const cv.CAP_PROP_XI_LED_MODE 412 
+const cv.CAP_PROP_XI_MANUAL_WB 413 
+const cv.CAP_PROP_XI_AUTO_WB 414 
+const cv.CAP_PROP_XI_AEAG 415 
+const cv.CAP_PROP_XI_EXP_PRIORITY 416 
+const cv.CAP_PROP_XI_AE_MAX_LIMIT 417 
+const cv.CAP_PROP_XI_AG_MAX_LIMIT 418 
+const cv.CAP_PROP_XI_AEAG_LEVEL 419 
+const cv.CAP_PROP_XI_TIMEOUT 420 
+const cv.CAP_PROP_ANDROID_AUTOGRAB 1024 
+const cv.CAP_PROP_ANDROID_PREVIEW_SIZES_STRING 1025 
+const cv.CAP_PROP_ANDROID_PREVIEW_FORMAT 1026 
+const cv.CAP_PROP_ANDROID_FLASH_MODE 8001 
+const cv.CAP_PROP_ANDROID_FOCUS_MODE 8002 
+const cv.CAP_PROP_ANDROID_WHITE_BALANCE 8003 
+const cv.CAP_PROP_ANDROID_ANTIBANDING 8004 
+const cv.CAP_PROP_ANDROID_FOCAL_LENGTH 8005 
+const cv.CAP_PROP_ANDROID_FOCUS_DISTANCE_NEAR 8006 
+const cv.CAP_PROP_ANDROID_FOCUS_DISTANCE_OPTIMAL 8007 
+const cv.CAP_PROP_ANDROID_FOCUS_DISTANCE_FAR 8008 
+const cv.CAP_ANDROID_COLOR_FRAME_BGR 0 
+const cv.CAP_ANDROID_COLOR_FRAME CAP_ANDROID_COLOR_FRAME_BGR 
+const cv.CAP_ANDROID_GREY_FRAME 1 
+const cv.CAP_ANDROID_GRAY_FRAME CAP_ANDROID_GREY_FRAME 
+const cv.CAP_ANDROID_COLOR_FRAME_RGB 2 
+const cv.CAP_ANDROID_COLOR_FRAME_BGRA 3 
+const cv.CAP_ANDROID_COLOR_FRAME_RGBA 4 
+const cv.CAP_ANDROID_FLASH_MODE_AUTO 0 
+const cv.CAP_ANDROID_FLASH_MODE_OFF 1 
+const cv.CAP_ANDROID_FLASH_MODE_ON 2 
+const cv.CAP_ANDROID_FLASH_MODE_RED_EYE 3 
+const cv.CAP_ANDROID_FLASH_MODE_TORCH 4 
+const cv.CAP_ANDROID_FOCUS_MODE_AUTO 0 
+const cv.CAP_ANDROID_FOCUS_MODE_CONTINUOUS_VIDEO 1 
+const cv.CAP_ANDROID_FOCUS_MODE_EDOF 2 
+const cv.CAP_ANDROID_FOCUS_MODE_FIXED 3 
+const cv.CAP_ANDROID_FOCUS_MODE_INFINITY 4 
+const cv.CAP_ANDROID_FOCUS_MODE_MACRO 5 
+const cv.CAP_ANDROID_WHITE_BALANCE_AUTO 0 
+const cv.CAP_ANDROID_WHITE_BALANCE_CLOUDY_DAYLIGHT 1 
+const cv.CAP_ANDROID_WHITE_BALANCE_DAYLIGHT 2 
+const cv.CAP_ANDROID_WHITE_BALANCE_FLUORESCENT 3 
+const cv.CAP_ANDROID_WHITE_BALANCE_INCANDESCENT 4 
+const cv.CAP_ANDROID_WHITE_BALANCE_SHADE 5 
+const cv.CAP_ANDROID_WHITE_BALANCE_TWILIGHT 6 
+const cv.CAP_ANDROID_WHITE_BALANCE_WARM_FLUORESCENT 7 
+const cv.CAP_ANDROID_ANTIBANDING_50HZ 0 
+const cv.CAP_ANDROID_ANTIBANDING_60HZ 1 
+const cv.CAP_ANDROID_ANTIBANDING_AUTO 2 
+const cv.CAP_ANDROID_ANTIBANDING_OFF 3 
+const cv.CAP_PROP_IOS_DEVICE_FOCUS 9001 
+const cv.CAP_PROP_IOS_DEVICE_EXPOSURE 9002 
+const cv.CAP_PROP_IOS_DEVICE_FLASH 9003 
+const cv.CAP_PROP_IOS_DEVICE_WHITEBALANCE 9004 
+const cv.CAP_PROP_IOS_DEVICE_TORCH 9005 
+const cv.CAP_PROP_GIGA_FRAME_OFFSET_X 10001 
+const cv.CAP_PROP_GIGA_FRAME_OFFSET_Y 10002 
+const cv.CAP_PROP_GIGA_FRAME_WIDTH_MAX 10003 
+const cv.CAP_PROP_GIGA_FRAME_HEIGH_MAX 10004 
+const cv.CAP_PROP_GIGA_FRAME_SENS_WIDTH 10005 
+const cv.CAP_PROP_GIGA_FRAME_SENS_HEIGH 10006 
+const cv.CAP_PROP_INTELPERC_PROFILE_COUNT 11001 
+const cv.CAP_PROP_INTELPERC_PROFILE_IDX 11002 
+const cv.CAP_PROP_INTELPERC_DEPTH_LOW_CONFIDENCE_VALUE 11003 
+const cv.CAP_PROP_INTELPERC_DEPTH_SATURATION_VALUE 11004 
+const cv.CAP_PROP_INTELPERC_DEPTH_CONFIDENCE_THRESHOLD 11005 
+const cv.CAP_PROP_INTELPERC_DEPTH_FOCAL_LENGTH_HORZ 11006 
+const cv.CAP_PROP_INTELPERC_DEPTH_FOCAL_LENGTH_VERT 11007 
+const cv.CAP_INTELPERC_DEPTH_GENERATOR 1 << 29 
+const cv.CAP_INTELPERC_IMAGE_GENERATOR 1 << 28 
+const cv.CAP_INTELPERC_GENERATORS_MASK CAP_INTELPERC_DEPTH_GENERATOR + CAP_INTELPERC_IMAGE_GENERATOR 
+const cv.CAP_INTELPERC_DEPTH_MAP 0 
+const cv.CAP_INTELPERC_UVDEPTH_MAP 1 
+const cv.CAP_INTELPERC_IR_MAP 2 
+const cv.CAP_INTELPERC_IMAGE 3 
+class cv.VideoCapture  
+cv.VideoCapture.VideoCapture  
+cv.VideoCapture.VideoCapture  
+    String filename 
+cv.VideoCapture.VideoCapture  
+    int device 
+cv.VideoCapture.open bool 
+    String filename 
+cv.VideoCapture.open bool 
+    int device 
+cv.VideoCapture.isOpened bool 
+cv.VideoCapture.release void 
+cv.VideoCapture.grab bool 
+cv.VideoCapture.retrieve bool 
+    Mat image /O
+    int flag 0
+cv.VideoCapture.read bool 
+    Mat image /O
+cv.VideoCapture.set bool 
+    int propId 
+    double value 
+cv.VideoCapture.get double 
+    int propId 
+class cv.VideoWriter  
+cv.VideoWriter.VideoWriter  
+cv.VideoWriter.VideoWriter  
+    String filename 
+    int fourcc 
+    double fps 
+    Size frameSize 
+    bool isColor true
+cv.VideoWriter.open bool 
+    String filename 
+    int fourcc 
+    double fps 
+    Size frameSize 
+    bool isColor true
+cv.VideoWriter.isOpened bool 
+cv.VideoWriter.release void 
+cv.VideoWriter.write void 
+    Mat image 
+cv.VideoWriter.fourcc int /S
+    char c1 
+    char c2 
+    char c3 
+    char c4 
+## ../../highgui/include/opencv2/highgui.hpp
+const cv.WINDOW_NORMAL 0x00000000 
+const cv.WINDOW_AUTOSIZE 0x00000001 
+const cv.WINDOW_OPENGL 0x00001000 
+const cv.WINDOW_FULLSCREEN 1 
+const cv.WINDOW_FREERATIO 0x00000100 
+const cv.WINDOW_KEEPRATIO 0x00000000 
+const cv.WND_PROP_FULLSCREEN 0 
+const cv.WND_PROP_AUTOSIZE 1 
+const cv.WND_PROP_ASPECT_RATIO 2 
+const cv.WND_PROP_OPENGL 3 
+const cv.EVENT_MOUSEMOVE 0 
+const cv.EVENT_LBUTTONDOWN 1 
+const cv.EVENT_RBUTTONDOWN 2 
+const cv.EVENT_MBUTTONDOWN 3 
+const cv.EVENT_LBUTTONUP 4 
+const cv.EVENT_RBUTTONUP 5 
+const cv.EVENT_MBUTTONUP 6 
+const cv.EVENT_LBUTTONDBLCLK 7 
+const cv.EVENT_RBUTTONDBLCLK 8 
+const cv.EVENT_MBUTTONDBLCLK 9 
+const cv.EVENT_MOUSEWHEEL 10 
+const cv.EVENT_MOUSEHWHEEL 11 
+const cv.EVENT_FLAG_LBUTTON 1 
+const cv.EVENT_FLAG_RBUTTON 2 
+const cv.EVENT_FLAG_MBUTTON 4 
+const cv.EVENT_FLAG_CTRLKEY 8 
+const cv.EVENT_FLAG_SHIFTKEY 16 
+const cv.EVENT_FLAG_ALTKEY 32 
+const cv.QT_FONT_LIGHT 25 
+const cv.QT_FONT_NORMAL 50 
+const cv.QT_FONT_DEMIBOLD 63 
+const cv.QT_FONT_BOLD 75 
+const cv.QT_FONT_BLACK 87 
+const cv.QT_STYLE_NORMAL 0 
+const cv.QT_STYLE_ITALIC 1 
+const cv.QT_STYLE_OBLIQUE 2 
+const cv.QT_PUSH_BUTTON 0 
+const cv.QT_CHECKBOX 1 
+const cv.QT_RADIOBOX 2 
+cv.namedWindow void 
+    String winname 
+    int flags WINDOW_AUTOSIZE
+cv.destroyWindow void 
+    String winname 
+cv.destroyAllWindows void 
+cv.startWindowThread int 
+cv.waitKey int 
+    int delay 0
+cv.imshow void 
+    String winname 
+    Mat mat 
+cv.resizeWindow void 
+    String winname 
+    int width 
+    int height 
+cv.moveWindow void 
+    String winname 
+    int x 
+    int y 
+cv.setWindowProperty void 
+    String winname 
+    int prop_id 
+    double prop_value 
+cv.setWindowTitle void 
+    String winname 
+    String title 
+cv.getWindowProperty double 
+    String winname 
+    int prop_id 
+cv.getTrackbarPos int 
+    String trackbarname 
+    String winname 
+cv.setTrackbarPos void 
+    String trackbarname 
+    String winname 
+    int pos 
+cv.setTrackbarMax void 
+    String trackbarname 
+    String winname 
+    int maxval 
+53
+namespaces: cv cv.fisheye cv.flann cv.ml cv.ocl cv.ocl.internal
