@@ -19,12 +19,13 @@ ocv_glob_module_sources()
 ocv_module_include_directories(${the_module} ${ENSCRIPTEN_INCLUDE_PATH})
 ocv_create_module()
 
-#set(JSOUTPUT ${CMAKE_CURRENT_BINARY_DIR}/opencv.cpp)
-#set(BITCODES ${CMAKE_CURRENT_BINARY_DIR}/lib/libopencv_core.so)
-#set(BITCODES ${BITCODES} ${CMAKE_CURRENT_BINARY_DIR}/lib/libopencv_imgproc.so)
-#add_custom_command(
-#   OUTPUT  ${JSOUTPUT}
-#   COMMAND echo "opencv_js!!!!!!!!!!"
-   #COMMAND emcc ${BITCODES} -O3 --bind --`llvm-lto 1 --closure 1 -s PRECISE_F32=1 -s FORCE_ALIGNED_MEMORY=1 -s TOTAL_MEMORY=306777216 -o ${JSOUTPUT}
-#   DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/matrix_bind.cpp)
-# ocv_add_library(${the_module} SHARED ${JSOUTPUT})
+# Build javascript library after opencv_js constructed.
+set(my_output ${LIBRARY_OUTPUT_PATH}/opencv.js)
+set(my_sources  ${LIBRARY_OUTPUT_PATH}/libopencv_core.so)
+set(my_sources ${my_sources} ${LIBRARY_OUTPUT_PATH}/libopencv_imgproc.so)
+set(my_sources ${my_sources} ${LIBRARY_OUTPUT_PATH}/libopencv_js.so)
+add_custom_command(
+    TARGET opencv_js POST_BUILD
+    COMMAND echo "* js library building... Be patient, it may take more than 30 seconds."
+    COMMAND emcc ${my_sources} -O3 --bind --llvm-lto 1 --closure 1 -s PRECISE_F32=1 -s FORCE_ALIGNED_MEMORY=1 -s TOTAL_MEMORY=306777216 -o ${my_output}
+)
