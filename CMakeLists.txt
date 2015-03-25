@@ -1131,3 +1131,16 @@ endif()
 # ----------------------------------------------------------------------------
 
 include(cmake/OpenCVPackaging.cmake)
+
+# ----------------------------------------------------------------------------
+# Build opencv.js
+# ----------------------------------------------------------------------------
+set(LIBS ${CMAKE_CURRENT_BINARY_DIR}/lib/libopencv_core.so)
+set(LIBS ${LIBS} ${CMAKE_CURRENT_BINARY_DIR}/lib/libopencv_imgproc.so)
+set(LIBS ${LIBS} ${CMAKE_CURRENT_BINARY_DIR}/lib/libopencv_js.so)
+message(STATUS "CJ : LIBS = ${LIBS}")
+add_custom_target(build_js
+  COMMAND echo "build ./bin/opencv.js"
+  COMMAND mkdir -p ./bin
+  COMMAND emcc ${LIBS} -O3 --bind --llvm-lto 1 --closure 1 -s PRECISE_F32=1 -s FORCE_ALIGNED_MEMORY=1 -s TOTAL_MEMORY=306777216 -o ./bin/opencv.js
+  )
