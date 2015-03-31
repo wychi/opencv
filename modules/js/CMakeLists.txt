@@ -27,5 +27,15 @@ set(my_sources ${my_sources} ${LIBRARY_OUTPUT_PATH}/libopencv_js.so)
 add_custom_command(
     TARGET opencv_js POST_BUILD
     COMMAND echo "* js library building... Be patient, it may take more than 30 seconds."
-    COMMAND emcc ${my_sources} -O3 --bind --llvm-lto 1 --closure 1 -s PRECISE_F32=1 -s FORCE_ALIGNED_MEMORY=1 -s TOTAL_MEMORY=306777216 -o ${my_output}
+    COMMAND emcc ${my_sources} -O3 --bind --llvm-lto 1 --closure 1 -s PRECISE_F32=1 -s FORCE_ALIGNED_MEMORY=1 -s TOTAL_MEMORY=318767104 -o ${my_output}
+)
+
+# I still have no idea on how testing work in build process.
+# Temporary cp all qunit test case and opencv.js to an isolated folder.
+add_custom_command(
+    TARGET opencv_js POST_BUILD
+    COMMAND echo "Copy js test cases and opencv.js into ."
+    COMMAND mkdir -p ${CMAKE_BINARY_DIR}/js_test
+    COMMAND cp ${OpenCV_SOURCE_DIR}/modules/js/test/*.* ${CMAKE_BINARY_DIR}/js_test
+    COMMAND cp ${LIBRARY_OUTPUT_PATH}/opencv.* ${CMAKE_BINARY_DIR}/js_test
 )
