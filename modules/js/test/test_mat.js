@@ -58,9 +58,7 @@ QUnit.test("test_mat_creation", function(assert) {
 
     mat.delete();
   }
-});
 
-QUnit.test("test_mat_create", function(assert) {
   //  Mat::create(int, int, int)
   {
     let mat = new Module.Mat();
@@ -158,7 +156,7 @@ QUnit.test("test_mat_ptr", function(assert) {
 });
 
 QUnit.test("test_mat_zeros", function(assert) {
-  // Mat::zero(int, int, int)
+  // Mat::zeros(int, int, int)
   {
     let mat = Module.Mat.zeros(10, 10, Module.CV_8UC1);
     let view = Module.HEAPU8.subarray(mat.data);
@@ -174,8 +172,11 @@ QUnit.test("test_mat_zeros", function(assert) {
     }
 
     assert.ok(total === 0);
+
+    mat.delete();
   }
-  // Mat::zero(Size, int)
+
+  // Mat::zeros(Size, int)
   {
     let mat = Module.Mat.zeros([10, 10], Module.CV_8UC1);
     let view = Module.HEAPU8.subarray(mat.data);
@@ -186,6 +187,8 @@ QUnit.test("test_mat_zeros", function(assert) {
     }
 
     assert.ok(total === 0);
+
+    mat.delete();
   }
 });
 
@@ -202,7 +205,6 @@ QUnit.test("test_mat_ones", function(assert) {
 
     assert.ok(total === 100);
   }
-
   // Mat::ones(Size, int)
   {
     var mat = Module.Mat.ones([10, 10], Module.CV_8UC1);
@@ -245,26 +247,44 @@ QUnit.test("test_mat_eye", function(assert) {
   }
 });
 
-QUnit.skip("test_mat_miscs", function(assert) {
-  var mat = Module.Mat.ones(5, 5, Module.CV_8UC2);
+QUnit.test("test_mat_miscs", function(assert) {
+  // Mat::col(int)
   {
+    let mat = Module.Mat.ones(5, 5, Module.CV_8UC2);
     let col = mat.col(1);
-    let data = Module.HEAPU8.subarray(col.data);
-    assert.equal(data[0], 1);
-    assert.equal(data[4], 1);
+    let view = Module.HEAPU8.subarray(col.data);
+    assert.equal(view[0], 1);
+    assert.equal(view[4], 1);
 
     col.delete();
+    mat.delete();
   }
 
+  // Mat::row(int)
   {
+    let mat = Module.Mat.zeros(5, 5, Module.CV_8UC2);
     let row = mat.row(1);
-    let data = Module.HEAPU8.subarray(row.data);
-    assert.equal(data[0], 1);
-    assert.equal(data[4], 1);
+    let view = Module.HEAPU8.subarray(row.data);
+    assert.equal(view[0], 0);
+    assert.equal(view[4], 0);
 
     row.delete();
+    mat.delete();
+  }
+
+  // Mat::convertTo(Mat, int, double, double)
+  {
+    let mat = Module.Mat.ones(5, 5, Module.CV_8UC3);
+    let grayMat = Module.Mat.zeros(5, 5, Module.CV_8UC1);
+
+    mat.convertTo(grayMat, Module.CV_8U, 2, 1);
+    // dest = 2 * source(x, y) + 1.
+    let view = Module.HEAPU8.subarray(grayMat.data);
+    assert.equal(view[0], (1 * 2) + 1);
+
+    grayMat.delete();
+    mat.delete();
   }
 });
-
 
 // Mat::zeros

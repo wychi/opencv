@@ -1,5 +1,5 @@
-#include "opencv2/core/mat.hpp"
 #include <emscripten/bind.h>
+#include "common.hpp"
 
 using namespace emscripten;
 
@@ -28,91 +28,68 @@ static std::vector<int> Mat_getSize(const cv::Mat &mat)
   return size;
 }
 
-// http://emscripten-discuss.narkive.com/51XSL2Cs/returning-references-with-embind
-uintptr_t Mat_at(cv::Mat &mat, int i0, int i1)
-{
-  return (uintptr_t)&mat.at<unsigned char>(i0, i1);
-}
-
-uintptr_t Mat_ptr(cv::Mat &mat, int i0)
-{
-  return (uintptr_t)mat.ptr(i0);
-}
-
-uintptr_t Mat_ptr(cv::Mat &mat, int i0, int i1)
-{
-  return (uintptr_t)mat.ptr(i0, i1);
-}
-
-template <int N, typename R>
-struct FunctionWrapper;
-
-template <int N, typename R, typename P1, typename P2>
-struct FunctionWrapper<N, R (*)(P1, P2)>
-{
-  typedef R (*FunctionSig)(P1, P2);
-
-  static void bind(FunctionSig f) { mF = f;}
-  template <typename T> static T call(P1 p1, P2 p2)
-  { return mF(p1, p2); }
-
-  static FunctionSig mF;
-};
-
-template <int N, typename R, typename P1, typename P2>
-typename FunctionWrapper<N, R (*)(P1, P2)>::FunctionSig
-FunctionWrapper<N, R (*)(P1, P2)>::mF = nullptr;
-
-template <int N, typename R, typename P1, typename P2, typename P3>
-struct FunctionWrapper<N, R (*)(P1, P2, P3)>
-{
-  typedef R (*FunctionSig)(P1, P2, P3);
-
-  static void bind(FunctionSig f) { mF = f;}
-  template <typename T> static T call(P1 p1, P2 p2, P3 p3)
-  { return mF(p1, p2, p3); }
-
-  static FunctionSig mF;
-};
-
-template <int N, typename R, typename P1, typename P2, typename P3>
-typename FunctionWrapper<N, R (*)(P1, P2, P3)>::FunctionSig
-FunctionWrapper<N, R (*)(P1, P2, P3)>::mF = nullptr;
-
-// TODO:
-// How to auto gen wrapper for function with void * pointer parameters.
-cv::Mat *createMat(cv::Size size, int type, uintptr_t data, size_t step) {
-  return new cv::Mat(size, type, reinterpret_cast<void *>(data), step);
-}
-
 EMSCRIPTEN_BINDINGS(stl_wrappers) {
   register_vector<int>("VectorInt");
 }
 
 EMSCRIPTEN_BINDINGS(ocv_matrix) {
-  typedef FunctionWrapper<0, cv::MatExpr (*)(int, int, int)> MatZero1;
-  typedef FunctionWrapper<1, cv::MatExpr (*)(int, int, int)> MatEye1;
-  typedef FunctionWrapper<2, cv::MatExpr (*)(int, int, int)> MatOnes1;
-  MatZero1::bind(cv::Mat::zeros);
-  MatEye1::bind(cv::Mat::eye);
-  MatOnes1::bind(cv::Mat::ones);
-  typedef FunctionWrapper<0, cv::MatExpr (*)(cv::Size, int)> MatZero2;
-  typedef FunctionWrapper<1, cv::MatExpr (*)(cv::Size, int)> MatEye2;
-  typedef FunctionWrapper<2, cv::MatExpr (*)(cv::Size, int)> MatOnes2;
-  MatZero2::bind(cv::Mat::zeros);
-  MatEye2::bind(cv::Mat::eye);
-  MatOnes2::bind(cv::Mat::ones);
+#define BIND_FUNCTION(N, name, binded) \
+  typedef ExplicitConversion<N, cv::MatExpr (*)(int, int, int)> name##_miii; \
+  name##_miii::bind(&binded);
+
+  BIND_FUNCTION(0, zeros, cv::Mat::zeros);
+  BIND_FUNCTION(1, eye, cv::Mat::eye);
+  BIND_FUNCTION(2, ones, cv::Mat::ones);
+#undef BIND_FUNCTION
+
+#define BIND_FUNCTION(N, name, binded) \
+  typedef ExplicitConversion<N, cv::MatExpr (*)(cv::Size, int)> name##_msi; \
+  name##_msi::bind(&binded);
+
+  BIND_FUNCTION(3, zeros, cv::Mat::zeros);
+  BIND_FUNCTION(4, eye, cv::Mat::eye);
+  BIND_FUNCTION(5, ones, cv::Mat::ones);
+#undef BIND_FUNCTION
+
+// TBD: export cv::MatExpr (*)(int, const int *, int) is mixup with
+// cv::MatExpr (*)(int, int, int)> for some unknown reason. Skip exporting
+// these API before I figure it out.
+/*
+#define BIND_FUNCTION(N, name, binded) \
+  typedef ExplicitConversion<N, cv::MatExpr (*)(int, const int *, int)> name##_miipi; \
+  name##_miipi::bind(&binded);
+
+  BIND_FUNCTION(6, zeros, cv::Mat::zeros);
+  BIND_FUNCTION(7, ones, cv::Mat::ones);
+  BIND_FUNCTION(12, aaaa, aaaa);
+#undef BIND_FUNCTION
+*/
+
+  typedef ExplicitConversion<8, void *(cv::Mat::*)(int)> ptr_vpi;
+  ptr_vpi::bind(&cv::Mat::ptr);
+  typedef ExplicitConversion<9, void *(cv::Mat::*)(int, int)> ptr_vpii;
+  ptr_vpii::bind(&cv::Mat::ptr);
+
+  typedef ExplicitConversion<10, void (cv::Mat::*)(cv::OutputArray, int, double, double) const> Mat_ConvertTo;
+  Mat_ConvertTo::bind(&cv::Mat::convertTo);
+
+  typedef ExplicitConversion<11, cv::Mat *(*)(cv::Size, int, void*, size_t)>
+    Mat_Creator;
+  Mat_Creator::bind([] (cv::Size size, int type, void *data, size_t step) {
+    return new cv::Mat(size, type, data, step);
+  });
 
   value_array<cv::Size>("Size")
     .element(&cv::Size::height)
     .element(&cv::Size::width)
     ;
+
   class_<cv::Mat>("Mat")
     // Constructor && external creators.
     .constructor<>()
     .constructor<int, int, int>()
     .constructor<const cv::Mat&>()
-    .constructor(&createMat, allow_raw_pointers())
+    .constructor(&Mat_Creator::call)
     // Mat properties
     .function("type", &cv::Mat::type)
     .function("depth", &cv::Mat::depth)
@@ -125,18 +102,20 @@ EMSCRIPTEN_BINDINGS(ocv_matrix) {
     .property("data", &Mat_getData, &Mat_setData)
     // We support Mat::ptr and do not supprt Mat::at.
     // User should use typed array to access element data with correct type.
-    .function("ptr", select_overload<uintptr_t (cv::Mat &, int)>(&Mat_ptr))
-    .function("ptr", select_overload<uintptr_t (cv::Mat &, int, int)>(&Mat_ptr))
+    .function("ptr", &ptr_vpi::call)
+    .function("ptr", &ptr_vpii::call)
     .function("create", select_overload<void (int, int, int)>(&cv::Mat::create))
     .function("create", select_overload<void (cv::Size, int)>(&cv::Mat::create))
     // Since we can't overwrite + operator at js side, we should return a matrix
     // instance, not MatExpr one, in exported eyes/ones/zeros
-    .class_function("zeros", &MatZero1::call<cv::Mat>)
-    .class_function("ones", &MatOnes1::call<cv::Mat>)
-    .class_function("eye", &MatEye1::call<cv::Mat>)
-    .class_function("zeros", &MatZero2::call<cv::Mat>)
-    .class_function("ones", &MatOnes2::call<cv::Mat>)
-    .class_function("eye", &MatEye2::call<cv::Mat>)
+    .class_function("zeros", &zeros_miii::call)
+    .class_function("ones", &ones_miii::call)
+    .class_function("eye", &eye_miii::call)
+    .class_function("zeros", &zeros_msi::call)
+    .class_function("ones", &ones_msi::call)
+    .class_function("eye", &eye_msi::call)
+    // Misc
+    .function("convertTo", &Mat_ConvertTo::call)
 /*
     Mat rowRange(int startrow, int endrow) const;
     Mat rowRange(const Range& r) const;
@@ -147,7 +126,6 @@ EMSCRIPTEN_BINDINGS(ocv_matrix) {
     Mat clone() const;
     void copyTo( OutputArray m ) const;
     void copyTo( OutputArray m, InputArray mask ) const;
-    void convertTo( OutputArray m, int rtype, double alpha=1, double beta=0 ) const;
     void assignTo( Mat& m, int type=-1 ) const;
     Mat& operator = (const Scalar& s);
     Mat& setTo(InputArray value, InputArray mask=noArray());
@@ -158,8 +136,6 @@ EMSCRIPTEN_BINDINGS(ocv_matrix) {
     MatExpr mul(InputArray m, double scale=1) const;
     Mat cross(InputArray m) const;
     double dot(InputArray m) const;
-    static MatExpr zeros(int ndims, const int* sz, int type);
-    static MatExpr ones(int ndims, const int* sz, int type);
     void deallocate();
     void copySize(const Mat& m);
     void reserve(size_t sz);
