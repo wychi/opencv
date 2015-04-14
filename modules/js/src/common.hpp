@@ -1,4 +1,3 @@
-
 #ifndef __JS_COMMON_HPP__
 #define __JS_COMMON_HPP__
 
@@ -54,23 +53,23 @@ struct ConversionTrait<cv::OutputArray> {
 template <int N,               // Index.
          typename T,           // Wrapped function type.
          template <typename> class Trait = ConversionTrait>
-struct ExplicitConversion;
+         struct ExplicitConversion;
 
-// one template parameter.
-template <int N, template <typename> class Trait, typename C, typename R, typename P0>
-struct ExplicitConversion<N, R (C::*)(P0), Trait> {
-  typedef R (C::*FunctionSig)(P0);
+         // one template parameter.
+         template <int N, template <typename> class Trait, typename C, typename R, typename P0>
+         struct ExplicitConversion<N, R (C::*)(P0), Trait> {
+           typedef R (C::*FunctionSig)(P0);
 
-  static void bind(FunctionSig f) { mF = f; }
-  static typename Trait<R>::Type
-  call(C &obj,
-       typename Trait<P0>::Type p0)
-  {
-    return typename Trait<R>::Type((obj.*mF)(P0(p0)));
-  }
+           static void bind(FunctionSig f) { mF = f; }
+           static typename Trait<R>::Type
+             call(C &obj,
+                 typename Trait<P0>::Type p0)
+             {
+               return typename Trait<R>::Type((obj.*mF)(P0(p0)));
+             }
 
-  static FunctionSig mF;
-};
+           static FunctionSig mF;
+         };
 
 template <int N, template <typename> class Trait, typename C, typename R, typename P0>
 typename ExplicitConversion<N, R (C::*)(P0), Trait>::FunctionSig
@@ -82,10 +81,10 @@ struct ExplicitConversion<N, R (*)(P0), Trait> {
 
   static void bind(FunctionSig f) { mF = f; }
   static typename Trait<R>::Type
-  call(typename Trait<P0>::Type p0)
-  {
-    return typename Trait<R>::Type(mF(P0(p0)));
-  }
+    call(typename Trait<P0>::Type p0)
+    {
+      return typename Trait<R>::Type(mF(P0(p0)));
+    }
 
   static FunctionSig mF;
 };
@@ -102,12 +101,12 @@ struct ExplicitConversion<N, R (C::*)(P0, P1), Trait> {
 
   static void bind(FunctionSig f) { mF = f; }
   static typename Trait<R>::Type
-  call(C &obj,
-       typename Trait<P0>::Type p0,
-       typename Trait<P1>::Type p1)
-  {
-    return  typename Trait<R>::Type((obj.*mF)(P0(p0), P1(p1)));
-  }
+    call(C &obj,
+        typename Trait<P0>::Type p0,
+        typename Trait<P1>::Type p1)
+    {
+      return  typename Trait<R>::Type((obj.*mF)(P0(p0), P1(p1)));
+    }
 
   static FunctionSig mF;
 };
@@ -122,11 +121,11 @@ struct ExplicitConversion<N, R (*)(P0, P1), Trait> {
 
   static void bind(FunctionSig f) { mF = f; }
   static typename Trait<R>::Type
-  call(typename Trait<P0>::Type p0,
-       typename Trait<P1>::Type p1)
-  {
-    return typename Trait<R>::Type(mF(P0(p0), P1(p1)));
-  }
+    call(typename Trait<P0>::Type p0,
+        typename Trait<P1>::Type p1)
+    {
+      return typename Trait<R>::Type(mF(P0(p0), P1(p1)));
+    }
 
   static FunctionSig mF;
 };
@@ -142,12 +141,12 @@ struct ExplicitConversion<N, R (*)(P0, P1, P2), Trait> {
 
   static void bind(FunctionSig f) { mF = f; }
   static typename Trait<R>::Type
-  call(typename Trait<P0>::Type p0,
-       typename Trait<P1>::Type p1,
-       typename Trait<P2>::Type p2)
-  {
-    return  typename Trait<R>::Type(mF(P0(p0), P1(p1), P2(p2)));
-  }
+    call(typename Trait<P0>::Type p0,
+        typename Trait<P1>::Type p1,
+        typename Trait<P2>::Type p2)
+    {
+      return  typename Trait<R>::Type(mF(P0(p0), P1(p1), P2(p2)));
+    }
 
   static FunctionSig mF;
 };
@@ -163,13 +162,13 @@ struct ExplicitConversion<N, R (*)(P0, P1, P2, P3), Trait> {
 
   static void bind(FunctionSig f) { mF = f; }
   static typename Trait<R>::Type
-  call(typename Trait<P0>::Type p0,
-       typename Trait<P1>::Type p1,
-       typename Trait<P2>::Type p2,
-       typename Trait<P3>::Type p3)
-  {
-    return  typename Trait<R>::Type(mF(P0(p0), P1(p1), P2(p2), P3(p3)));
-  }
+    call(typename Trait<P0>::Type p0,
+        typename Trait<P1>::Type p1,
+        typename Trait<P2>::Type p2,
+        typename Trait<P3>::Type p3)
+    {
+      return  typename Trait<R>::Type(mF(P0(p0), P1(p1), P2(p2), P3(p3)));
+    }
 
   static FunctionSig mF;
 };
@@ -184,14 +183,14 @@ struct ExplicitConversion<N, R (C::*)(P0, P1, P2, P3), Trait> {
 
   static void bind(FunctionSig f) { mF = f; }
   static typename Trait<R>::Type
-  call(C &obj,
-       typename Trait<P0>::Type p0,
-       typename Trait<P1>::Type p1,
-       typename Trait<P2>::Type p2,
-       typename Trait<P3>::Type p3)
-  {
-    return  typename Trait<R>::Type((obj.*mF)(P0(p0), P1(p1), P2(p2), P3(p3)));
-  }
+    call(C &obj,
+        typename Trait<P0>::Type p0,
+        typename Trait<P1>::Type p1,
+        typename Trait<P2>::Type p2,
+        typename Trait<P3>::Type p3)
+    {
+      return  typename Trait<R>::Type((obj.*mF)(P0(p0), P1(p1), P2(p2), P3(p3)));
+    }
 
   static FunctionSig mF;
 };
@@ -206,14 +205,14 @@ struct ExplicitConversion<N, R (C::*)(P0, P1, P2, P3) const, Trait> {
 
   static void bind(FunctionSig f) { mF = f; }
   static typename Trait<R>::Type
-  call(C &obj,
-       typename Trait<P0>::Type p0,
-       typename Trait<P1>::Type p1,
-       typename Trait<P2>::Type p2,
-       typename Trait<P3>::Type p3)
-  {
-    return  typename Trait<R>::Type((obj.*mF)(P0(p0), P1(p1), P2(p2), P3(p3)));
-  }
+    call(C &obj,
+        typename Trait<P0>::Type p0,
+        typename Trait<P1>::Type p1,
+        typename Trait<P2>::Type p2,
+        typename Trait<P3>::Type p3)
+    {
+      return  typename Trait<R>::Type((obj.*mF)(P0(p0), P1(p1), P2(p2), P3(p3)));
+    }
 
   static FunctionSig mF;
 };
@@ -229,19 +228,19 @@ struct ExplicitConversion<N, R (*)(P0, P1, P2, P3, P4, P5, P6, P7, P8, P9), Trai
 
   static void bind(FunctionSig f) { mF = f; }
   static typename Trait<R>::Type
-  call(typename Trait<P0>::Type p0,
-       typename Trait<P1>::Type p1,
-       typename Trait<P2>::Type p2,
-       typename Trait<P3>::Type p3,
-       typename Trait<P4>::Type p4,
-       typename Trait<P5>::Type p5,
-       typename Trait<P6>::Type p6,
-       typename Trait<P7>::Type p7,
-       typename Trait<P8>::Type p8,
-       typename Trait<P9>::Type p9)
-  {
-    return  typename Trait<R>::Type(mF(P0(p0), P1(p1), P2(p2), P3(p3), P4(p4), P5(p5), P6(p6), P7(p7), P8(p8), P9(p9)));
-  }
+    call(typename Trait<P0>::Type p0,
+        typename Trait<P1>::Type p1,
+        typename Trait<P2>::Type p2,
+        typename Trait<P3>::Type p3,
+        typename Trait<P4>::Type p4,
+        typename Trait<P5>::Type p5,
+        typename Trait<P6>::Type p6,
+        typename Trait<P7>::Type p7,
+        typename Trait<P8>::Type p8,
+        typename Trait<P9>::Type p9)
+    {
+      return  typename Trait<R>::Type(mF(P0(p0), P1(p1), P2(p2), P3(p3), P4(p4), P5(p5), P6(p6), P7(p7), P8(p8), P9(p9)));
+    }
 
   static FunctionSig mF;
 };

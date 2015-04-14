@@ -2,8 +2,8 @@
 #include "common.hpp"
 #include "opencv2/imgproc.hpp"
 #include "opencv2/imgproc/types_c.h"
-using namespace emscripten;
 
+using namespace emscripten;
 
 EMSCRIPTEN_BINDINGS(ocv_imgproc) {
   // void calcHist(const Mat*, int, const int*, InputArray, OutputArray,
@@ -15,7 +15,7 @@ EMSCRIPTEN_BINDINGS(ocv_imgproc) {
   function("calcHist", &ImgProc_calcHist::call, allow_raw_pointers());
 
   // void cvtColor(InputArray src, OutputArray dst, int code, int dstCn=0)
-  typedef ExplicitConversion<100,  void (*)(cv::InputArray, cv::OutputArray, int, int)> ImgProc_cvtColor;
+  typedef ExplicitConversion<101,  void (*)(cv::InputArray, cv::OutputArray, int, int)> ImgProc_cvtColor;
   ImgProc_cvtColor::bind(cv::cvtColor);
   function("cvtColor", &ImgProc_cvtColor::call);
 
