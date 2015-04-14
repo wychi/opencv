@@ -12,6 +12,16 @@ EMSCRIPTEN_BINDINGS(ocv_imgproc) {
       cv::InputArray, cv::OutputArray, int, const int*,
       const float**, bool, bool)> ImgProc_calcHist;
   ImgProc_calcHist::bind(cv::calcHist);
+  //typedef ExplicitConversion<100, void (*)(const cv::Mat*, int, uintptr_t,
+  //    cv::Mat &, cv::Mat &, int, uintptr_t,
+  //    uintptr_t, bool, bool)> ImgProc_calcHist;
+  //ImgProc_calcHist::bind([](const cv::Mat* p1, int p2, uintptr_t p3,
+  //    cv::Mat &p4, cv::Mat &p5, int p6, uintptr_t p7,
+  //    uintptr_t p8, bool p9, bool p10) {
+  //      int a = 255;
+  //      cv::calcHist(p1, p2, (const int *)p3,p4,p5,p6,&a, (const float **)p8, p9,p10);
+  //    }
+  //);
   function("calcHist", &ImgProc_calcHist::call, allow_raw_pointers());
 
   // void cvtColor(InputArray src, OutputArray dst, int code, int dstCn=0)

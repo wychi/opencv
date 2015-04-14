@@ -294,7 +294,7 @@ QUnit.test("test_mat_miscs", function(assert) {
     let mat = Module.Mat.ones(5, 5, Module.CV_8UC3);
     let bgr_planes = new Module.VectorMat();
     Module.split(mat, bgr_planes);
-
+    bgr_planes.get(0);
     assert.equal(bgr_planes.size(), 3);
   }
 });
