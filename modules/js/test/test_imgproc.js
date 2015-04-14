@@ -16,6 +16,10 @@ QUnit.test("test_imgProc", function(assert) {
     szView[0] = 255;
     Module.calcHist(source, 1, 0, mask, hist, 1, sz, 0, true, false);
 
+    let size = hist.size();
+    assert.equal(size.get(0), 0);
+    assert.equal(size.get(1), 1);
+
     mask.delete();
     hist.delete();
     source.delete();

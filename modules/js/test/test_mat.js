@@ -285,6 +285,18 @@ QUnit.test("test_mat_miscs", function(assert) {
     grayMat.delete();
     mat.delete();
   }
+
+  // C++
+  //   void split(InputArray, OutputArrayOfArrays)
+  // Embind
+  //   void split(VecotrMat, VectorMat)
+  {
+    let mat = Module.Mat.ones(5, 5, Module.CV_8UC3);
+    let bgr_planes = new Module.VectorMat();
+    Module.split(mat, bgr_planes);
+
+    assert.equal(bgr_planes.size(), 3);
+  }
 });
 
 // Mat::zeros

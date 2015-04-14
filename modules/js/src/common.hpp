@@ -50,6 +50,7 @@ struct ConversionTrait<cv::OutputArray> {
   typedef cv::Mat & Type;
 };
 
+
 template <int N,               // Index.
          typename T,           // Wrapped function type.
          template <typename> class Trait = ConversionTrait>
