@@ -50,27 +50,24 @@ struct ConversionTrait<cv::OutputArray> {
   typedef cv::Mat & Type;
 };
 
+template <int N, typename T, template <typename> class Trait = ConversionTrait>
+struct ExplicitConversion;
 
-template <int N,               // Index.
-         typename T,           // Wrapped function type.
-         template <typename> class Trait = ConversionTrait>
-         struct ExplicitConversion;
+// one template parameter.
+template <int N, template <typename> class Trait, typename C, typename R, typename P0>
+struct ExplicitConversion<N, R (C::*)(P0), Trait> {
+  using FunctionSig = R (C::*)(P0);
 
-         // one template parameter.
-         template <int N, template <typename> class Trait, typename C, typename R, typename P0>
-         struct ExplicitConversion<N, R (C::*)(P0), Trait> {
-           typedef R (C::*FunctionSig)(P0);
+  static void bind(FunctionSig f) { mF = f; }
+  static typename Trait<R>::Type
+    call(C &obj,
+        typename Trait<P0>::Type p0)
+    {
+      return typename Trait<R>::Type((obj.*mF)(P0(p0)));
+    }
 
-           static void bind(FunctionSig f) { mF = f; }
-           static typename Trait<R>::Type
-             call(C &obj,
-                 typename Trait<P0>::Type p0)
-             {
-               return typename Trait<R>::Type((obj.*mF)(P0(p0)));
-             }
-
-           static FunctionSig mF;
-         };
+  static FunctionSig mF;
+};
 
 template <int N, template <typename> class Trait, typename C, typename R, typename P0>
 typename ExplicitConversion<N, R (C::*)(P0), Trait>::FunctionSig
@@ -78,7 +75,7 @@ ExplicitConversion<N, R (C::*)(P0), Trait>::mF = nullptr;
 
 template <int N, template <typename> class Trait, typename R, typename P0>
 struct ExplicitConversion<N, R (*)(P0), Trait> {
-  typedef R (*FunctionSig)(P0);
+  using FunctionSig = R (*)(P0);
 
   static void bind(FunctionSig f) { mF = f; }
   static typename Trait<R>::Type
@@ -94,11 +91,10 @@ template <int N, template <typename> class Trait, typename R, typename P0>
 typename ExplicitConversion<N, R (*)(P0), Trait>::FunctionSig
 ExplicitConversion<N, R (*)(P0), Trait>::mF = nullptr;
 
-
 // two tempalte parameters.
 template <int N, template <typename> class Trait, typename C, typename R, typename P0, typename P1>
 struct ExplicitConversion<N, R (C::*)(P0, P1), Trait> {
-  typedef R (C::*FunctionSig)(P0, P1);
+  using FunctionSig = R (C::*)(P0, P1);
 
   static void bind(FunctionSig f) { mF = f; }
   static typename Trait<R>::Type
@@ -118,7 +114,7 @@ ExplicitConversion<N, R (C::*)(P0, P1), Trait>::mF = nullptr;
 
 template <int N, template <typename> class Trait, typename R, typename P0, typename P1>
 struct ExplicitConversion<N, R (*)(P0, P1), Trait> {
-  typedef R (*FunctionSig)(P0, P1);
+  using FunctionSig = R (*)(P0, P1);
 
   static void bind(FunctionSig f) { mF = f; }
   static typename Trait<R>::Type
@@ -138,7 +134,7 @@ ExplicitConversion<N, R (*)(P0, P1), Trait>::mF = nullptr;
 // three template parameters.
 template <int N, template <typename> class Trait, typename R, typename P0, typename P1, typename P2>
 struct ExplicitConversion<N, R (*)(P0, P1, P2), Trait> {
-  typedef R (*FunctionSig)(P0, P1, P2);
+  using FunctionSig = R (*)(P0, P1, P2);
 
   static void bind(FunctionSig f) { mF = f; }
   static typename Trait<R>::Type
@@ -159,10 +155,10 @@ ExplicitConversion<N, R (*)(P0, P1, P2), Trait>::mF = nullptr;
 // 3 template params.
 template <int N, template <typename> class Trait, typename R, typename P0, typename P1, typename P2, typename P3>
 struct ExplicitConversion<N, R (*)(P0, P1, P2, P3), Trait> {
-  typedef R (*FunctionSig)(P0, P1, P2, P3);
+  using FunctionSig = R (*)(P0, P1, P2, P3);
 
   static void bind(FunctionSig f) { mF = f; }
-  static typename Trait<R>::Type
+   static typename Trait<R>::Type
     call(typename Trait<P0>::Type p0,
         typename Trait<P1>::Type p1,
         typename Trait<P2>::Type p2,
@@ -180,7 +176,7 @@ ExplicitConversion<N, R (*)(P0, P1, P2, P3), Trait>::mF = nullptr;
 
 template <int N, template <typename> class Trait, typename C, typename R, typename P0, typename P1, typename P2, typename P3>
 struct ExplicitConversion<N, R (C::*)(P0, P1, P2, P3), Trait> {
-  typedef R (C::*FunctionSig)(P0, P1, P2, P3);
+  using FunctionSig = R (C::*)(P0, P1, P2, P3);
 
   static void bind(FunctionSig f) { mF = f; }
   static typename Trait<R>::Type
@@ -202,7 +198,7 @@ ExplicitConversion<N, R (C::*)(P0, P1, P2, P3), Trait>::mF = nullptr;
 
 template <int N, template <typename> class Trait, typename C, typename R, typename P0, typename P1, typename P2, typename P3>
 struct ExplicitConversion<N, R (C::*)(P0, P1, P2, P3) const, Trait> {
-  typedef R (C::*FunctionSig)(P0, P1, P2, P3) const;
+  using FunctionSig = R (C::*)(P0, P1, P2, P3) const;
 
   static void bind(FunctionSig f) { mF = f; }
   static typename Trait<R>::Type
@@ -225,7 +221,7 @@ ExplicitConversion<N, R (C::*)(P0, P1, P2, P3) const, Trait>::mF = nullptr;
 // 10 params
 template <int N, template <typename> class Trait, typename R, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8, typename P9>
 struct ExplicitConversion<N, R (*)(P0, P1, P2, P3, P4, P5, P6, P7, P8, P9), Trait> {
-  typedef R (*FunctionSig)(P0, P1, P2, P3, P4, P5, P6, P7, P8, P9);
+  using FunctionSig = R (*)(P0, P1, P2, P3, P4, P5, P6, P7, P8, P9);
 
   static void bind(FunctionSig f) { mF = f; }
   static typename Trait<R>::Type

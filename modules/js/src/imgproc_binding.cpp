@@ -24,11 +24,23 @@ EMSCRIPTEN_BINDINGS(ocv_imgproc) {
   //);
   function("calcHist", &ImgProc_calcHist::call, allow_raw_pointers());
 
+  //  void equalizeHist( InputArray src, OutputArray dst );
+  typedef ExplicitConversion<101, void (*)(cv::InputArray, cv::OutputArray)> ImgProc_equalizeHist;
+  ImgProc_equalizeHist::bind(cv::equalizeHist);
+  function("equalizeHist", &ImgProc_equalizeHist::call);
+
   // void cvtColor(InputArray src, OutputArray dst, int code, int dstCn=0)
   typedef ExplicitConversion<101,  void (*)(cv::InputArray, cv::OutputArray, int, int)> ImgProc_cvtColor;
   ImgProc_cvtColor::bind(cv::cvtColor);
   function("cvtColor", &ImgProc_cvtColor::call);
 
+  // CV_EXPORTS_W double threshold( InputArray src, OutputArray dst,
+  //                             double thresh, double maxval, int type );
+
+  // CV_EXPORTS_W void adaptiveThreshold( InputArray src, OutputArray dst,
+  //                                   double maxValue, int adaptiveMethod,
+  //                                   int thresholdType, int blockSize, double C );
+  
   // http://stackoverflow.com/questions/5720359/no-matching-function-call-to-anonymous-enum
   //  template<typename ConstantType>
   //  void constant(const char* name, const ConstantType& v) {

@@ -14,6 +14,8 @@ static uintptr_t Mat_getData(const cv::Mat& mat)
   return uintptr_t(mat.data);
 }
 
+// Current template spec does not support lambda template paremater.
+// As a result, we still neeed to define a simple wrapper function here.
 static void Mat_setData(cv::Mat& mat, uintptr_t data)
 {
   mat.data = reinterpret_cast<uchar *>(data);
@@ -35,6 +37,11 @@ EMSCRIPTEN_BINDINGS(stl_wrappers) {
 }
 
 EMSCRIPTEN_BINDINGS(ocv_matrix) {
+  value_array<cv::Size>("Size")
+    .element(&cv::Size::height)
+    .element(&cv::Size::width)
+    ;
+
 #define BIND_FUNCTION(N, name, binded) \
   typedef ExplicitConversion<N, cv::MatExpr (*)(int, int, int)> name##_miii; \
   name##_miii::bind(&binded);
@@ -57,42 +64,35 @@ EMSCRIPTEN_BINDINGS(ocv_matrix) {
   // cv::MatExpr (*)(int, int, int)> for some unknown reason. Skip exporting
   // these API before I figure it out.
   /*
-#define BIND_FUNCTION(N, name, binded) \
-typedef ExplicitConversion<N, cv::MatExpr (*)(int, const int *, int)> name##_miipi; \
-name##_miipi::bind(&binded);
+  #define BIND_FUNCTION(N, name, binded) \
+  typedef ExplicitConversion<N, cv::MatExpr (*)(int, const int *, int)> name##_miipi; \
+  name##_miipi::bind(&binded);
 
-BIND_FUNCTION(6, zeros, cv::Mat::zeros);
-BIND_FUNCTION(7, ones, cv::Mat::ones);
-BIND_FUNCTION(12, aaaa, aaaa);
-#undef BIND_FUNCTION
-*/
+  BIND_FUNCTION(6, zeros, cv::Mat::zeros);
+  BIND_FUNCTION(7, ones, cv::Mat::ones);
+  BIND_FUNCTION(12, aaaa, aaaa);
+  #undef BIND_FUNCTION
+  */
 
-  typedef ExplicitConversion<8, void *(cv::Mat::*)(int)> ptr_vpi;
-  ptr_vpi::bind(&cv::Mat::ptr);
-  typedef ExplicitConversion<9, void *(cv::Mat::*)(int, int)> ptr_vpii;
-  ptr_vpii::bind(&cv::Mat::ptr);
+  using BindMatPtrVPI = ExplicitConversion<8, void *(cv::Mat::*)(int)>;
+  BindMatPtrVPI::bind(&cv::Mat::ptr);
+  using BindMatPtrVPII = ExplicitConversion<9, void *(cv::Mat::*)(int, int)>;
+  BindMatPtrVPII::bind(&cv::Mat::ptr);
 
-  typedef ExplicitConversion<10, void (cv::Mat::*)(cv::OutputArray, int, double, double) const> Mat_ConvertTo;
-  Mat_ConvertTo::bind(&cv::Mat::convertTo);
+  using BindConvertTo = ExplicitConversion<10, decltype(&cv::Mat::convertTo)>;
+  BindConvertTo::bind(&cv::Mat::convertTo);
 
-  typedef ExplicitConversion<11, cv::Mat *(*)(cv::Size, int, void*, size_t)>
-    Mat_Creator;
-  Mat_Creator::bind([] (cv::Size size, int type, void *data, size_t step) {
+  using BindMatCreate = ExplicitConversion<11, cv::Mat *(*)(cv::Size, int, void*, size_t)>;
+  BindMatCreate::bind([] (cv::Size size, int type, void *data, size_t step) {
       return new cv::Mat(size, type, data, step);
       });
-
-
-  value_array<cv::Size>("Size")
-    .element(&cv::Size::height)
-    .element(&cv::Size::width)
-    ;
 
   class_<cv::Mat>("Mat")
     // Constructor && external creators.
     .constructor<>()
     .constructor<int, int, int>()
     .constructor<const cv::Mat&>()
-    .constructor(&Mat_Creator::call)
+    .constructor(&BindMatCreate::call)
     // Mat properties
     .function("type", &cv::Mat::type)
     .function("depth", &cv::Mat::depth)
@@ -103,10 +103,10 @@ BIND_FUNCTION(12, aaaa, aaaa);
     .function("row", &cv::Mat::row)
     .function("col", &cv::Mat::row)
     .property("data", &Mat_getData, &Mat_setData)
-    // We support Mat::ptr and do not supprt Mat::at.
-    // User should use typed array to access element data with correct type.
-    .function("ptr", &ptr_vpi::call)
-    .function("ptr", &ptr_vpii::call)
+    // We support Mat::ptr, but do not support Mat::at.
+    // A user can use typed array to access element data with correct type.
+    .function("ptr", &BindMatPtrVPI::call)
+    .function("ptr", &BindMatPtrVPII::call)
     .function("create", select_overload<void (int, int, int)>(&cv::Mat::create))
     .function("create", select_overload<void (cv::Size, int)>(&cv::Mat::create))
     // Since we can't overwrite + operator at js side, we should return a matrix
@@ -118,13 +118,14 @@ BIND_FUNCTION(12, aaaa, aaaa);
     .class_function("ones", &ones_msi::call)
     .class_function("eye", &eye_msi::call)
     // Misc
-    .function("convertTo", &Mat_ConvertTo::call)
+    .function("convertTo", &BindConvertTo::call)
     /*
        Mat rowRange(int startrow, int endrow) const;
        Mat rowRange(const Range& r) const;
        Mat colRange(int startcol, int endcol) const;
        Mat colRange(const Range& r) const;
        static Mat diag(const Mat& d);
+       Mat diag(int d=0) const;
 
        Mat clone() const;
        void copyTo( OutputArray m ) const;
@@ -154,18 +155,29 @@ BIND_FUNCTION(12, aaaa, aaaa);
        Mat operator()( Range rowRange, Range colRange ) const;
        Mat operator()( const Rect& roi ) const;
        Mat operator()( const Range* ranges ) const;
-       Mat diag(int d=0) const;
+       template<typename _Tp> operator std::vector<_Tp>() const;
+       template<typename _Tp, int n> operator Vec<_Tp, n>() const;
+       template<typename _Tp, int m, int n> operator Matx<_Tp, m, n>() const;
+       bool isContinuous() const;
+       bool isSubmatrix() const;
+       size_t elemSize() const;
+       size_t elemSize1() const;
+       size_t step1(int i=0) const;
+       size_t total() const;
+       int checkVector(int elemChannels, int depth=-1, bool requireContinuous=true) const;
+       template<typename _Tp, typename Functor> void forEach(const Functor& operation);
        */
     ;
 
   // Misc API.
   // void split(const Mat& src, Mat* mvbegin);
   // void split(InputArray m, OutputArrayOfArrays mv)
-  typedef ExplicitConversion<20, void (*)(cv::Mat &, std::vector<cv::Mat> &)> Mat_split;
-  Mat_split::bind([] (cv::Mat &m, std::vector<cv::Mat> &mv) {
-    cv::split(m, mv);
-  });
-  function("split", &Mat_split::call);
+  using BindSplit = ExplicitConversion<20, void (*)(cv::Mat &, std::vector<cv::Mat> &)>;
+  BindSplit::bind([] (cv::Mat &m, std::vector<cv::Mat> &mv) { cv::split(m, mv); });
+  function("split", &BindSplit::call);
+
+  // void perspectiveTransform(InputArray, OutputArray, InputArray);
+
   // constants.
   constant("CV_8UC1", CV_8UC1);
   constant("CV_8UC2", CV_8UC2);
