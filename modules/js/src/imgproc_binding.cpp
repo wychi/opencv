@@ -30,16 +30,22 @@ EMSCRIPTEN_BINDINGS(ocv_imgproc) {
   function("equalizeHist", &ImgProc_equalizeHist::call);
 
   // void cvtColor(InputArray src, OutputArray dst, int code, int dstCn=0)
-  typedef ExplicitConversion<101,  void (*)(cv::InputArray, cv::OutputArray, int, int)> ImgProc_cvtColor;
-  ImgProc_cvtColor::bind(cv::cvtColor);
-  function("cvtColor", &ImgProc_cvtColor::call);
+  using ImgProcCvtColor = ExplicitConversion<101,  void (*)(cv::InputArray, cv::OutputArray, int, int)>;
+  ImgProcCvtColor::bind(cv::cvtColor);
+  function("cvtColor", &ImgProcCvtColor::call);
 
+  // Segmentation API
   // CV_EXPORTS_W double threshold( InputArray src, OutputArray dst,
   //                             double thresh, double maxval, int type );
-
+  using ImgProcThreshold = ExplicitConversion<102, decltype(&cv::threshold)>;
+  ImgProcThreshold::bind(cv::threshold);
+  function("threshold", &ImgProcThreshold::call);
   // CV_EXPORTS_W void adaptiveThreshold( InputArray src, OutputArray dst,
   //                                   double maxValue, int adaptiveMethod,
   //                                   int thresholdType, int blockSize, double C );
+  using ImgProcAdaptiveThreshold = ExplicitConversion<102, decltype(&cv::adaptiveThreshold)>;
+  ImgProcAdaptiveThreshold::bind(cv::adaptiveThreshold);
+  function("adaptiveThreshold", &ImgProcAdaptiveThreshold::call);
   
   // http://stackoverflow.com/questions/5720359/no-matching-function-call-to-anonymous-enum
   //  template<typename ConstantType>
@@ -244,4 +250,18 @@ EMSCRIPTEN_BINDINGS(ocv_imgproc) {
   constant("CV_BayerGB2RGB_EA", +CV_BayerGB2RGB_EA);
   constant("CV_BayerRG2RGB_EA", +CV_BayerRG2RGB_EA);
   constant("CV_BayerGR2RGB_EA", +CV_BayerGR2RGB_EA);
+
+  constant("CV_ADAPTIVE_THRESH_MEAN_C  ", +CV_ADAPTIVE_THRESH_MEAN_C);
+  constant("CV_ADAPTIVE_THRESH_GAUSSIAN_C  ", +CV_ADAPTIVE_THRESH_GAUSSIAN_C);
+
+  enum_<cv::ThresholdTypes>("ThresholdTypes")
+    .value("THRESH_BINARY", cv::THRESH_BINARY)
+    .value("THRESH_BINARY_INV", cv::THRESH_BINARY_INV)
+    .value("THRESH_TRUNC", cv::THRESH_TRUNC)
+    .value("THRESH_TOZERO", cv::THRESH_TOZERO)
+    .value("THRESH_TOZERO_INV", cv::THRESH_TOZERO_INV)
+    .value("THRESH_MASK", cv::THRESH_MASK)
+    .value("THRESH_OTSU", cv::THRESH_OTSU)
+    .value("THRESH_TRIANGLE", cv::THRESH_TRIANGLE)
+    ;
 }
