@@ -40,12 +40,14 @@ EMSCRIPTEN_BINDINGS(ocv_imgproc) {
   using ImgProcThreshold = ExplicitConversion<102, decltype(&cv::threshold)>;
   ImgProcThreshold::bind(cv::threshold);
   function("threshold", &ImgProcThreshold::call);
+
   // CV_EXPORTS_W void adaptiveThreshold( InputArray src, OutputArray dst,
   //                                   double maxValue, int adaptiveMethod,
   //                                   int thresholdType, int blockSize, double C );
   using ImgProcAdaptiveThreshold = ExplicitConversion<102, decltype(&cv::adaptiveThreshold)>;
   ImgProcAdaptiveThreshold::bind(cv::adaptiveThreshold);
   function("adaptiveThreshold", &ImgProcAdaptiveThreshold::call);
+
   // http://stackoverflow.com/questions/5720359/no-matching-function-call-to-anonymous-enum
   //  template<typename ConstantType>
   //  void constant(const char* name, const ConstantType& v) {
@@ -250,8 +252,8 @@ EMSCRIPTEN_BINDINGS(ocv_imgproc) {
   constant("CV_BayerRG2RGB_EA", +CV_BayerRG2RGB_EA);
   constant("CV_BayerGR2RGB_EA", +CV_BayerGR2RGB_EA);
 
-  constant("CV_ADAPTIVE_THRESH_MEAN_C  ", +CV_ADAPTIVE_THRESH_MEAN_C);
-  constant("CV_ADAPTIVE_THRESH_GAUSSIAN_C  ", +CV_ADAPTIVE_THRESH_GAUSSIAN_C);
+  constant("CV_ADAPTIVE_THRESH_MEAN_C", +CV_ADAPTIVE_THRESH_MEAN_C);
+  constant("CV_ADAPTIVE_THRESH_GAUSSIAN_C", +CV_ADAPTIVE_THRESH_GAUSSIAN_C);
 
   constant("THRESH_BINARY", +cv::THRESH_BINARY);
   constant("THRESH_BINARY_INV", +cv::THRESH_BINARY_INV);

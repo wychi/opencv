@@ -74,14 +74,14 @@ QUnit.test("test_imgProc", function(assert) {
 });
 
 QUnit.test("test_segmentation", function(assert) {
+  const THRESHOLD = 127.0;
+  const THRESHOLD_MAX = 210.0;
+
   // C++
   //   double threshold(InputArray, OutputArray, double, double, int)
   // Embind
   //   double threshold(Mat&, Mat&, double, double, int)
   {
-    const THRESHOLD = 127.0;
-    const THRESHOLD_MAX = 210.0;
-
     let source = new Module.Mat(1, 5, Module.CV_8UC1);
     let sourceView = Module.HEAPU8.subarray(source.data);
     sourceView[0] = 0;   // < threshold
@@ -95,6 +95,30 @@ QUnit.test("test_segmentation", function(assert) {
     let destView = Module.HEAPU8.subarray(dest.data);
     assert.equal(destView[0], 0);
     assert.equal(destView[1], 0);
+    assert.equal(destView[2], THRESHOLD_MAX);
+  }
+
+  // C++
+  //   void adaptiveThreshold(InputArray, OutputArray, double, int, int, int, double);
+  // Embind
+  //   void adaptiveThreshold(Mat &, Mat &, double, int, int, int, double);
+  {
+    let source = Module.Mat.zeros(1, 5, Module.CV_8UC1);
+    let sourceView = Module.HEAPU8.subarray(source.data);
+    sourceView[0] = 50;
+    sourceView[1] = 150;
+    sourceView[2] = 200;
+
+    let dest = new Module.Mat();
+    let C = 0;
+    const block_size = 3;
+    Module.adaptiveThreshold(source, dest, THRESHOLD_MAX,
+        Module.CV_ADAPTIVE_THRESH_MEAN_C,
+        Module.THRESH_BINARY, block_size, C);
+
+    let destView = Module.HEAPU8.subarray(dest.data);
+    assert.equal(destView[0], 0);
+    assert.equal(destView[1], THRESHOLD_MAX);
     assert.equal(destView[2], THRESHOLD_MAX);
   }
 });
