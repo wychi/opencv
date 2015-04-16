@@ -72,3 +72,29 @@ QUnit.test("test_imgProc", function(assert) {
     source.delete();
   }
 });
+
+QUnit.test("test_segmentation", function(assert) {
+  // C++
+  //   double threshold(InputArray, OutputArray, double, double, int)
+  // Embind
+  //   double threshold(Mat&, Mat&, double, double, int)
+  {
+    const THRESHOLD = 127.0;
+    const THRESHOLD_MAX = 210.0;
+
+    let source = new Module.Mat(1, 5, Module.CV_8UC1);
+    let sourceView = Module.HEAPU8.subarray(source.data);
+    sourceView[0] = 0;   // < threshold
+    sourceView[1] = 100; // < threshold
+    sourceView[2] = 200; // > threshold
+
+    let dest = new Module.Mat();
+
+    Module.threshold(source, dest, THRESHOLD, THRESHOLD_MAX, Module.THRESH_BINARY);
+
+    let destView = Module.HEAPU8.subarray(dest.data);
+    assert.equal(destView[0], 0);
+    assert.equal(destView[1], 0);
+    assert.equal(destView[2], THRESHOLD_MAX);
+  }
+});

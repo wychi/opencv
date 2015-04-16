@@ -46,7 +46,6 @@ EMSCRIPTEN_BINDINGS(ocv_imgproc) {
   using ImgProcAdaptiveThreshold = ExplicitConversion<102, decltype(&cv::adaptiveThreshold)>;
   ImgProcAdaptiveThreshold::bind(cv::adaptiveThreshold);
   function("adaptiveThreshold", &ImgProcAdaptiveThreshold::call);
-  
   // http://stackoverflow.com/questions/5720359/no-matching-function-call-to-anonymous-enum
   //  template<typename ConstantType>
   //  void constant(const char* name, const ConstantType& v) {
@@ -254,7 +253,16 @@ EMSCRIPTEN_BINDINGS(ocv_imgproc) {
   constant("CV_ADAPTIVE_THRESH_MEAN_C  ", +CV_ADAPTIVE_THRESH_MEAN_C);
   constant("CV_ADAPTIVE_THRESH_GAUSSIAN_C  ", +CV_ADAPTIVE_THRESH_GAUSSIAN_C);
 
-  enum_<cv::ThresholdTypes>("ThresholdTypes")
+  constant("THRESH_BINARY", +cv::THRESH_BINARY);
+  constant("THRESH_BINARY_INV", +cv::THRESH_BINARY_INV);
+  constant("THRESH_TRUNC", +cv::THRESH_TRUNC);
+  constant("THRESH_TOZERO", +cv::THRESH_TOZERO);
+  constant("THRESH_TOZERO_INV", +cv::THRESH_TOZERO_INV);
+  constant("THRESH_MASK", +cv::THRESH_MASK);
+  constant("THRESH_OTSU", +cv::THRESH_OTSU);
+  constant("THRESH_TRIANGLE", +cv::THRESH_TRIANGLE);
+
+  /*enum_<cv::ThresholdTypes>("ThresholdTypes")
     .value("THRESH_BINARY", cv::THRESH_BINARY)
     .value("THRESH_BINARY_INV", cv::THRESH_BINARY_INV)
     .value("THRESH_TRUNC", cv::THRESH_TRUNC)
@@ -263,5 +271,5 @@ EMSCRIPTEN_BINDINGS(ocv_imgproc) {
     .value("THRESH_MASK", cv::THRESH_MASK)
     .value("THRESH_OTSU", cv::THRESH_OTSU)
     .value("THRESH_TRIANGLE", cv::THRESH_TRIANGLE)
-    ;
+    ;*/
 }
