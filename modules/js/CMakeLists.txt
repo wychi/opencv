@@ -34,8 +34,8 @@ add_custom_command(
 # Temporary cp all qunit test case and opencv.js to an isolated folder.
 add_custom_command(
     TARGET opencv_js POST_BUILD
-    COMMAND echo "Copy js test cases and opencv.js into ."
+    COMMAND echo "Copy js test cases and opencv.js into ./js_test"
     COMMAND mkdir -p ${CMAKE_BINARY_DIR}/js_test
-    COMMAND cp ${OpenCV_SOURCE_DIR}/modules/js/test/*.* ${CMAKE_BINARY_DIR}/js_test
+    COMMAND cp -R ${OpenCV_SOURCE_DIR}/modules/js/test/* ${CMAKE_BINARY_DIR}/js_test
     COMMAND cp ${LIBRARY_OUTPUT_PATH}/opencv.* ${CMAKE_BINARY_DIR}/js_test
 )
