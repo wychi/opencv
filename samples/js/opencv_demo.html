@@ -15,28 +15,70 @@
                 /*line-height: 50%;*/
                 padding: 1px 5px;
             }
-            #source_image {
-                max-width: 50wh; 
-                max-height: 50vh;
-                width: auto;
+
+            /* Hold image panes */
+            #pane_holder {
+                width: 100wh; 
                 height: auto;
             }
-            /*canvas {
-                width: auto;
-                height: auto;
-            }*/
+
+            /* Hold canvas, on the left, and control_pane*/
+            .image_pane {
+                overflow: hidden;
+                /* Make it relative so that childred of it can be absolutly positioned. */
+                position: relative;
+                width: 40%;
+                height: 250px;
+                background-color: LightGray;
+                border-radius: 5px;
+                margin: 5px;
+                padding: 10px;
+                display: inline-block;
+            }
+
+            .left_pane {
+                position: absolute;
+                left: 0%;
+                top: 5px
+                left: 5px;
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+                background-color: Gray;
+                width: calc(50% - 10px); 
+                height: calc(100% - 10px);
+            }
+            .right_pane {
+                position: absolute;
+                left: 50%;
+                top: 5px;
+                padding: 5px;
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+                /*display: inline-block;*/
+                background-color: White;
+                width: calc(50% - 15px); 
+                height: calc(100% - 20px);
+            }
+            canvas {
+                display: block;
+                padding-left: 0;
+                padding-right: 0;
+                margin-left: auto;
+                margin-right: auto;
+                max-width: 100%;
+                max-height: 100%;
+            }
+            .ui-slider { margin-top: 5px }
         </style>
 
-        <!-- jquery libs -->
         <script src="lib/jquery-1.8.3.js"></script>
         <script src="lib/jquery-ui-1.9.2.custom.min.js"></script>
-        <script type="application/javascript;version=1.8" src="lib/opencv.js"></script>
         <script type="application/javascript;version=1.8" src="js/opencv_demo.js"></script>
+        <script type="application/javascript;version=1.8" src="lib/opencv.js" async></script>
     </head>
     <body>
         <button id="load_button">Load</button>
-        <p id="opened_file" style="display: inline">AAA</p>
         <input type='file' accept='image/*' id="load_file_input" style="display:none" />
-        <img id='baboon_img' style="display:none" src="./test/baboon.png"/>
+        <div id='pane_holder'/>
     </body>
 </html>
