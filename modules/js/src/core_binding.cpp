@@ -119,6 +119,8 @@ EMSCRIPTEN_BINDINGS(ocv_matrix) {
     .class_function("eye", &eye_msi::call)
     // Misc
     .function("convertTo", &BindConvertTo::call)
+    .function("elemSize", &cv::Mat::elemSize)
+    .function("elemSize1", &cv::Mat::elemSize1)
     /*
        Mat rowRange(int startrow, int endrow) const;
        Mat rowRange(const Range& r) const;

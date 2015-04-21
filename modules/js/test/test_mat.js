@@ -291,11 +291,56 @@ QUnit.test("test_mat_miscs", function(assert) {
   // Embind
   //   void split(VecotrMat, VectorMat)
   {
+    const R =7;
+    const G =13;
+    const B =29;
+
     let mat = Module.Mat.ones(5, 5, Module.CV_8UC3);
+    let view = Module.HEAPU8.subarray(mat.data);
+    view[0] = R;
+    view[1] = G;
+    view[2] = B;
+
     let bgr_planes = new Module.VectorMat();
     Module.split(mat, bgr_planes);
-    bgr_planes.get(0);
     assert.equal(bgr_planes.size(), 3);
+
+    let rMat = bgr_planes.get(0);
+    view = Module.HEAPU8.subarray(rMat.data);
+    assert.equal(view[0], R);
+
+    let gMat = bgr_planes.get(1);
+    view = Module.HEAPU8.subarray(gMat.data);
+    assert.equal(view[0], G);
+
+    let bMat = bgr_planes.get(2);
+    view = Module.HEAPU8.subarray(bMat.data);
+    assert.equal(view[0], B);
+
+    mat.delete();
+    rMat.delete();
+    gMat.delete();
+    bMat.delete();
+  }
+
+  // C++
+  //   size_t Mat::elemSize() const
+  {
+    let mat = Module.Mat.ones(5, 5, Module.CV_8UC3);
+    assert.equal(mat.elemSize(), 3);
+    assert.equal(mat.elemSize1(), 1);
+
+    let mat2 = Module.Mat.zeros(5, 5, Module.CV_8UC1);
+    assert.equal(mat2.elemSize(), 1);
+    assert.equal(mat2.elemSize1(), 1);
+
+    let mat3 = Module.Mat.eye(5, 5, Module.CV_16UC3);
+    assert.equal(mat3.elemSize(), 2 * 3);
+    assert.equal(mat3.elemSize1(), 2);
+
+    mat.delete();
+    mat2.delete();
+    mat3.delete();
   }
 });
 
