@@ -178,6 +178,11 @@ EMSCRIPTEN_BINDINGS(ocv_matrix) {
   BindSplit::bind([] (cv::Mat &m, std::vector<cv::Mat> &mv) { cv::split(m, mv); });
   function("split", &BindSplit::call);
 
+  // void addWeighted(InputArray, double, InputArray, double, double, OutputArray, int)
+  using BindAddWeighted = ExplicitConversion<21, decltype(&cv::addWeighted)>;
+  BindAddWeighted::bind(&cv::addWeighted);
+  function("addWeighted", &BindAddWeighted::call);
+
   // void perspectiveTransform(InputArray, OutputArray, InputArray);
 
   // constants.
