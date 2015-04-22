@@ -34,3 +34,13 @@ $ node
 > mat.channels()
 3
 </pre>
+
+## Test
+JS test suite is put in module/js/test. There are many tests in test suite, and those tests are good reference of how to using opencv module by javascript.
+
+## Sample
+I am constructing a js app, in sample/js folder, which demostrate the usage of image-proc module. 
+
+## Next step
+1. Automatic binding code generator. I don't want to manually generate bind code for each function that we want to export onto javascript. 
+2. Matrix operation.(MatExpr)

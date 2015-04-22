@@ -8,12 +8,12 @@ using namespace emscripten;
 EMSCRIPTEN_BINDINGS(ocv_imgproc) {
   // void calcHist(const Mat*, int, const int*, InputArray, OutputArray,
   // int, const int*, const float**, bool, bool)
-  typedef ExplicitConversion<100, void (*)(const cv::Mat*, int, const int*,
-      cv::InputArray, cv::OutputArray, int, const int*,
-      const float**, bool, bool)> ImgProc_calcHist;
+  typedef EmbindWrapper<IMGPROC_INDEX, void (*)(const cv::Mat*, int, const int*,
+    cv::InputArray, cv::OutputArray, int, const int*,
+    const float**, bool, bool)> ImgProc_calcHist;
   ImgProc_calcHist::bind(cv::calcHist);
   //debug code...
-  //typedef ExplicitConversion<100, void (*)(const cv::Mat*, int, uintptr_t,
+  //typedef EmbindWrapper<100, void (*)(const cv::Mat*, int, uintptr_t,
   //    cv::Mat &, cv::Mat &, int, uintptr_t,
   //    uintptr_t, bool, bool)> ImgProc_calcHist;
   //ImgProc_calcHist::bind([](const cv::Mat* p1, int p2, uintptr_t p3,
@@ -26,54 +26,148 @@ EMSCRIPTEN_BINDINGS(ocv_imgproc) {
   function("calcHist", &ImgProc_calcHist::call, allow_raw_pointers());
 
   //  void equalizeHist( InputArray src, OutputArray dst );
-  typedef ExplicitConversion<101, void (*)(cv::InputArray, cv::OutputArray)> ImgProc_equalizeHist;
+  typedef EmbindWrapper<IMGPROC_INDEX + 1, void (*)(cv::InputArray, cv::OutputArray)> ImgProc_equalizeHist;
   ImgProc_equalizeHist::bind(cv::equalizeHist);
   function("equalizeHist", &ImgProc_equalizeHist::call);
 
   // void cvtColor(InputArray src, OutputArray dst, int code, int dstCn=0)
-  using ImgProcCvtColor = ExplicitConversion<102,  void (*)(cv::InputArray, cv::OutputArray, int, int)>;
+  using ImgProcCvtColor = EmbindWrapper<IMGPROC_INDEX + 2,  void (*)(cv::InputArray, cv::OutputArray, int, int)>;
   ImgProcCvtColor::bind(cv::cvtColor);
   function("cvtColor", &ImgProcCvtColor::call);
 
   // Segmentation API
   // CV_EXPORTS_W double threshold( InputArray src, OutputArray dst,
   //                             double thresh, double maxval, int type );
-  using ImgProcThreshold = ExplicitConversion<103, decltype(&cv::threshold)>;
+  using ImgProcThreshold = EmbindWrapper<IMGPROC_INDEX + 3, decltype(&cv::threshold)>;
   ImgProcThreshold::bind(cv::threshold);
   function("threshold", &ImgProcThreshold::call);
 
   // CV_EXPORTS_W void adaptiveThreshold( InputArray src, OutputArray dst,
   //                                   double maxValue, int adaptiveMethod,
   //                                   int thresholdType, int blockSize, double C );
-  using ImgProcAdaptiveThreshold = ExplicitConversion<104, decltype(&cv::adaptiveThreshold)>;
+  using ImgProcAdaptiveThreshold = EmbindWrapper<IMGPROC_INDEX + 4, decltype(&cv::adaptiveThreshold)>;
   ImgProcAdaptiveThreshold::bind(cv::adaptiveThreshold);
   function("adaptiveThreshold", &ImgProcAdaptiveThreshold::call);
 
   // CV_EXPORTS_W void GaussianBlur( InputArray src, OutputArray dst, Size ksize,
   //                              double sigmaX, double sigmaY = 0,
   //                              int borderType = BORDER_DEFAULT );
-  using ImgProcGussianBlur = ExplicitConversion<105, decltype(&cv::GaussianBlur)>;
+  using ImgProcGussianBlur = EmbindWrapper<IMGPROC_INDEX + 5, decltype(&cv::GaussianBlur)>;
   ImgProcGussianBlur::bind(cv::GaussianBlur);
   function("GaussianBlur", &ImgProcGussianBlur::call);
 
   // CV_EXPORTS_W void medianBlur( InputArray src, OutputArray dst, int ksize );
-  using ImgProcMedianBlur = ExplicitConversion<106, decltype(&cv::medianBlur)>;
+  using ImgProcMedianBlur = EmbindWrapper<IMGPROC_INDEX + 6, decltype(&cv::medianBlur)>;
   ImgProcMedianBlur::bind(cv::medianBlur);
   function("medianBlur", &ImgProcMedianBlur::call);
 
   // CV_EXPORTS_W void bilateralFilter( InputArray src, OutputArray dst, int d,
   //                                 double sigmaColor, double sigmaSpace,
   //                                 int borderType = BORDER_DEFAULT);
-  using ImgProcBilateralFilter = ExplicitConversion<107, decltype(&cv::bilateralFilter)>;
+  using ImgProcBilateralFilter = EmbindWrapper<IMGPROC_INDEX + 7, decltype(&cv::bilateralFilter)>;
   ImgProcBilateralFilter::bind(cv::bilateralFilter);
   function("bilateralFilter", &ImgProcBilateralFilter::call);
 
   // CV_EXPORTS_W void blur( InputArray src, OutputArray dst,
   //                     Size ksize, Point anchor = Point(-1,-1),
   //                     int borderType = BORDER_DEFAULT );
-  using ImgProcBlur = ExplicitConversion<108, decltype(&cv::blur)>;
+  using ImgProcBlur = EmbindWrapper<IMGPROC_INDEX + 8, decltype(&cv::blur)>;
   ImgProcBlur::bind(cv::blur);
   function("blur", &ImgProcBlur::call);
+
+  // morphology
+  // CV_EXPORTS_W void erode(InputArray src, OutputArray dst, InputArray kernel, 
+  //   Point anchor=Point(-1,-1), int iterations=1, 
+  //   int borderType=BORDER_CONSTANT, 
+  //   const Scalar& borderValue=morphologyDefaultBorderValue());
+  using ImgProcErode = EmbindWrapper<IMGPROC_INDEX + 9, decltype(&cv::erode)>;
+  ImgProcErode::bind(cv::erode);
+  function("erode", &ImgProcErode::call);
+  // CV_EXPORTS_W void dilate(InputArray src, OutputArray dst, InputArray kernel, 
+  //   Point anchor=Point(-1,-1), int iterations=1, int borderType=BORDER_CONSTANT, 
+  //   const Scalar& borderValue=morphologyDefaultBorderValue());
+  using ImgProcDilate = EmbindWrapper<IMGPROC_INDEX + 10, decltype(&cv::dilate)>;
+  ImgProcDilate::bind(cv::dilate);
+  function("dilate", &ImgProcDilate::call);
+
+  //  CV_EXPORTS_W void morphologyEx( InputArray src, OutputArray dst,
+  //    int op, InputArray kernel,
+  //    Point anchor = Point(-1,-1), int iterations = 1,
+  //    int borderType = BORDER_CONSTANT,
+  //    const Scalar& borderValue = morphologyDefaultBorderValue() );
+  using ImgProcMorphologyEx = EmbindWrapper<IMGPROC_INDEX + 11, decltype(&cv::morphologyEx)>;
+  ImgProcMorphologyEx::bind(cv::morphologyEx);
+  function("morphologyEx", &ImgProcMorphologyEx::call);
+
+  // CV_EXPORTS_W Mat getStructuringElement(int shape, Size ksize, 
+  //   Point anchor = Point(-1,-1));
+  using ImgProcGSM = EmbindWrapper<IMGPROC_INDEX + 12, decltype(&cv::getStructuringElement)>;
+  ImgProcGSM::bind(cv::getStructuringElement);
+  function("getStructuringElement", &ImgProcGSM ::call);
+
+  // CV_EXPORTS_W void filter2D( InputArray src, OutputArray dst, int ddepth,
+  //   InputArray kernel, Point anchor = Point(-1,-1),
+  //   double delta = 0, int borderType = BORDER_DEFAULT );
+  using ImgProcFilter2D = EmbindWrapper<IMGPROC_INDEX + 13, decltype(&cv::filter2D)>;
+  ImgProcFilter2D::bind(cv::filter2D);
+  function("filter2D", &ImgProcFilter2D ::call);
+
+  // CV_EXPORTS_W void sepFilter2D( InputArray src, OutputArray dst, int ddepth,
+  //   InputArray kernelX, InputArray kernelY,
+  //   Point anchor = Point(-1,-1),
+  //   double delta = 0, int borderType = BORDER_DEFAULT );
+  using ImgProcSepFilter2D = EmbindWrapper<IMGPROC_INDEX + 14, decltype(&cv::sepFilter2D)>;
+  ImgProcSepFilter2D::bind(cv::sepFilter2D);
+  function("sepFilter2D", &ImgProcSepFilter2D ::call);
+
+  // Pyramid
+  // CV_EXPORTS_W void pyrDown( InputArray src, OutputArray dst,
+  //   const Size& dstsize = Size(), int borderType = BORDER_DEFAULT );
+  using ImgProcPyrDown = EmbindWrapper<IMGPROC_INDEX + 15, decltype(&cv::pyrDown)>;
+  ImgProcPyrDown::bind(cv::pyrDown);
+  function("pyrDown", &ImgProcPyrDown ::call);
+  
+  // CV_EXPORTS_W void pyrUp( InputArray src, OutputArray dst,
+  //   const Size& dstsize = Size(), int borderType = BORDER_DEFAULT );
+  using ImgProcPyrUp = EmbindWrapper<IMGPROC_INDEX + 16, decltype(&cv::pyrUp)>;
+  ImgProcPyrUp::bind(cv::pyrUp);
+  function("pyrUp", &ImgProcPyrUp ::call);
+  
+  // CV_EXPORTS void buildPyramid( InputArray src, OutputArrayOfArrays dst,
+  //   int maxlevel, int borderType = BORDER_DEFAULT );
+  using ImgProcBuildPyramidP = EmbindWrapper<IMGPROC_INDEX + 17, decltype(&cv::buildPyramid)>;
+  ImgProcBuildPyramidP::bind(cv::buildPyramid);
+  function("buildPyramid", &ImgProcPyrUp::call);
+
+  // Remaining functions that we need for samples in
+  // http://docs.opencv.org/doc/tutorials/imgproc/table_of_content_imgproc/table_of_content_imgproc.html#table-of-content-imgproc
+  // copyMakeBorder
+  // Sobel
+  // Laplacian
+  // convertScaleAbs
+  // CannyThreshold
+  // HoughLinesP
+  // line
+  // HoughCircles
+  // circle
+  // cvRound?
+  // remap
+  // getAffineTransform
+  // getRotationMatrix2D
+  // warpAffine
+  // normalize??
+  // calcBackProject
+  // matchTemplate
+  // minMaxLoc
+  // rectangle??
+  // findContours
+  // drawContours
+  // convexHull
+  // approxPolyDP
+  // minEnclosingCircle
+  // ellipse
+  // moments
+  // minMaxLoc
 
   // http://stackoverflow.com/questions/5720359/no-matching-function-call-to-anonymous-enum
   //  template<typename ConstantType>
@@ -290,15 +384,12 @@ EMSCRIPTEN_BINDINGS(ocv_imgproc) {
   constant("THRESH_MASK", +cv::THRESH_MASK);
   constant("THRESH_OTSU", +cv::THRESH_OTSU);
   constant("THRESH_TRIANGLE", +cv::THRESH_TRIANGLE);
-
-  /*enum_<cv::ThresholdTypes>("ThresholdTypes")
-    .value("THRESH_BINARY", cv::THRESH_BINARY)
-    .value("THRESH_BINARY_INV", cv::THRESH_BINARY_INV)
-    .value("THRESH_TRUNC", cv::THRESH_TRUNC)
-    .value("THRESH_TOZERO", cv::THRESH_TOZERO)
-    .value("THRESH_TOZERO_INV", cv::THRESH_TOZERO_INV)
-    .value("THRESH_MASK", cv::THRESH_MASK)
-    .value("THRESH_OTSU", cv::THRESH_OTSU)
-    .value("THRESH_TRIANGLE", cv::THRESH_TRIANGLE)
-    ;*/
+  // XXX
+  // enum to int implicit conversion.
+  constant("MORPH_ERODE", +cv::MORPH_ERODE);
+  constant("MORPH_OPEN", +cv::MORPH_OPEN);
+  constant("MORPH_CLOSE", +cv::MORPH_CLOSE);
+  constant("MORPH_GRADIENT", +cv::MORPH_GRADIENT);
+  constant("MORPH_TOPHAT", +cv::MORPH_TOPHAT);
+  constant("MORPH_BLACKHAT", +cv::MORPH_BLACKHAT);
 }
