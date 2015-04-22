@@ -41,7 +41,10 @@ EMSCRIPTEN_BINDINGS(ocv_matrix) {
     .element(&cv::Size::height)
     .element(&cv::Size::width)
     ;
-
+  value_array<cv::Point>("Point")
+    .element(&cv::Point::x)
+    .element(&cv::Point::y)
+    ;
 #define BIND_FUNCTION(N, name, binded) \
   typedef ExplicitConversion<N, cv::MatExpr (*)(int, int, int)> name##_miii; \
   name##_miii::bind(&binded);
@@ -81,7 +84,9 @@ EMSCRIPTEN_BINDINGS(ocv_matrix) {
 
   using BindConvertTo = ExplicitConversion<10, decltype(&cv::Mat::convertTo)>;
   BindConvertTo::bind(&cv::Mat::convertTo);
-
+  // TBD:
+  //   All manually bind call is a blocker of automated code generation.
+  //   Find a rule to get rid of it!.
   using BindMatCreate = ExplicitConversion<11, cv::Mat *(*)(cv::Size, int, void*, size_t)>;
   BindMatCreate::bind([] (cv::Size size, int type, void *data, size_t step) {
       return new cv::Mat(size, type, data, step);
@@ -223,4 +228,17 @@ EMSCRIPTEN_BINDINGS(ocv_matrix) {
   constant("CV_32F", CV_32F);
   constant("CV_64F", CV_64F);
   constant("AUTO_STEP", size_t(cv::Mat::AUTO_STEP));
+  // XXX
+  // emun/ anonymous emum are another problem.
+  // In many cases, a programmer declare a parameter as integer type, instead of an enumeration
+  // type. It's not a problem since we have implicit conversion in C++.
+  constant("BORDER_CONSTANT", +cv::BorderTypes::BORDER_CONSTANT);
+  constant("BORDER_REPLICATE", +cv::BorderTypes::BORDER_REPLICATE);
+  constant("BORDER_REFLECT", +cv::BorderTypes::BORDER_REFLECT);
+  constant("BORDER_WRAP", +cv::BorderTypes::BORDER_WRAP);
+  constant("BORDER_REFLECT_101", +cv::BorderTypes::BORDER_REFLECT_101);
+  constant("BORDER_TRANSPARENT", +cv::BorderTypes::BORDER_TRANSPARENT);
+  constant("BORDER_REFLECT101", +cv::BorderTypes::BORDER_REFLECT101);
+  constant("BORDER_DEFAULT", +cv::BorderTypes::BORDER_DEFAULT);
+  constant("BORDER_ISOLATED", +cv::BorderTypes::BORDER_ISOLATED);
 }

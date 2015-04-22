@@ -241,6 +241,30 @@ template <int N, template <typename> class Trait, typename R, typename P0, typen
 typename ExplicitConversion<N, R (*)(P0, P1, P2, P3, P4), Trait>::FunctionSig
 ExplicitConversion<N, R (*)(P0, P1, P2, P3, P4), Trait>::mF = nullptr;
 
+// 6 params
+template <int N, template <typename> class Trait, typename R, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5>
+struct ExplicitConversion<N, R (*)(P0, P1, P2, P3, P4, P5), Trait> {
+  using FunctionSig = R (*)(P0, P1, P2, P3, P4, P5);
+
+  static void bind(FunctionSig f) { mF = f; }
+   static typename Trait<R>::Type
+    call(typename Trait<P0>::Type p0,
+        typename Trait<P1>::Type p1,
+        typename Trait<P2>::Type p2,
+        typename Trait<P3>::Type p3,
+        typename Trait<P4>::Type p4,
+        typename Trait<P5>::Type p5)
+    {
+      return  typename Trait<R>::Type(mF(P0(p0), P1(p1), P2(p2), P3(p3), P4(p4), P5(p5)));
+    }
+
+  static FunctionSig mF;
+};
+
+template <int N, template <typename> class Trait, typename R, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5>
+typename ExplicitConversion<N, R (*)(P0, P1, P2, P3, P4, P5), Trait>::FunctionSig
+ExplicitConversion<N, R (*)(P0, P1, P2, P3, P4, P5), Trait>::mF = nullptr;
+
 // 7 params
 template <int N, template <typename> class Trait, typename R, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6>
 struct ExplicitConversion<N, R (*)(P0, P1, P2, P3, P4, P5, P6), Trait> {
@@ -265,7 +289,6 @@ struct ExplicitConversion<N, R (*)(P0, P1, P2, P3, P4, P5, P6), Trait> {
 template <int N, template <typename> class Trait, typename R, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6>
 typename ExplicitConversion<N, R (*)(P0, P1, P2, P3, P4, P5, P6), Trait>::FunctionSig
 ExplicitConversion<N, R (*)(P0, P1, P2, P3, P4, P5, P6), Trait>::mF = nullptr;
-
 
 // 10 params
 template <int N, template <typename> class Trait, typename R, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8, typename P9>

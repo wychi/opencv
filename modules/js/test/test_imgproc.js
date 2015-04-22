@@ -122,3 +122,77 @@ QUnit.test("test_segmentation", function(assert) {
     assert.equal(destView[2], THRESHOLD_MAX);
   }
 });
+
+QUnit.test("test_filter", function(assert) {
+  // C++
+  //   void blur(InputArray, OutputArray, Size ksize, Point, int);
+  // Embind
+  //   void blur(Mat &, Mat &, Size ksize, Point, int);
+  {
+      let mat1 = Module.Mat.ones(5, 5, Module.CV_8UC3);
+      let mat2 = new Module.Mat();
+
+      Module.blur(mat1, mat2, [3, 3], [-1, -1], Module.BORDER_DEFAULT);
+
+      // Verify result.
+      let view = Module.HEAPU8.subarray(mat2.data);
+      let size = mat2.size();
+      assert.equal(mat2.channels(), 3);
+      assert.equal(size.get(0), 5);
+      assert.equal(size.get(1), 5);
+  }
+  // C++
+  //  void GaussianBlur(InputArray, OutputArray, Size, double, double, int);
+  // Embind
+  //  void GaussianBlur(Mat &, Mat&, Size, double, double, int);
+  {
+      let mat1 = Module.Mat.ones(7, 7, Module.CV_8UC1);
+      let mat2 = new Module.Mat();
+
+      Module.GaussianBlur(mat1, mat2, [3, 3], 0, 0, Module.BORDER_DEFAULT);
+
+      // Verify result.
+      let view = Module.HEAPU8.subarray(mat2.data);
+      let size = mat2.size();
+      assert.equal(mat2.channels(), 1);
+      assert.equal(size.get(0), 7);
+      assert.equal(size.get(1), 7);
+  }
+  
+  // C++
+  //   void medianBlur(InputArray, OutputArray, int);
+  // Embind
+  //   void medianBlur(Mat &, Mat &, int);
+  {
+      let mat1 = Module.Mat.ones(9, 9, Module.CV_8UC3);
+      let mat2 = new Module.Mat();
+
+      Module.medianBlur(mat1, mat2, 3);
+
+      // Verify result.
+      let view = Module.HEAPU8.subarray(mat2.data);
+      let size = mat2.size();
+      assert.equal(mat2.channels(), 3);
+      assert.equal(size.get(0), 9);
+      assert.equal(size.get(1), 9);
+  }
+
+  // C++
+  //   void bilateralFilter(InputArray, OutputArray, int, double, double, int borderType);
+  // Embind
+  //   void bilateralFilter(Mat &, Mat &, int, double, double, int borderType);
+  {
+      let mat1 = Module.Mat.ones(11, 11, Module.CV_8UC3);
+      let mat2 = new Module.Mat();
+
+      Module.bilateralFilter(mat1, mat2, 3, 6, 1.5, Module.BORDER_DEFAULT);
+
+      // Verify result.
+      let view = Module.HEAPU8.subarray(mat2.data);
+      let size = mat2.size();
+      assert.equal(mat2.channels(), 3);
+      assert.equal(size.get(0), 11);
+      assert.equal(size.get(1), 11);
+
+  }
+});

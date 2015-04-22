@@ -12,6 +12,7 @@ EMSCRIPTEN_BINDINGS(ocv_imgproc) {
       cv::InputArray, cv::OutputArray, int, const int*,
       const float**, bool, bool)> ImgProc_calcHist;
   ImgProc_calcHist::bind(cv::calcHist);
+  //debug code...
   //typedef ExplicitConversion<100, void (*)(const cv::Mat*, int, uintptr_t,
   //    cv::Mat &, cv::Mat &, int, uintptr_t,
   //    uintptr_t, bool, bool)> ImgProc_calcHist;
@@ -30,23 +31,49 @@ EMSCRIPTEN_BINDINGS(ocv_imgproc) {
   function("equalizeHist", &ImgProc_equalizeHist::call);
 
   // void cvtColor(InputArray src, OutputArray dst, int code, int dstCn=0)
-  using ImgProcCvtColor = ExplicitConversion<101,  void (*)(cv::InputArray, cv::OutputArray, int, int)>;
+  using ImgProcCvtColor = ExplicitConversion<102,  void (*)(cv::InputArray, cv::OutputArray, int, int)>;
   ImgProcCvtColor::bind(cv::cvtColor);
   function("cvtColor", &ImgProcCvtColor::call);
 
   // Segmentation API
   // CV_EXPORTS_W double threshold( InputArray src, OutputArray dst,
   //                             double thresh, double maxval, int type );
-  using ImgProcThreshold = ExplicitConversion<102, decltype(&cv::threshold)>;
+  using ImgProcThreshold = ExplicitConversion<103, decltype(&cv::threshold)>;
   ImgProcThreshold::bind(cv::threshold);
   function("threshold", &ImgProcThreshold::call);
 
   // CV_EXPORTS_W void adaptiveThreshold( InputArray src, OutputArray dst,
   //                                   double maxValue, int adaptiveMethod,
   //                                   int thresholdType, int blockSize, double C );
-  using ImgProcAdaptiveThreshold = ExplicitConversion<102, decltype(&cv::adaptiveThreshold)>;
+  using ImgProcAdaptiveThreshold = ExplicitConversion<104, decltype(&cv::adaptiveThreshold)>;
   ImgProcAdaptiveThreshold::bind(cv::adaptiveThreshold);
   function("adaptiveThreshold", &ImgProcAdaptiveThreshold::call);
+
+  // CV_EXPORTS_W void GaussianBlur( InputArray src, OutputArray dst, Size ksize,
+  //                              double sigmaX, double sigmaY = 0,
+  //                              int borderType = BORDER_DEFAULT );
+  using ImgProcGussianBlur = ExplicitConversion<105, decltype(&cv::GaussianBlur)>;
+  ImgProcGussianBlur::bind(cv::GaussianBlur);
+  function("GaussianBlur", &ImgProcGussianBlur::call);
+
+  // CV_EXPORTS_W void medianBlur( InputArray src, OutputArray dst, int ksize );
+  using ImgProcMedianBlur = ExplicitConversion<106, decltype(&cv::medianBlur)>;
+  ImgProcMedianBlur::bind(cv::medianBlur);
+  function("medianBlur", &ImgProcMedianBlur::call);
+
+  // CV_EXPORTS_W void bilateralFilter( InputArray src, OutputArray dst, int d,
+  //                                 double sigmaColor, double sigmaSpace,
+  //                                 int borderType = BORDER_DEFAULT);
+  using ImgProcBilateralFilter = ExplicitConversion<107, decltype(&cv::bilateralFilter)>;
+  ImgProcBilateralFilter::bind(cv::bilateralFilter);
+  function("bilateralFilter", &ImgProcBilateralFilter::call);
+
+  // CV_EXPORTS_W void blur( InputArray src, OutputArray dst,
+  //                     Size ksize, Point anchor = Point(-1,-1),
+  //                     int borderType = BORDER_DEFAULT );
+  using ImgProcBlur = ExplicitConversion<108, decltype(&cv::blur)>;
+  ImgProcBlur::bind(cv::blur);
+  function("blur", &ImgProcBlur::call);
 
   // http://stackoverflow.com/questions/5720359/no-matching-function-call-to-anonymous-enum
   //  template<typename ConstantType>
