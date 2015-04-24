@@ -20,6 +20,7 @@ QUnit.test("test_imgProc", function(assert) {
     // float **: change this parameter to vector?
     Module.calcHist(source, 1, 0, mask, hist, 1, binSize, 0, true, false);
 
+    // hist should contains a N X 1 arrary.
     let size = hist.size();
     assert.equal(size.size(), 2);
     assert.equal(size.get(0), 10);

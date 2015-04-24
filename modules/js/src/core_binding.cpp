@@ -146,6 +146,16 @@ EMSCRIPTEN_BINDINGS(ocv_matrix) {
 
   // CV_EXPORTS_W void transform(InputArray src, OutputArray dst, InputArray m );
   // CV_EXPORTS_W void perspectiveTransform(InputArray src, OutputArray dst, InputArray m );
+  // CV_EXPORTS_W void normalize(InputArray, InputOutputArray, double, double,
+  //   int, int, InputArray mask = noArray());
+  // XXX: how to handl noArray(matrix.cpp)
+  //using BindNormalize = EmbindWrapper<CORE_INDEX + 22, void (*)(cv::InputArray, cv::InputOutputArray, double, double, int, int)>;
+  //BindNormalize::bind([] (cv::InputArray p1, cv::InputOutputArray p2, double p3, double p4, int p5, int p6) {
+  //  cv::normalize(p1, p2, p3, p4, p5, p6); 
+  //});
+  //function("normalize", &BindNormalize::call);
+
+  // CV_EXPORTS void normalize(const SparseMat&, SparseMat&, double, int);
 
   // constants.
   constant("CV_8UC1", CV_8UC1);
@@ -197,6 +207,16 @@ EMSCRIPTEN_BINDINGS(ocv_matrix) {
   constant("BORDER_REFLECT101", +cv::BorderTypes::BORDER_REFLECT101);
   constant("BORDER_DEFAULT", +cv::BorderTypes::BORDER_DEFAULT);
   constant("BORDER_ISOLATED", +cv::BorderTypes::BORDER_ISOLATED);
+
+  constant("NORM_INF", +cv::NormTypes::NORM_INF);
+  constant("NORM_L1", +cv::NormTypes::NORM_L1);
+  constant("NORM_L2", +cv::NormTypes::NORM_L2);
+  constant("NORM_L2SQR", +cv::NormTypes::NORM_L2SQR);
+  constant("NORM_HAMMING", +cv::NormTypes::NORM_HAMMING);
+  constant("NORM_HAMMING2", +cv::NormTypes::NORM_HAMMING2);
+  constant("NORM_TYPE_MASK", +cv::NormTypes::NORM_TYPE_MASK);
+  constant("NORM_RELATIVE", +cv::NormTypes::NORM_RELATIVE);
+  constant("NORM_MINMAX", +cv::NormTypes::NORM_MINMAX);
 }
     /*
        Mat rowRange(int startrow, int endrow) const;
