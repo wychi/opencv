@@ -21,7 +21,7 @@ ocv_create_module()
 
 # Build javascript library after opencv_js constructed.
 set(my_output ${LIBRARY_OUTPUT_PATH}/opencv.js)
-set(my_sources  ${LIBRARY_OUTPUT_PATH}/libopencv_core.so)
+set(my_sources ${LIBRARY_OUTPUT_PATH}/libopencv_core.so)
 set(my_sources ${my_sources} ${LIBRARY_OUTPUT_PATH}/libopencv_imgproc.so)
 set(my_sources ${my_sources} ${LIBRARY_OUTPUT_PATH}/libopencv_js.so)
 add_custom_command(

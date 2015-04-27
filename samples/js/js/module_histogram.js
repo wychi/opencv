@@ -1,11 +1,23 @@
+if (typeof OpenCV == "undefined" || !OpenCV) {
+  OpenCV = {};
+}
 
 OpenCV.HistogramModule = new OpenCV.Module();
 OpenCV.HistogramModule.getName = function() {
-  return 'Histogram Module';
+  return 'Histogram';
 }
 
 OpenCV.HistogramModule.attach = function($target) {
   Object.getPrototypeOf(this).attach.call(this, $target);
+
+  this._$histCanvas = $('<canvas>')
+    .appendTo(this._$rightPane)
+    .width(this._$rightPane.width())
+    .height(this._$rightPane.height() - 40)
+    .attr('id', 'histogram')
+    .attr('width', this._$rightPane.width())
+    .attr('height', this._$rightPane.height() - 40)
+    ;
 }
 
 OpenCV.HistogramModule.pin = function (imageData) {
@@ -29,7 +41,7 @@ OpenCV.HistogramModule.pin = function (imageData) {
     this._ctx.putImageData(new ImageData(grayView, width, height), 0, 0);
 
     rgba.delete();
-  }
+ }
 
  {
     // Caculate histogram
@@ -41,18 +53,9 @@ OpenCV.HistogramModule.pin = function (imageData) {
     binView[0] = bins;
     Module.calcHist(gray, 1, 0, mask, hist, 1, binSize, 0, true, false);
 
-    // Create a canvas for drawing histogram(hist)
-    let $histCanvas = $('<canvas>')
-      .appendTo(this._$rightPane)
-      .width(this._$rightPane.width())
-      .height(this._$rightPane.height())
-      .attr('width', this._$rightPane.width())
-      .attr('height', this._$rightPane.height())
-      ;
-
     // Draw histogram(hist)
-    let canvasWidth = $histCanvas.width();
-    let canvasHeight = $histCanvas.height();
+    let canvasWidth = this._$histCanvas.width();
+    let canvasHeight = this._$histCanvas.height();
     let width = gray.size().get(1);
     let height = gray.size().get(0);
     let length = width * height * gray.elemSize();
@@ -64,12 +67,13 @@ OpenCV.HistogramModule.pin = function (imageData) {
     }
     let yratio = canvasHeight / max; 
     let xratio = canvasWidth / bins;
-    let ctx = $histCanvas[0].getContext('2d');
+    let ctx = this._$histCanvas[0].getContext('2d');
+    ctx.clearRect( 0, 0, canvasWidth, canvasHeight);
     ctx.save();
     // vertical flip 
     ctx.scale(1, -1);
     ctx.translate(0, -canvasHeight);
-    ctx.fillStyle="#0000FF";
+    ctx.fillStyle= "#0000FF";
     for (let i = 0; i < length; i++) {
       ctx.fillRect(i * xratio, 0, xratio, grayView[i] * yratio);
     }
