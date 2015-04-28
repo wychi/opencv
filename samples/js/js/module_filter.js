@@ -5,10 +5,15 @@ if (typeof OpenCV == "undefined" || !OpenCV) {
 // ==============================================================
 //   Dummy Module
 // in == out
-OpenCV.FilterModule = new OpenCV.Module();
-OpenCV.FilterModule.getName = function() {
-  return 'Filter';
-}
+OpenCV.FilterModule = new OpenCV.Module('Filter', 'Filter');
+
+OpenCV.FilterModule.toJSON = function() {
+    return JSON.stringify({
+    	id: this.name,
+    	type: this._blurType,
+    	kernel: this._kernelSize
+    });
+};
 
 OpenCV.FilterModule.attach = function($target) {
   Object.getPrototypeOf(this).attach.call(this, $target);
@@ -31,7 +36,7 @@ OpenCV.FilterModule.attach = function($target) {
   $('#blur_type input[type=radio]')
     .change(function() {
       self._blurType = this.value;
-      self._pin();
+      OpenCV.MainCommandDispatcher.postMessage();
     })
     ;
 
@@ -52,38 +57,11 @@ OpenCV.FilterModule.attach = function($target) {
       step: 2,
       animation: true,
       slide: function(evt, ui) {
-        if (!!self._source) {
-          self._kernelSize = ui.value;
-          kernelSizeCaption.text('Kernel size: ' + self._kernelSize);
-          OpenCV.PipelineBuilder.push(self._pin(), self);
-        }
+        self._kernelSize = ui.value;
+        kernelSizeCaption.text('Kernel size: ' + self._kernelSize);
+        OpenCV.MainCommandDispatcher.postMessage();
       }
     });
-
-}
-
-OpenCV.FilterModule.pin = function(imageData) {
-  this._source = imageData;  
-  this._mat = imageDataToMat(imageData);
-  return this._pin(this._source);
-}
-
-OpenCV.FilterModule._pin = function() {
-  let filterMat = new Module.Mat();
-  if (this._blurType === "blur") {
-    Module.blur(this._mat, filterMat, [this._kernelSize, this._kernelSize], [-1,-1], Module.BORDER_DEFAULT);
-  } else if (this._blurType === "GaussianBlur") {
-    Module.GaussianBlur(this._mat, filterMat, [this._kernelSize, this._kernelSize], 0, 0, Module.BORDER_DEFAULT);
-  } else if (this._blurType === "medianBlur") {
-    Module.medianBlur(this._mat, filterMat, this._kernelSize);
-  }
-
-  let filterImageData = matToImageData(filterMat);
-  this._$canvas.attr('width', filterMat.size().get(1));
-  this._$canvas.attr('height', filterMat.size().get(0));
-  this._ctx.putImageData(filterImageData, 0, 0);
-
-  return filterImageData;
 }
 
 OpenCV.PipelineBuilder.register(OpenCV.FilterModule);

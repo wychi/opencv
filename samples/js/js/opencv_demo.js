@@ -2,139 +2,74 @@ if (typeof OpenCV == "undefined" || !OpenCV) {
   OpenCV = {};
 }
 
-//  Image data generator.
-OpenCV.ImageGenerator = {
-  _canvas: null,
-  _ctx: null,
-
-  load: function(blob) {
-    /*this._lazyInit();
-
-    let $image = $('#baboon_img');
-    this._canvas.width = $image[0].width;
-    this._canvas.height = $image[0].height;
-
-    this._ctx.drawImage($image[0], 0, 0);
-    return new Promise(function(resolve, reject) {
-        resolve();
-      });*/
-    this._lazyInit();
-    var self = this;
-    var reader = new FileReader();
-    var promise = new Promise(function(resolve, reject) {
-      reader.onload = function(e)  {
-        var dataURL = reader.result;
-        //var dataURL = reader.result.split(',')[1];
-        //dataURL = atob(dataURL);
-        //var aaa = btoa(decodeURIComponent(escape(dataURL)));
-
-        try {
-          self
-            ._drawImage(dataURL)
-            //._drawImage("data:image/png;base64," + aaa)
-            .then(function() { 
-              resolve();
-            });
-        } catch(e) {
-          alert("TBD: something wrong. Error message.");
-          reject();
-        }
-      };
-        
-      reader.readAsDataURL(blob);
-    });
-
-    return promise;
-  },
-
-  createImageData: function SI_getImageData() {
-    if (this._ctx === undefined) {
-      return null;
-    }
-
-    return this._ctx.getImageData(0, 0, this._canvas.width, this._canvas.height);
-  },
-
-  _drawImage: function SI_load(dataURL) {
-    var $image = $("<img>");
-    $image.appendTo("body");
-
-    $image.attr('display', 'none');
-    $image.attr('id', 'draw_target');
-    $image.attr('src', dataURL);
-
-    var self = this;
-    return new Promise(function(resolve, reject) {
-      $image[0].onload = function() {
-        self._canvas.width = this.width;
-        self._canvas.height = this.height;
-
-        self._ctx.drawImage(this, 0, 0);
-        $('#draw_target').remove();
-        resolve();
-      }
-    });
-  },
-
-  _lazyInit: function SI_lazyInit() {
-    if (null === this._canvas) {
-      this._canvas = $("<canvas>")[0];
-      this._ctx = this._canvas.getContext("2d");
-    }
-  }
-};
-
 OpenCV.PipelineBuilder = {
   _moduleList: [],
   _selectedList: [],
+  _source: null,
 
   register: function ML_register(module) {
     this._moduleList.push(module);
   },
+
   build: function ML_build(selectedModules) {
     $('#pane_holder').empty(); 
+    this._source = new OpenCV.Module("Source Image", "Source Image");
+    this._source.attach($('#pane_holder'));
+
     selectedModules.forEach(function(item) {
       item.attach($('#pane_holder'));
       }); 
+
     this._selectedList = selectedModules;
+  }
+};
+
+OpenCV.MainCommandDispatcher = {
+  _worker: null,
+
+  init: function MCD_init() {
+    this._worker = new Worker('js/opencv_worker.js');
+    this._worker.onmessage = this.receiveMessage;
   },
 
-  push: function ML_push(imageData, from) {
-    var index = this._selectedList.indexOf(from);
-    // The last one.
-    if (index === (this._selectedList.length - 1)) {
-      return;
-    }
+  receiveMessage: function MCD_receiveMessage(e) {
+    var message = e.data;
 
-    index = (index === -1) ? 0: index + 1;
-    for (; index < this._selectedList.length; index++) {
-      imageData = this._selectedList[index].pin(imageData);
+    for (let key in message) {
+      if (message.hasOwnProperty(key)) {
+        OpenCV.PipelineBuilder._moduleList.every( (m) => {
+          if (m.name === key) {
+            m.draw(message[key].buffer, message[key].width, message[key].height);
+            return false;
+          }
+          // Keep searching.    
+          return true;
+        })
+      }
+    }
+  },
+
+  postMessage: function ML_postMessage(sendBuffer) {
+    if (!!sendBuffer) {
+      let imageData = OpenCV.ImageLoader.createImageData();
+      OpenCV.PipelineBuilder._source.draw(imageData.data.buffer, imageData.width, imageData.height);
+
+      this._worker.postMessage({
+        buffer: imageData.data.buffer,
+        size: [imageData.width, imageData.height]
+      }, [imageData.data.buffer]);
+    } else {
+      this._worker.postMessage({
+        settings: JSON.stringify(OpenCV.PipelineBuilder._selectedList),
+      });
     }
   }
 };
 
-
-
-// ==============================================================
-//   Dummy Module
-// in == out
-OpenCV.DummyModule = new OpenCV.Module();
-OpenCV.DummyModule.getName = function() {
-  return 'Source Image';
-}
-
-OpenCV.DummyModule.pin = function(imageData) {
-  this._$canvas.attr('width', imageData.width);
-  this._$canvas.attr('height', imageData.height);
-  this._ctx.putImageData(imageData, 0, 0);
-
-  return imageData;
-}
-
-OpenCV.PipelineBuilder.register(OpenCV.DummyModule);
-
 //OpenCV.Module.
-$(function() {
+$(function() {  
+  OpenCV.MainCommandDispatcher.init();
+  
   // Load button.
   $("#load_button")
     .button()
@@ -147,13 +82,12 @@ $(function() {
   $("#load_file_input")
     .change(function(evt) {
       var file = evt.target.files[0];
-      OpenCV.ImageGenerator
+      OpenCV.ImageLoader
         .load(file)
         .then(function() {
-          var imageData = OpenCV.ImageGenerator.createImageData();
-          //OpenCV.PipelineBuilder.build([OpenCV.DummyModule, OpenCV.ThresholdModule]);
-          OpenCV.PipelineBuilder.build([OpenCV.DummyModule, OpenCV.ThresholdModule, OpenCV.FilterModule, OpenCV.HistogramModule]);
-          OpenCV.PipelineBuilder.push(imageData);
+          OpenCV.PipelineBuilder.build([OpenCV.ThresholdModule, OpenCV.FilterModule, OpenCV.HistogramModule]);
+          OpenCV.MainCommandDispatcher.postMessage(true);
+          OpenCV.MainCommandDispatcher.postMessage();
         })
         ;
     })

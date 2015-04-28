@@ -2,28 +2,13 @@ if (typeof OpenCV == "undefined" || !OpenCV) {
   OpenCV = {};
 }
 
-function imageDataToMat(imageData) {
-  let mat = new Module.Mat(imageData.height, imageData.width, Module.CV_8UC4);
-  let view = Module.HEAPU8.subarray(mat.data);
-  view.set(imageData.data);
-
-  return mat;
-}
-
-function matToImageData(mat) {
-  let width = mat.size().get(1);
-  let height = mat.size().get(0);
-  let length = width * height * mat.elemSize();
-  let view = new Uint8ClampedArray(Module.HEAPU8.buffer, mat.data, length);
-
-  return new ImageData(view, width, height);
-}
-
-OpenCV.Module = function() {
+OpenCV.Module = function(title, name) {
   this._$pane = null;
   this._$rightPane = null;
   this._$canvas = null;
   this._ctx = null;
+  this._name = name;
+  this._title = title;
 };
 
 OpenCV.Module.prototype = {
@@ -49,8 +34,107 @@ OpenCV.Module.prototype = {
       .appendTo(this._$pane);
     $('<p>')
       .attr('class', "ui-widget")
-      .text(this.getName())
+      .text(this.title)
       .appendTo(this._$rightPane)
       ;
+  },
+
+  get title() {
+  	return this._title;
+  },
+
+  get name() {
+  	return this._name;
+  },
+
+  draw: function M_draw(buffer, width, height) {
+    this._$canvas.attr('width', width);
+    this._$canvas.attr('height', height);
+    var array = new Uint8ClampedArray(buffer);
+    var imageData = new ImageData(array, width, height);
+  
+    this._ctx.putImageData(imageData, 0, 0);
+  }
+};
+
+//  Image data generator.
+OpenCV.ImageLoader = {
+  _canvas: null,
+  _ctx: null,
+
+  load: function(blob) {
+    /*this._lazyInit();
+
+    let $image = $('#baboon_img');
+    this._canvas.width = $image[0].width;
+    this._canvas.height = $image[0].height;
+
+    this._ctx.drawImage($image[0], 0, 0);
+    return new Promise(function(resolve, reject) {
+        resolve();
+      });*/
+    this._lazyInit();
+    var self = this;
+    var reader = new FileReader();
+    var promise = new Promise(function(resolve, reject) {
+      reader.onload = function(e)  {
+        var dataURL = reader.result;
+        //var dataURL = reader.result.split(',')[1];
+        //dataURL = atob(dataURL);
+        //var aaa = btoa(decodeURIComponent(escape(dataURL)));
+
+        try {
+          self
+            ._drawImage(dataURL)
+            //._drawImage("data:image/png;base64," + aaa)
+            .then(function() { 
+              resolve();
+            });
+        } catch(e) {
+          alert("TBD: something wrong. Error message.");
+          reject();
+        }
+      };
+        
+      reader.readAsDataURL(blob);
+    });
+
+    return promise;
+  },
+
+  createImageData: function SI_getImageData() {
+    if (this._ctx === undefined) {
+      return null;
+    }
+
+    return this._ctx.getImageData(0, 0, this._canvas.width, this._canvas.height);
+  },
+
+  _drawImage: function SI_load(dataURL) {
+    var $image = $("<img>");
+    $image.appendTo("body");
+
+    $image.attr('display', 'none');
+    $image.attr('id', 'draw_target');
+    $image.attr('src', dataURL);
+
+    var self = this;
+    return new Promise(function(resolve, reject) {
+      $image[0].onload = function() {
+        self._canvas.width = this.width;
+        self._canvas.height = this.height;
+
+        self._ctx.drawImage(this, 0, 0);
+        $('#draw_target').remove();
+        resolve();
+      }
+    });
+  },
+
+  _lazyInit: function SI_lazyInit() {
+    if (null === this._canvas) {
+      this._canvas = $("<canvas>")[0];
+      this._ctx = this._canvas.getContext("2d");
+    }
   }
 };

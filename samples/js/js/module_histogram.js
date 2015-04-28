@@ -2,10 +2,13 @@ if (typeof OpenCV == "undefined" || !OpenCV) {
   OpenCV = {};
 }
 
-OpenCV.HistogramModule = new OpenCV.Module();
-OpenCV.HistogramModule.getName = function() {
-  return 'Histogram';
-}
+OpenCV.HistogramModule = new OpenCV.Module('Histogram', 'Histogram');
+
+OpenCV.HistogramModule.toJSON = function() {
+    return JSON.stringify({
+      id: this.name
+    });
+};
 
 OpenCV.HistogramModule.attach = function($target) {
   Object.getPrototypeOf(this).attach.call(this, $target);
@@ -19,8 +22,9 @@ OpenCV.HistogramModule.attach = function($target) {
     .attr('height', this._$rightPane.height() - 40)
     ;
 }
-
-OpenCV.HistogramModule.pin = function (imageData) {
+/*
+OpenCV.HistogramModule.draw = function (buffer, width, height) {
+  Object.getPrototypeOf(this).draw.call(this, buffer, width, height);
   // Create and draw gray image.
   let source = imageDataToMat(imageData);
   let gray = new Module.Mat();
@@ -85,5 +89,5 @@ OpenCV.HistogramModule.pin = function (imageData) {
   gray.delete();
   return imageData;
 }
-
+*/
 OpenCV.PipelineBuilder.register(OpenCV.HistogramModule);
