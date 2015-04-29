@@ -33,13 +33,13 @@ OpenCV.MainCommandDispatcher = {
   },
 
   receiveMessage: function MCD_receiveMessage(e) {
-    var message = e.data;
+    var aMessage = e.data;
 
-    for (let key in message) {
-      if (message.hasOwnProperty(key)) {
+    for (let key in aMessage) {
+      if (aMessage.hasOwnProperty(key)) {
         OpenCV.PipelineBuilder._moduleList.every( (m) => {
           if (m.name === key) {
-            m.draw(message[key].buffer, message[key].width, message[key].height);
+            m.draw(aMessage[key]);
             return false;
           }
           // Keep searching.    
@@ -50,14 +50,20 @@ OpenCV.MainCommandDispatcher = {
   },
 
   postMessage: function ML_postMessage(sendBuffer) {
+    // Pass image data to worker thread. Invoke a memory copy 
     if (!!sendBuffer) {
       let imageData = OpenCV.ImageLoader.createImageData();
-      OpenCV.PipelineBuilder._source.draw(imageData.data.buffer, imageData.width, imageData.height);
+      OpenCV.PipelineBuilder._source.draw({
+        buffer: imageData.data.buffer, 
+        width: imageData.width, 
+        height: imageData.height
+      });
 
       this._worker.postMessage({
         buffer: imageData.data.buffer,
         size: [imageData.width, imageData.height]
       }, [imageData.data.buffer]);
+    // Pass opencv algorithm setting.
     } else {
       this._worker.postMessage({
         settings: JSON.stringify(OpenCV.PipelineBuilder._selectedList),

@@ -47,11 +47,11 @@ OpenCV.Module.prototype = {
   	return this._name;
   },
 
-  draw: function M_draw(buffer, width, height) {
-    this._$canvas.attr('width', width);
-    this._$canvas.attr('height', height);
-    var array = new Uint8ClampedArray(buffer);
-    var imageData = new ImageData(array, width, height);
+  draw: function M_draw(message) {
+    this._$canvas.attr('width', message.width);
+    this._$canvas.attr('height', message.height);
+    var array = new Uint8ClampedArray(message.buffer);
+    var imageData = new ImageData(array, message.width, message.height);
   
     this._ctx.putImageData(imageData, 0, 0);
   }

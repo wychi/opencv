@@ -5,89 +5,59 @@ if (typeof OpenCV == "undefined" || !OpenCV) {
 OpenCV.HistogramModule = new OpenCV.Module('Histogram', 'Histogram');
 
 OpenCV.HistogramModule.toJSON = function() {
-    return JSON.stringify({
-      id: this.name
-    });
+  return JSON.stringify({
+    id: this.name
+  });
 };
 
 OpenCV.HistogramModule.attach = function($target) {
   Object.getPrototypeOf(this).attach.call(this, $target);
 
+  // Add a canvas in right pane for histogram drawing.
   this._$histCanvas = $('<canvas>')
-    .appendTo(this._$rightPane)
-    .width(this._$rightPane.width())
-    .height(this._$rightPane.height() - 40)
-    .attr('id', 'histogram')
-    .attr('width', this._$rightPane.width())
-    .attr('height', this._$rightPane.height() - 40)
-    ;
+  .appendTo(this._$rightPane)
+  .width(this._$rightPane.width())
+  .height(this._$rightPane.height() - 40)
+  .attr('id', 'histogram')
+  .attr('width', this._$rightPane.width())
+  .attr('height', this._$rightPane.height() - 40)
+  ;
 }
-/*
-OpenCV.HistogramModule.draw = function (buffer, width, height) {
-  Object.getPrototypeOf(this).draw.call(this, buffer, width, height);
-  // Create and draw gray image.
-  let source = imageDataToMat(imageData);
-  let gray = new Module.Mat();
 
-  Module.cvtColor(source, gray, Module.CV_RGBA2GRAY, 0);
-  source.delete();
+OpenCV.HistogramModule.draw = function (message) {
+  Object.getPrototypeOf(this).draw.call(this, message);
+  
+  // Draw histogram
+  // XXX:
+  // It's too bad that we can submit draw call in worker thread.
+  // Canvas proxy need!
+  let canvasWidth = this._$histCanvas.width();
+  let canvasHeight = this._$histCanvas.height();
+  let view = new Uint8ClampedArray(message.histogramBuffer);
+  let max = 0;
+  for (let i = 0; i < message.histogramLength; i++) {
+    if (view[i] > max)
+      max = view[i];
+  }
+  
+  let yratio = canvasHeight / max; 
+  let xratio = canvasWidth / message.histogramBins;
+  let ctx = this._$histCanvas[0].getContext('2d');
+  ctx.save();
 
-  {
-    // Draw grayscale image.
-    let rgba = new Module.Mat();
-    Module.cvtColor(gray, rgba, Module.CV_GRAY2RGBA, 0);
-    let width = rgba.size().get(1);
-    let height = rgba.size().get(0);
-    let length = width * height * rgba.elemSize();
-    let grayView = new Uint8ClampedArray(Module.HEAPU8.buffer, rgba.data, length);
+  // clear
+  ctx.clearRect( 0, 0, canvasWidth, canvasHeight);
 
-    this._$canvas.attr('width', width).attr('height', height);
-    this._ctx.putImageData(new ImageData(grayView, width, height), 0, 0);
-
-    rgba.delete();
- }
-
- {
-    // Caculate histogram
-    const bins = 100;
-    let mask = new Module.Mat();
-    let hist = new Module.Mat();
-    let binSize = Module._malloc(4);
-    let binView = new Int32Array(Module.HEAP8.buffer, binSize);
-    binView[0] = bins;
-    Module.calcHist(gray, 1, 0, mask, hist, 1, binSize, 0, true, false);
-
-    // Draw histogram(hist)
-    let canvasWidth = this._$histCanvas.width();
-    let canvasHeight = this._$histCanvas.height();
-    let width = gray.size().get(1);
-    let height = gray.size().get(0);
-    let length = width * height * gray.elemSize();
-    let grayView = new Uint8ClampedArray(Module.HEAPU8.buffer, gray.data, length);
-    let max = 0;
-    for (let i = 0; i < length; i++) {
-      if (grayView[i] > max)
-        max = grayView[i];
-    }
-    let yratio = canvasHeight / max; 
-    let xratio = canvasWidth / bins;
-    let ctx = this._$histCanvas[0].getContext('2d');
-    ctx.clearRect( 0, 0, canvasWidth, canvasHeight);
-    ctx.save();
-    // vertical flip 
-    ctx.scale(1, -1);
-    ctx.translate(0, -canvasHeight);
-    ctx.fillStyle= "#0000FF";
-    for (let i = 0; i < length; i++) {
-      ctx.fillRect(i * xratio, 0, xratio, grayView[i] * yratio);
-    }
-    ctx.restore();
-    mask.delete();
-    Module._free(binSize);
+  // draw 
+  ctx.scale(1, -1);
+  ctx.translate(0, -canvasHeight);
+  ctx.fillStyle= "#0000FF"; // I am blue....
+  for (let i = 0; i < message.histogramLength; i++) {
+    // "- 1" to introduce a gap between two bars.
+    ctx.fillRect(i * xratio, 0, xratio - 1, view[i] * yratio);
   }
 
-  gray.delete();
-  return imageData;
+  ctx.restore();
 }
-*/
+
 OpenCV.PipelineBuilder.register(OpenCV.HistogramModule);
