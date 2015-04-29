@@ -9,6 +9,12 @@
         <!-- css -->
         <link href="css/jquery-ui-1.9.2.custom.css" rel="stylesheet">
         <style type="text/css">
+            body {
+                font: 15px/22.5px "Helvetica Neue",HelveticaNeue,Helvetica,Arial,sans-serif;
+            }
+            h1 {
+                text-align: center;
+            }
             /* jquery ui css */
             .ui-button .ui-button-text {
                 font-size: 10px;
@@ -84,8 +90,13 @@
         <script type="application/javascript;version=1.8" src="js/module_threshold.js"></script>
         <script type="application/javascript;version=1.8" src="js/module_histogram.js"></script>
         <script type="application/javascript;version=1.8" src="js/module_filter.js"></script>
+        <script type="application/javascript;version=1.8" src="js/module_morphology.js"></script>
     </head>
     <body>
+        <h1>OpneCV by Emscripten</h1>
+        <a href="https://github.com/CJKu/opencv">The WIP repository on github</a><br>
+        <p>This page works fine in Firefox on both Mac and Linux. For unknown reason, OpenCV effect doesn't work on windows.</p>
+        <p>Start by clicking on Load button to load an image, enjoy life opencv demo.</p> 
         <button id="load_button">Load</button>
         <input type='file' accept='image/*' id="load_file_input" style="display:none" />
         <div id='pane_holder'/>

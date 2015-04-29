@@ -33,9 +33,10 @@ OpenCV.HistogramModule.draw = function (message) {
   // Canvas proxy need!
   let canvasWidth = this._$histCanvas.width();
   let canvasHeight = this._$histCanvas.height();
-  let view = new Uint8ClampedArray(message.histogramBuffer);
+  let view = message.histogramImageData.data;
+  let length = message.histogramImageData.width * message.histogramImageData.height;
   let max = 0;
-  for (let i = 0; i < message.histogramLength; i++) {
+  for (let i = 0; i < length; i++) {
     if (view[i] > max)
       max = view[i];
   }
@@ -52,7 +53,7 @@ OpenCV.HistogramModule.draw = function (message) {
   ctx.scale(1, -1);
   ctx.translate(0, -canvasHeight);
   ctx.fillStyle= "#0000FF"; // I am blue....
-  for (let i = 0; i < message.histogramLength; i++) {
+  for (let i = 0; i < length; i++) {
     // "- 1" to introduce a gap between two bars.
     ctx.fillRect(i * xratio, 0, xratio - 1, view[i] * yratio);
   }

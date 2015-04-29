@@ -48,12 +48,10 @@ OpenCV.Module.prototype = {
   },
 
   draw: function M_draw(message) {
-    this._$canvas.attr('width', message.width);
-    this._$canvas.attr('height', message.height);
-    var array = new Uint8ClampedArray(message.buffer);
-    var imageData = new ImageData(array, message.width, message.height);
+    this._$canvas.attr('width', message.imageData.width);
+    this._$canvas.attr('height', message.imageData.height);
   
-    this._ctx.putImageData(imageData, 0, 0);
+    this._ctx.putImageData(message.imageData, 0, 0);
   }
 };
 

@@ -80,14 +80,18 @@ EMSCRIPTEN_BINDINGS(ocv_imgproc) {
   //   Point anchor=Point(-1,-1), int iterations=1, 
   //   int borderType=BORDER_CONSTANT, 
   //   const Scalar& borderValue=morphologyDefaultBorderValue());
-  using ImgProcErode = EmbindWrapper<IMGPROC_INDEX + 9, decltype(&cv::erode)>;
-  ImgProcErode::bind(cv::erode);
+  using ImgProcErode = EmbindWrapper<IMGPROC_INDEX + 9, void (*)(cv::InputArray, cv::OutputArray, cv::InputArray)>;
+  ImgProcErode::bind([] (cv::InputArray src, cv::OutputArray dst, cv::InputArray kernel) {
+    cv::erode(src, dst, kernel);
+  });
   function("erode", &ImgProcErode::call);
   // CV_EXPORTS_W void dilate(InputArray src, OutputArray dst, InputArray kernel, 
   //   Point anchor=Point(-1,-1), int iterations=1, int borderType=BORDER_CONSTANT, 
   //   const Scalar& borderValue=morphologyDefaultBorderValue());
-  using ImgProcDilate = EmbindWrapper<IMGPROC_INDEX + 10, decltype(&cv::dilate)>;
-  ImgProcDilate::bind(cv::dilate);
+  using ImgProcDilate = EmbindWrapper<IMGPROC_INDEX + 10, void (*)(cv::InputArray, cv::OutputArray, cv::InputArray)>;
+  ImgProcDilate::bind([] (cv::InputArray src, cv::OutputArray dst, cv::InputArray kernel) {
+    cv::dilate(src, dst, kernel);
+  });
   function("dilate", &ImgProcDilate::call);
 
   //  CV_EXPORTS_W void morphologyEx( InputArray src, OutputArray dst,
@@ -392,4 +396,8 @@ EMSCRIPTEN_BINDINGS(ocv_imgproc) {
   constant("MORPH_GRADIENT", +cv::MORPH_GRADIENT);
   constant("MORPH_TOPHAT", +cv::MORPH_TOPHAT);
   constant("MORPH_BLACKHAT", +cv::MORPH_BLACKHAT);
+
+  constant("MORPH_RECT", +cv::MorphShapes::MORPH_RECT);
+  constant("MORPH_CROSS", +cv::MorphShapes::MORPH_CROSS);
+  constant("MORPH_ELLIPSE", +cv::MorphShapes::MORPH_ELLIPSE);
 }
