@@ -36,7 +36,7 @@ OpenCV.FilterModule.attach = function($target) {
   $('#blur_type input[type=radio]')
     .change(function() {
       self._blurType = this.value;
-      OpenCV.MainCommandDispatcher.postMessage();
+      OpenCV.MainCommandDispatcher.draw();
     })
     ;
 
@@ -59,7 +59,7 @@ OpenCV.FilterModule.attach = function($target) {
       slide: function(evt, ui) {
         self._kernelSize = ui.value;
         kernelSizeCaption.text('Kernel size: ' + self._kernelSize);
-        OpenCV.MainCommandDispatcher.postMessage();
+        OpenCV.MainCommandDispatcher.draw();
       }
     });
 }

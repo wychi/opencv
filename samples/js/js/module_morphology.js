@@ -36,7 +36,7 @@ OpenCV.MorphologyModule.attach = function($target) {
   $('#morphology_type input[type=radio]')
     .change(function() {
       self._type = this.value;
-      OpenCV.MainCommandDispatcher.postMessage();
+      OpenCV.MainCommandDispatcher.draw();
     })
     ;
 
@@ -56,7 +56,7 @@ OpenCV.MorphologyModule.attach = function($target) {
   $('#shape_type input[type=radio]')
     .change(function() {
       self._shape = parseInt(this.value);
-      OpenCV.MainCommandDispatcher.postMessage();
+      OpenCV.MainCommandDispatcher.draw();
     })
     ;
 
@@ -79,7 +79,7 @@ OpenCV.MorphologyModule.attach = function($target) {
       slide: function(evt, ui) {
         self._kernelSize = ui.value;
         kernelSizeCaption.text('Kernel size: ' + self._kernelSize);
-        OpenCV.MainCommandDispatcher.postMessage();
+        OpenCV.MainCommandDispatcher.draw();
       }
     });
 }

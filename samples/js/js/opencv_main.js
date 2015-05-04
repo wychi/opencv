@@ -11,7 +11,11 @@ OpenCV.PipelineBuilder = {
     this._moduleList.push(module);
   },
 
-  build: function ML_build(selectedModules) {
+  get modules() {
+    return this._moduleList;
+  },
+
+  build: function ML_build() {
     $('#pane_holder').empty(); 
 
     // this._sourceDrawer is in charge of drawing source image in the page. 
@@ -34,11 +38,55 @@ OpenCV.PipelineBuilder = {
     };
     this._sourceDrawer.attach($('#pane_holder'));
 
-    selectedModules.forEach(function(item) {
+    this._selectedList.forEach(function(item) {
       item.attach($('#pane_holder'));
       }); 
+  },
 
-    this._selectedList = selectedModules;
+  init: function MS_init() {
+    this._appendCombo();
+  },
+
+  _appendCombo: function MS_appendCombo() {
+    var all = OpenCV.PipelineBuilder._moduleList;
+    var selected = OpenCV.PipelineBuilder._selectedList;
+
+    var $div = $("#module_selection");
+    var $select = $("<select>")
+      .appendTo($div)
+      ;
+
+    // Add a blink un-selectable option.
+    //   <option selected disabled hidden value=''></option>
+    $("<option>")
+      .attr('selected', '')
+      .attr('disabled', '')
+      .attr('hidden', '')
+      .attr('value', '')
+      .appendTo($select)
+      ;
+
+    // Append modules which are not selectet yet.
+    all.forEach(function (m) {
+      if (-1 == selected.indexOf(m)) {
+        $("<option>")
+          .attr('value', m.name)
+          .text(m.title)
+          .appendTo($select)
+          ;
+        }
+    })
+
+    var self = this;
+    $select
+      .change(function() {
+        $(this).find("option:selected").each(function(o) {
+          selected.push(OpenCV[$(this).attr('value') + 'Module']);
+          if (selected.length < all.length)
+            self._appendCombo();
+        });
+      })
+      ;
   }
 };
 
@@ -68,32 +116,31 @@ OpenCV.MainCommandDispatcher = {
     }
   },
 
-  postMessage: function ML_postMessage(sendBuffer) {
-    // Pass image data to worker thread. Invoke a memory copy 
-    if (!!sendBuffer) {
-      let imageData = OpenCV.ImageLoader.createImageData();
-      OpenCV.PipelineBuilder._sourceDrawer.draw({
-        imageData: imageData
-      });
+  setSourceImage: function ML_setSourceImage(imageData) {
+    OpenCV.PipelineBuilder._sourceDrawer.draw({
+      imageData: imageData
+    });
 
-      this._worker.postMessage({
-        buffer: imageData.data.buffer,
-        size: [imageData.width, imageData.height]
-      }, [imageData.data.buffer]);
-    // Pass opencv algorithm setting.
-    } else {
-      this._worker.postMessage({
-        settings: JSON.stringify(OpenCV.PipelineBuilder._selectedList),
-      });
-    }
+    this._worker.postMessage({
+      buffer: imageData.data.buffer,
+      size: [imageData.width, imageData.height]
+    }, [imageData.data.buffer]);
+  },
+
+  draw: function ML_draw(sendBuffer) {
+    this._worker.postMessage({
+      settings: JSON.stringify(OpenCV.PipelineBuilder._selectedList),
+    });
   }
 };
 
 //OpenCV.Module.
-$(function() {  
+$(function() {
+  OpenCV.CodeSnippets.init();  
   OpenCV.MainCommandDispatcher.init();
-  
-  // Load button.
+
+  OpenCV.PipelineBuilder.init();
+
   $("#load_button")
     .button()
     .on("click", function(event) {
@@ -101,16 +148,26 @@ $(function() {
     })
     ;
 
-  // File Reader.
+  $("#start_button")
+    .button()
+    .on("click", function(event) {
+          OpenCV.PipelineBuilder.build();
+          let imageData = OpenCV.ImageLoader.createImageData();
+          OpenCV.MainCommandDispatcher.setSourceImage(imageData);
+          OpenCV.MainCommandDispatcher.draw();
+      // TBD
+    })
+    .button('disable')
+    ;
+
   $("#load_file_input")
     .change(function(evt) {
       var file = evt.target.files[0];
       OpenCV.ImageLoader
         .load(file)
         .then(function() {
-          OpenCV.PipelineBuilder.build([OpenCV.ThresholdModule, OpenCV.FilterModule, OpenCV.MorphologyModule, OpenCV.HistogramModule]);
-          OpenCV.MainCommandDispatcher.postMessage(true);
-          OpenCV.MainCommandDispatcher.postMessage();
+          $('#loaded_file').text(file.name);
+          $("#start_button").button('enable');
         })
         ;
     })

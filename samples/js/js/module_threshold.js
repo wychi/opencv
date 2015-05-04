@@ -13,8 +13,8 @@ OpenCV.ThresholdModule.toJSON = function() {
     });
 };
 
-// By moving OpenCV call to worker thread, we suppose do not need to link opencv.js
-// into main thread modules. Unfortunately, we still need some constant definition
+// By moving OpenCV call to worker thread, ieeally, we do not need to link opencv.js 
+// library in main thread. Unfortunately, we still need some constant definition
 // exported from opencv.js. Cheap solution is to re-define those constant manually. 
 OpenCV.ThresholdType = {
   THRESH_BINARY: 0, 
@@ -40,10 +40,14 @@ OpenCV.ThresholdModule.attach = function($target) {
   let $type = $('<div>')
     .attr('id', 'threshold_type')
     .appendTo(this._$rightPane)
-    .html('<input type="radio" id="radio1" name="THRESH_TYPE" value="THRESH_BINARY" checked="checked"><label for="radio1">Binary</label> \
-    <input type="radio" id="radio3" name="THRESH_TYPE" value="THRESH_TRUNC"><label for="radio3">Truncate</label> \
-    <input type="radio" id="radio4" name="THRESH_TYPE" value="THRESH_TOZERO"><label for="radio4">ToZero</label> \
-    ')
+    .html('\
+      <input type="radio" id="radio1" name="THRESH_TYPE" value="THRESH_BINARY" checked="checked">\
+      <label for="radio1">Binary</label>\
+      <input type="radio" id="radio3" name="THRESH_TYPE" value="THRESH_TRUNC">\
+      <label for="radio3">Truncate</label>\
+      <input type="radio" id="radio4" name="THRESH_TYPE" value="THRESH_TOZERO">\
+      <label for="radio4">ToZero</label>\
+      ')
     .css('margin-top', '10px')
     ;
     // Tempoary remove INV types since it's just not work.
@@ -52,7 +56,7 @@ OpenCV.ThresholdModule.attach = function($target) {
   $('#threshold_type input[type=radio]')
     .change(function() {
       self._thresholdType = OpenCV.ThresholdType[this.value];
-      OpenCV.MainCommandDispatcher.postMessage();
+      OpenCV.MainCommandDispatcher.draw();
     })
     ;
 
@@ -73,7 +77,7 @@ OpenCV.ThresholdModule.attach = function($target) {
       slide: function(evt, ui) {
         self._threshold = ui.value;
         tresholdCaption.text('Threshold :' + self._threshold);
-        OpenCV.MainCommandDispatcher.postMessage();
+        OpenCV.MainCommandDispatcher.draw();
       }
     });
 
@@ -94,7 +98,7 @@ OpenCV.ThresholdModule.attach = function($target) {
       slide: function(evt, ui) {
         self._thresholdMax = ui.value;
         tresholdMaxCaption.text('Threshold Max: ' + self._thresholdMax);
-        OpenCV.MainCommandDispatcher.postMessage();
+        OpenCV.MainCommandDispatcher.draw();
       }
     });
 

@@ -2,6 +2,18 @@ if (typeof OpenCV == "undefined" || !OpenCV) {
   OpenCV = {};
 }
 
+OpenCV.CodeSnippets = {
+  init: function CS_init() {
+    var $s = $('#code_snippet').detach();
+    var $snippets = $s.children();
+
+    this['Filter'] = $snippets[0];
+    this['Histogram'] = $snippets[1];
+    this['Threshold'] = $snippets[2];
+    this['Morphology'] = $snippets[3];
+  },
+};
+
 OpenCV.Module = function(title, name) {
   this._$pane = null;
   this._$rightPane = null;
@@ -35,8 +47,29 @@ OpenCV.Module.prototype = {
     $('<p>')
       .attr('class', "ui-widget")
       .text(this.title)
+      .css('font-weight', 'bold')
       .appendTo(this._$rightPane)
       ;
+
+    // perf indicator
+    $('<p>')
+    	.attr('class', 'perf_indicator')
+      .appendTo(this._$rightPane)
+      ;
+
+    // code snippet
+    let $snippet = $(OpenCV.CodeSnippets[this.name]);
+    if ($snippet.length) {
+      $("<div>")
+        .text('code ...')
+        .button()
+        .appendTo($target)
+        .click(function( event ) {
+          $snippet.toggle('slow');
+        });
+
+      $snippet.appendTo($target);
+    }
   },
 
   get title() {
@@ -48,10 +81,17 @@ OpenCV.Module.prototype = {
   },
 
   draw: function M_draw(message) {
-    this._$canvas.attr('width', message.imageData.width);
-    this._$canvas.attr('height', message.imageData.height);
-  
-    this._ctx.putImageData(message.imageData, 0, 0);
+  	if (!!message.imageData) {
+    	this._$canvas.attr('width', message.imageData.width);
+    	this._$canvas.attr('height', message.imageData.height);
+  	
+    	this._ctx.putImageData(message.imageData, 0, 0);
+    }
+    if (!!message.duration) {
+    	this._$rightPane.find('.perf_indicator')
+    	  .text('Elapsed time: ' + message.duration + " ms")
+    		;
+    }
   }
 };
 
