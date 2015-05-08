@@ -27,7 +27,8 @@ set(my_sources ${my_sources} ${LIBRARY_OUTPUT_PATH}/libopencv_js.so)
 add_custom_command(
     TARGET ${the_module} POST_BUILD
     COMMAND echo "* js library building... Be patient, it may take more than 30 seconds."
-    COMMAND emcc ${my_sources} -s DISABLE_EXCEPTION_CATCHING=0 --bind --llvm-lto 1 --closure 1 -s PRECISE_F32=1 -s FORCE_ALIGNED_MEMORY=1 -s TOTAL_MEMORY=318767104 -o ${my_output}
+    COMMAND echo ${my_sources}
+    COMMAND emcc ${my_sources} -s DISABLE_EXCEPTION_CATCHING=0 --bind -O3 -s ASSERTIONS=1 --llvm-lto 1 --closure 0 -s PRECISE_F32=1 -s TOTAL_MEMORY=318767104 -o ${my_output}
 )
 
 # I still have no idea on how testing work in build process.

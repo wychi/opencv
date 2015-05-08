@@ -96,6 +96,9 @@ EMSCRIPTEN_BINDINGS(ocv_matrix) {
   using BindMatData = EmbindWrapper<CORE_INDEX + 12, decltype(&cv::Mat::data)>;
   BindMatData::bind(&cv::Mat::data);
 
+  using BindMatCopyTo = EmbindWrapper<CORE_INDEX + 23, void (*)(cv::Mat &, cv::Mat &, cv::Mat &)>;
+  BindMatCopyTo::bind([] (cv::Mat &src, cv::Mat &dst, cv::Mat &mask) { src.copyTo(dst, mask); });
+
   class_<cv::Mat>("Mat")
     // Constructor && external creators.
   .constructor<>()
@@ -130,6 +133,8 @@ EMSCRIPTEN_BINDINGS(ocv_matrix) {
   .function("convertTo", &BindConvertTo::call)
   .function("elemSize", &cv::Mat::elemSize)
   .function("elemSize1", &cv::Mat::elemSize1)
+  .function("copyTo", &BindMatCopyTo::call)
+  //.function("copyTo", select_overload<void (cv::OutputArray&, cv::InputArray&)const>(&cv::Mat::copyTo))
   ;
 
   // Misc API.
@@ -143,6 +148,11 @@ EMSCRIPTEN_BINDINGS(ocv_matrix) {
   using BindAddWeighted = EmbindWrapper<CORE_INDEX + 21, decltype(&cv::addWeighted)>;
   BindAddWeighted::bind(&cv::addWeighted);
   function("addWeighted", &BindAddWeighted::call);
+
+  //CV_EXPORTS_W void inRange(InputArray src, InputArray lowerb, InputArray upperb, OutputArray dst);
+  using BindInRange = EmbindWrapper<CORE_INDEX + 22, decltype(&cv::inRange)>;
+  BindInRange::bind(&cv::inRange);
+  function("inRange", &BindInRange::call);
 
   // CV_EXPORTS_W void transform(InputArray src, OutputArray dst, InputArray m );
   // CV_EXPORTS_W void perspectiveTransform(InputArray src, OutputArray dst, InputArray m );
